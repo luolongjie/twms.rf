@@ -118,6 +118,7 @@ namespace Rf_Wms.In
                 //this.labcode.Text ="";
                 //this.labqty.Text = "";
                 //this.txtcarton.Focus();
+                this.btnslid.Visible = false;
                 this.txttotraycode.Enabled = true;
                 this.txttotraycode.Focus();
                 this.txttotraycode.SelectAll();
@@ -128,12 +129,23 @@ namespace Rf_Wms.In
             if (string.IsNullOrEmpty(this.txtshelve.Text.Trim()))
             {
                 this.txtshelve.Enabled = false;
+                this.btnslid.Visible = false;
                 this.txttotraycode.Enabled = true;
                 this.txttotraycode.Focus();
                 return;
             }
             //this.txtshelve.Text = this.txtshelve.Text.ToUpper();
-            slid = mRec.data.recommendSlId;
+            bool isfind = false;
+            foreach (Model.recommends v in mRec.data.recommendList)
+            {
+                if (v.name == this.txtshelve.Text)
+                {
+                    slid = v.id;
+                    isfind = true;
+                    break;
+                }
+            }
+            //slid = mRec.data.recommendSlId;
             if (this.labrecommendSlId.Text == "")
             {
                 try
@@ -157,7 +169,7 @@ namespace Rf_Wms.In
                 }
                 slid = ms.data.slId;   
             }
-            else if (this.txtshelve.Text != this.labrecommendSlId.Text)
+            else if (!isfind)
             {
                 DialogResult dr = MessageBox.Show("移入库位不是指定库位,是否继续?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                 if (dr != DialogResult.Yes)
@@ -242,6 +254,7 @@ namespace Rf_Wms.In
             this.txttotraycode.Text = "";
             this.txtshelve.Enabled = false;
             this.txttotraycode.Enabled = false;
+            this.btnslid.Visible = false;
             this.txtcarton.Enabled = true;
             this.txtcarton.Focus();
         }
@@ -327,6 +340,7 @@ namespace Rf_Wms.In
             if (string.IsNullOrEmpty(this.txttotraycode.Text.Trim()))
             {
                 this.txttotraycode.Enabled = false;
+                this.btnslid.Visible = true;
                 this.txtshelve.Enabled = true;
                 this.txtshelve.Focus();
                 return;
@@ -425,6 +439,20 @@ namespace Rf_Wms.In
 
         private void txtshelve_GotFocus(object sender, EventArgs e)
         {
+            this.txtshelve.SelectAll();
+        }
+
+        private void btnslid_Click(object sender, EventArgs e)
+        {
+            Ot.frmTrayChoose frm = new Rf_Wms.Ot.frmTrayChoose();
+            frm.srecommendList = mRec.data.recommendList;
+            frm.ShowDialog();
+            //slid = frm.slid;
+            if (!string.IsNullOrEmpty(frm.slname))
+            {
+                this.labrecommendSlId.Text = frm.slname;
+            }
+            this.txtshelve.Focus();
             this.txtshelve.SelectAll();
         }
 

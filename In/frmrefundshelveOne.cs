@@ -83,7 +83,7 @@ namespace Rf_Wms.In
                 }
                 this.labmaterialname.Text = mRec.data.material.materialName;
                 //this.labrecommendSlId.Text = mRec.data.recommendSlId.ToString();
-                this.labrecommendSlId.Text = mRec.data.recommendSlName;
+               
                 this.labcode.Text = mRec.data.material.materialCode;
                 this.labqty.Text = mRec.data.material.quantity.ToString() + mRec.data.material.commonUnit + mRec.data.material.minQuantity.ToString() + mRec.data.material.minUnit;
                 //this.txtshelve.Enabled = true;
@@ -99,8 +99,19 @@ namespace Rf_Wms.In
 
             }
             this.txtcarton.Enabled = false;
-            this.txttotraycode.Enabled = true;
-            this.txttotraycode.Focus();
+            //if (mRec.data.recommendList.Count == 1)
+            //{
+                this.labrecommendSlId.Text = mRec.data.recommendSlName;
+                this.txttotraycode.Enabled = true;
+                this.txttotraycode.Focus();
+            //}
+            //else
+            //{
+            //    btnslid.Enabled = true;
+            //    btnslid_Click(null, null);
+            //}
+           
+           
         }
 
         Model.MSlIdBySlName ms = null;
@@ -117,6 +128,7 @@ namespace Rf_Wms.In
                 //this.labrecommendSlId.Text = "";
                 //this.labcode.Text ="";
                 //this.labqty.Text = "";
+                this.btnslid.Visible = false;
                 //this.txtcarton.Focus();
                 this.txttotraycode.Enabled = true;
                 this.txttotraycode.Focus();
@@ -128,12 +140,23 @@ namespace Rf_Wms.In
             if (string.IsNullOrEmpty(this.txtshelve.Text.Trim()))
             {
                 this.txtshelve.Enabled = false;
+                this.btnslid.Visible = false;
                 this.txttotraycode.Enabled = true;
                 this.txttotraycode.Focus();
                 return;
             }
             //this.txtshelve.Text = this.txtshelve.Text.ToUpper();
-            slid = mRec.data.recommendSlId;
+            bool isfind = false;
+            foreach (Model.recommends v in mRec.data.recommendList)
+            {
+                if (v.name == this.txtshelve.Text)
+                {
+                    slid = v.id;
+                    isfind = true;
+                    break;
+                }
+            }
+            //slid = mRec.data.recommendSlId;
             if (this.labrecommendSlId.Text == "")
             {
                 try
@@ -157,9 +180,9 @@ namespace Rf_Wms.In
                 }
                 slid = ms.data.slId;   
             }
-            else if (this.txtshelve.Text != this.labrecommendSlId.Text)
+            else if (!isfind)
             {
-                DialogResult dr = MessageBox.Show("移入库位不是指定库位,是否继续?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                DialogResult dr = MessageBox.Show("移入库位不在指定库位列表里,是否继续?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                 if (dr != DialogResult.Yes)
                 {
                     this.txtshelve.SelectAll();
@@ -245,6 +268,7 @@ namespace Rf_Wms.In
             this.labrecommendSlId.Text = "";
             this.txtshelve.Enabled = false;
             this.txttotraycode.Enabled = false;
+            this.btnslid.Visible = false;
             this.txtcarton.Enabled = true;
             this.txtcarton.Focus();
         }
@@ -329,6 +353,7 @@ namespace Rf_Wms.In
             if (string.IsNullOrEmpty(this.txttotraycode.Text.Trim()) || this.txttotraycode.Text==this.txtcarton.Text)
             {
                 this.txttotraycode.Enabled = false;
+                this.btnslid.Visible = true;
                 this.txtshelve.Enabled = true;
                 this.txtshelve.Focus();
                 return;
@@ -420,6 +445,22 @@ namespace Rf_Wms.In
 
         private void txtshelve_GotFocus(object sender, EventArgs e)
         {
+            this.txtshelve.SelectAll();
+        }
+
+        //public string slid;
+        //public string slname = "";
+        private void btnslid_Click(object sender, EventArgs e)
+        {
+            Ot.frmTrayChoose frm = new Rf_Wms.Ot.frmTrayChoose();
+            frm.srecommendList = mRec.data.recommendList;
+            frm.ShowDialog();
+            //slid = frm.slid;
+            if (!string.IsNullOrEmpty(frm.slname))
+            {
+                this.labrecommendSlId.Text = frm.slname;
+            }
+            this.txtshelve.Focus();
             this.txtshelve.SelectAll();
         }
 
