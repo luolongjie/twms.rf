@@ -1,0 +1,590 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9A5E6604-A18A-45A6-85DD-16EAE2D1AA41}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rf_Wms</RootNamespace>
+    <AssemblyName>Rf_Wms</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
+    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
+    <OSVersion>5.00</OSVersion>
+    <DeployDirSuffix>Rf_Wms</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <NativePlatformName>Windows CE</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+    <ApplicationIcon>wms.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Windowsce.Forms" />
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CK\frmCheckMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CK\frmCheckMenu.Designer.cs">
+      <DependentUpon>frmCheckMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CK\frmCheckVo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CK\frmCheckVo.Designer.cs">
+      <DependentUpon>frmCheckVo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CK\frmCheckVoByOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CK\frmCheckVoByOrder.Designer.cs">
+      <DependentUpon>frmCheckVoByOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CK\frmCheckVoSecond.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CK\frmCheckVoSecond.Designer.cs">
+      <DependentUpon>frmCheckVoSecond.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comm.cs" />
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMenuPic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMenuPic.Designer.cs">
+      <DependentUpon>frmMenuPic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetting.Designer.cs">
+      <DependentUpon>frmSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HttpHelper.cs" />
+    <Compile Include="In\frmbalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmbalance.Designer.cs">
+      <DependentUpon>frmbalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="In\frmMachiningIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmMachiningIn.Designer.cs">
+      <DependentUpon>frmMachiningIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="In\frmreceipting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmreceipting.Designer.cs">
+      <DependentUpon>frmreceipting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="In\frmRefMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmRefMenu.Designer.cs">
+      <DependentUpon>frmRefMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="In\frmrefund.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmrefund.designer.cs">
+      <DependentUpon>frmrefund.cs</DependentUpon>
+    </Compile>
+    <Compile Include="In\frmrefundshelve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmrefundshelve.designer.cs">
+      <DependentUpon>frmrefundshelve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="In\frmrefundshelveOne.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmrefundshelveOne.designer.cs">
+      <DependentUpon>frmrefundshelveOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="In\frmshelve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmshelve.Designer.cs">
+      <DependentUpon>frmshelve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="In\frmShelveMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="In\frmShelveMenu.Designer.cs">
+      <DependentUpon>frmShelveMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\getRegionList.cs" />
+    <Compile Include="Model\MContainer.cs" />
+    <Compile Include="Model\MdoStockUpConfirm.cs" />
+    <Compile Include="Model\MergeRefundOrder.cs" />
+    <Compile Include="Model\MgetMaterialsByBar.cs" />
+    <Compile Include="Model\MgetSecondarySortingInfo.cs" />
+    <Compile Include="Model\MLocationTray.cs" />
+    <Compile Include="Model\MQuantityListByTray.cs" />
+    <Compile Include="Model\MRefundBanlance.cs" />
+    <Compile Include="Model\MstartSecondarySorting.cs" />
+    <Compile Include="Model\MStockInOrderInfoByFromTray.cs" />
+    <Compile Include="Model\MSumQuantityByTray.cs" />
+    <Compile Include="Model\MbaseIn.cs" />
+    <Compile Include="Model\Mccode.cs" />
+    <Compile Include="Model\Mcheckrepeats.cs" />
+    <Compile Include="Model\McheckResult.cs" />
+    <Compile Include="Model\MCVreason.cs" />
+    <Compile Include="Model\MgetCustomersByLcCode.cs" />
+    <Compile Include="Model\MgetMaterial.cs" />
+    <Compile Include="Model\Mlogin.cs" />
+    <Compile Include="Model\Mmaterialcode.cs" />
+    <Compile Include="Model\Mmsg.cs" />
+    <Compile Include="Model\Mpick.cs" />
+    <Compile Include="Model\MproductPackorder.cs" />
+    <Compile Include="Model\MrepeatInfos.cs" />
+    <Compile Include="Model\Mreplenish.cs" />
+    <Compile Include="Model\MShowList.cs" />
+    <Compile Include="Model\MSlIdBySlName.cs" />
+    <Compile Include="Model\MstockIn.cs" />
+    <Compile Include="Model\MstockinReceive.cs" />
+    <Compile Include="Model\MStockOutItem.cs" />
+    <Compile Include="Model\MTran.cs" />
+    <Compile Include="Model\MTranMove.cs" />
+    <Compile Include="Model\Mtray.cs" />
+    <Compile Include="Model\MTrayByBox.cs" />
+    <Compile Include="Model\MTrayStockByOrderType.cs" />
+    <Compile Include="Model\MultiMaterialList.cs" />
+    <Compile Include="Model\MUserInfo.cs" />
+    <Compile Include="Model\MZcqSlList.cs" />
+    <Compile Include="Model\PickRrList.cs" />
+    <Compile Include="Model\SendToItemList.cs" />
+    <Compile Include="Model\Twarehouse.cs" />
+    <Compile Include="Ot\frmcontainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmcontainer.Designer.cs">
+      <DependentUpon>frmcontainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmcontainerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmcontainerList.Designer.cs">
+      <DependentUpon>frmcontainerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmCustomer.Designer.cs">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmGetTray.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmGetTray.designer.cs">
+      <DependentUpon>frmGetTray.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmList.Designer.cs">
+      <DependentUpon>frmList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmMachingMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmMachingMain.Designer.cs">
+      <DependentUpon>frmMachingMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmMaterial.Designer.cs">
+      <DependentUpon>frmMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmMaterialInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmMaterialInfo.Designer.cs">
+      <DependentUpon>frmMaterialInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmNcontainerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmNcontainerList.Designer.cs">
+      <DependentUpon>frmNcontainerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmSLSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmSLSearch.Designer.cs">
+      <DependentUpon>frmSLSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmTMcustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmTMcustomer.Designer.cs">
+      <DependentUpon>frmTMcustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmTray.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmTray.Designer.cs">
+      <DependentUpon>frmTray.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmUpdAssistance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmUpdAssistance.Designer.cs">
+      <DependentUpon>frmUpdAssistance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ot\frmWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmWarehouse.Designer.cs">
+      <DependentUpon>frmWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmDirTranMove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmDirTranMove.Designer.cs">
+      <DependentUpon>frmDirTranMove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmMachiningOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmMachiningOut.Designer.cs">
+      <DependentUpon>frmMachiningOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmNStockOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmNStockOut.designer.cs">
+      <DependentUpon>frmNStockOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmNStockOutMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmNStockOutMaterial.Designer.cs">
+      <DependentUpon>frmNStockOutMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmPackingUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmPackingUp.Designer.cs">
+      <DependentUpon>frmPackingUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmreplenish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmreplenish.Designer.cs">
+      <DependentUpon>frmreplenish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmSecCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmSecCheck.Designer.cs">
+      <DependentUpon>frmSecCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmStockOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmStockOut.Designer.cs">
+      <DependentUpon>frmStockOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmStockOutCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmStockOutCheck.Designer.cs">
+      <DependentUpon>frmStockOutCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmStockOutMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmStockOutMenu.Designer.cs">
+      <DependentUpon>frmStockOutMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmStockUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmStockUp.Designer.cs">
+      <DependentUpon>frmStockUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmTranMove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmTranMove.Designer.cs">
+      <DependentUpon>frmTranMove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmTranMoveMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmTranMoveMain.Designer.cs">
+      <DependentUpon>frmTranMoveMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmTrayMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmTrayMenu.Designer.cs">
+      <DependentUpon>frmTrayMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CK\frmCheckMenu.resx">
+      <DependentUpon>frmCheckMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CK\frmCheckVo.resx">
+      <DependentUpon>frmCheckVo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CK\frmCheckVoByOrder.resx">
+      <DependentUpon>frmCheckVoByOrder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CK\frmCheckVoSecond.resx">
+      <DependentUpon>frmCheckVoSecond.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMenuPic.resx">
+      <DependentUpon>frmMenuPic.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetting.resx">
+      <DependentUpon>frmSetting.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmbalance.resx">
+      <DependentUpon>frmbalance.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmMachiningIn.resx">
+      <DependentUpon>frmMachiningIn.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmreceipting.resx">
+      <DependentUpon>frmreceipting.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmRefMenu.resx">
+      <DependentUpon>frmRefMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmrefund.resx">
+      <DependentUpon>frmrefund.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmrefundshelve.resx">
+      <DependentUpon>frmrefundshelve.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmrefundshelveOne.resx">
+      <DependentUpon>frmrefundshelveOne.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmshelve.resx">
+      <DependentUpon>frmshelve.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In\frmShelveMenu.resx">
+      <DependentUpon>frmShelveMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmcontainer.resx">
+      <DependentUpon>frmcontainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmcontainerList.resx">
+      <DependentUpon>frmcontainerList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmCustomer.resx">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmGetTray.resx">
+      <DependentUpon>frmGetTray.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmList.resx">
+      <DependentUpon>frmList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmMachingMain.resx">
+      <DependentUpon>frmMachingMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmMaterial.resx">
+      <DependentUpon>frmMaterial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmMaterialInfo.resx">
+      <DependentUpon>frmMaterialInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmNcontainerList.resx">
+      <DependentUpon>frmNcontainerList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmSLSearch.resx">
+      <DependentUpon>frmSLSearch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmTMcustomer.resx">
+      <DependentUpon>frmTMcustomer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmTray.resx">
+      <DependentUpon>frmTray.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmUpdAssistance.resx">
+      <DependentUpon>frmUpdAssistance.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmWarehouse.resx">
+      <DependentUpon>frmWarehouse.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmDirTranMove.resx">
+      <DependentUpon>frmDirTranMove.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmMachiningOut.resx">
+      <DependentUpon>frmMachiningOut.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmNStockOut.resx">
+      <DependentUpon>frmNStockOut.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmNStockOutMaterial.resx">
+      <DependentUpon>frmNStockOutMaterial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmPackingUp.resx">
+      <DependentUpon>frmPackingUp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmreplenish.resx">
+      <DependentUpon>frmreplenish.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmSecCheck.resx">
+      <DependentUpon>frmSecCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmStockOut.resx">
+      <DependentUpon>frmStockOut.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmStockOutCheck.resx">
+      <DependentUpon>frmStockOutCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmStockOutMenu.resx">
+      <DependentUpon>frmStockOutMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmStockUp.resx">
+      <DependentUpon>frmStockUp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmTranMove.resx">
+      <DependentUpon>frmTranMove.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmTranMoveMain.resx">
+      <DependentUpon>frmTranMoveMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmTrayMenu.resx">
+      <DependentUpon>frmTrayMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RIL_IME.cs" />
+    <Compile Include="Model\SortingFlg.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wms.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
