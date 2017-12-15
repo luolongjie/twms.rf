@@ -1,2 +1,2 @@
-﻿https://twms.wilmar.cn:7083/twms-hand/api/1
+﻿https://twms.wilmar.cn:7083/twms-hand/api/
 https://logistics.wilmar.cn:9100/static/Rf_Wms.exe
