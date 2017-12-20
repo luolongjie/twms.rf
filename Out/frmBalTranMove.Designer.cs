@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.btnkeyboard = new System.Windows.Forms.Button();
-            this.labtoslname = new System.Windows.Forms.Label();
             this.txttotraycode = new System.Windows.Forms.TextBox();
             this.btnData = new System.Windows.Forms.Button();
             this.txttoslid = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.labtrayqty = new System.Windows.Forms.Label();
+            this.labqty = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.labfromsIId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,17 +44,20 @@
             this.txtcommonqty = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.labneedqty = new System.Windows.Forms.Label();
+            this.labmaterial = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtbarcode = new System.Windows.Forms.TextBox();
             this.txttoslname = new System.Windows.Forms.TextBox();
             this.cmbtoslname = new System.Windows.Forms.ComboBox();
             this.labccode = new System.Windows.Forms.Label();
+            this.labpdate = new System.Windows.Forms.Label();
+            this.labbatchno = new System.Windows.Forms.Label();
+            this.labshippername = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnNext1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnkeyboard
@@ -67,19 +69,16 @@
             this.btnkeyboard.Size = new System.Drawing.Size(72, 20);
             this.btnkeyboard.TabIndex = 320;
             this.btnkeyboard.Text = "键盘";
-            // 
-            // labtoslname
-            // 
-            this.labtoslname.Location = new System.Drawing.Point(173, 249);
-            this.labtoslname.Name = "labtoslname";
-            this.labtoslname.Size = new System.Drawing.Size(62, 20);
+            this.btnkeyboard.Click += new System.EventHandler(this.btnkeyboard_Click);
             // 
             // txttotraycode
             // 
+            this.txttotraycode.Enabled = false;
             this.txttotraycode.Location = new System.Drawing.Point(84, 220);
             this.txttotraycode.Name = "txttotraycode";
             this.txttotraycode.Size = new System.Drawing.Size(140, 23);
             this.txttotraycode.TabIndex = 318;
+            this.txttotraycode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txttotraycode_KeyPress);
             // 
             // btnData
             // 
@@ -90,13 +89,16 @@
             this.btnData.Size = new System.Drawing.Size(72, 20);
             this.btnData.TabIndex = 317;
             this.btnData.Text = "列表";
+            this.btnData.Click += new System.EventHandler(this.btnData_Click);
             // 
             // txttoslid
             // 
+            this.txttoslid.Enabled = false;
             this.txttoslid.Location = new System.Drawing.Point(84, 247);
             this.txttoslid.Name = "txttoslid";
-            this.txttoslid.Size = new System.Drawing.Size(83, 23);
+            this.txttoslid.Size = new System.Drawing.Size(140, 23);
             this.txttoslid.TabIndex = 316;
+            this.txttoslid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txttoslid_KeyPress);
             // 
             // label14
             // 
@@ -105,11 +107,11 @@
             this.label14.Size = new System.Drawing.Size(77, 20);
             this.label14.Text = "移入托盘";
             // 
-            // labtrayqty
+            // labqty
             // 
-            this.labtrayqty.Location = new System.Drawing.Point(84, 172);
-            this.labtrayqty.Name = "labtrayqty";
-            this.labtrayqty.Size = new System.Drawing.Size(118, 20);
+            this.labqty.Location = new System.Drawing.Point(75, 172);
+            this.labqty.Name = "labqty";
+            this.labqty.Size = new System.Drawing.Size(118, 20);
             // 
             // label10
             // 
@@ -126,7 +128,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(1, 34);
+            this.label3.Location = new System.Drawing.Point(1, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 20);
             this.label3.Text = "暂存区";
@@ -144,10 +146,12 @@
             // 
             // txtminqty
             // 
+            this.txtminqty.Enabled = false;
             this.txtminqty.Location = new System.Drawing.Point(131, 194);
             this.txtminqty.Name = "txtminqty";
             this.txtminqty.Size = new System.Drawing.Size(47, 23);
             this.txtminqty.TabIndex = 313;
+            this.txtminqty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtminqty_KeyPress);
             // 
             // labminunit
             // 
@@ -165,10 +169,12 @@
             // 
             // txtcommonqty
             // 
+            this.txtcommonqty.Enabled = false;
             this.txtcommonqty.Location = new System.Drawing.Point(40, 194);
             this.txtcommonqty.Name = "txtcommonqty";
             this.txtcommonqty.Size = new System.Drawing.Size(47, 23);
             this.txtcommonqty.TabIndex = 312;
+            this.txtcommonqty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtcommonqty_KeyPress);
             // 
             // label13
             // 
@@ -184,57 +190,44 @@
             this.label12.Size = new System.Drawing.Size(77, 20);
             this.label12.Text = "移入库位";
             // 
-            // labneedqty
+            // labmaterial
             // 
-            this.labneedqty.Location = new System.Drawing.Point(0, 98);
-            this.labneedqty.Name = "labneedqty";
-            this.labneedqty.Size = new System.Drawing.Size(238, 20);
+            this.labmaterial.Location = new System.Drawing.Point(0, 80);
+            this.labmaterial.Name = "labmaterial";
+            this.labmaterial.Size = new System.Drawing.Size(238, 20);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(1, 9);
+            this.label1.Location = new System.Drawing.Point(1, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 20);
             this.label1.Text = "转储单号";
             // 
             // label11
             // 
-            this.label11.Location = new System.Drawing.Point(1, 61);
+            this.label11.Location = new System.Drawing.Point(1, 55);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(77, 20);
             this.label11.Text = "商品码";
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(91, 149);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(140, 23);
-            this.textBox2.TabIndex = 340;
-            // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(1, 151);
+            this.label2.Location = new System.Drawing.Point(1, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 20);
             this.label2.Text = "批次";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(91, 121);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(140, 23);
-            this.textBox3.TabIndex = 343;
-            // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(1, 123);
+            this.label4.Location = new System.Drawing.Point(1, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 20);
             this.label4.Text = "生产日期";
             // 
             // txtbarcode
             // 
-            this.txtbarcode.Location = new System.Drawing.Point(84, 59);
+            this.txtbarcode.Enabled = false;
+            this.txtbarcode.Location = new System.Drawing.Point(84, 52);
             this.txtbarcode.Name = "txtbarcode";
             this.txtbarcode.Size = new System.Drawing.Size(140, 23);
             this.txtbarcode.TabIndex = 345;
@@ -242,7 +235,7 @@
             // 
             // txttoslname
             // 
-            this.txttoslname.Location = new System.Drawing.Point(70, 31);
+            this.txttoslname.Location = new System.Drawing.Point(70, 24);
             this.txttoslname.Name = "txttoslname";
             this.txttoslname.Size = new System.Drawing.Size(80, 23);
             this.txttoslname.TabIndex = 347;
@@ -250,7 +243,7 @@
             // 
             // cmbtoslname
             // 
-            this.cmbtoslname.Location = new System.Drawing.Point(156, 31);
+            this.cmbtoslname.Location = new System.Drawing.Point(156, 24);
             this.cmbtoslname.Name = "cmbtoslname";
             this.cmbtoslname.Size = new System.Drawing.Size(78, 23);
             this.cmbtoslname.TabIndex = 346;
@@ -258,9 +251,45 @@
             // 
             // labccode
             // 
-            this.labccode.Location = new System.Drawing.Point(73, 4);
+            this.labccode.Location = new System.Drawing.Point(73, 3);
             this.labccode.Name = "labccode";
             this.labccode.Size = new System.Drawing.Size(151, 20);
+            // 
+            // labpdate
+            // 
+            this.labpdate.Location = new System.Drawing.Point(75, 103);
+            this.labpdate.Name = "labpdate";
+            this.labpdate.Size = new System.Drawing.Size(118, 20);
+            // 
+            // labbatchno
+            // 
+            this.labbatchno.Location = new System.Drawing.Point(75, 127);
+            this.labbatchno.Name = "labbatchno";
+            this.labbatchno.Size = new System.Drawing.Size(118, 20);
+            // 
+            // labshippername
+            // 
+            this.labshippername.Location = new System.Drawing.Point(78, 147);
+            this.labshippername.Name = "labshippername";
+            this.labshippername.Size = new System.Drawing.Size(153, 20);
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(1, 149);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 20);
+            this.label6.Text = "货主";
+            // 
+            // btnNext1
+            // 
+            this.btnNext1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnNext1.ForeColor = System.Drawing.Color.White;
+            this.btnNext1.Location = new System.Drawing.Point(159, 125);
+            this.btnNext1.Name = "btnNext1";
+            this.btnNext1.Size = new System.Drawing.Size(72, 20);
+            this.btnNext1.TabIndex = 367;
+            this.btnNext1.Text = "跳过";
+            this.btnNext1.Click += new System.EventHandler(this.btnNext1_Click);
             // 
             // frmBalTranMove
             // 
@@ -269,21 +298,23 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.btnNext1);
+            this.Controls.Add(this.labshippername);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.labbatchno);
+            this.Controls.Add(this.labpdate);
             this.Controls.Add(this.labccode);
             this.Controls.Add(this.txttoslname);
             this.Controls.Add(this.cmbtoslname);
             this.Controls.Add(this.txtbarcode);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnkeyboard);
-            this.Controls.Add(this.labtoslname);
             this.Controls.Add(this.txttotraycode);
             this.Controls.Add(this.btnData);
             this.Controls.Add(this.txttoslid);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.labtrayqty);
+            this.Controls.Add(this.labqty);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.labfromsIId);
             this.Controls.Add(this.label3);
@@ -294,7 +325,7 @@
             this.Controls.Add(this.txtcommonqty);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.labneedqty);
+            this.Controls.Add(this.labmaterial);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label11);
             this.MaximizeBox = false;
@@ -309,12 +340,11 @@
         #endregion
 
         private System.Windows.Forms.Button btnkeyboard;
-        private System.Windows.Forms.Label labtoslname;
         private System.Windows.Forms.TextBox txttotraycode;
         private System.Windows.Forms.Button btnData;
         private System.Windows.Forms.TextBox txttoslid;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label labtrayqty;
+        private System.Windows.Forms.Label labqty;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label labfromsIId;
         private System.Windows.Forms.Label label3;
@@ -325,16 +355,19 @@
         private System.Windows.Forms.TextBox txtcommonqty;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label labneedqty;
+        private System.Windows.Forms.Label labmaterial;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtbarcode;
         private System.Windows.Forms.TextBox txttoslname;
         private System.Windows.Forms.ComboBox cmbtoslname;
         private System.Windows.Forms.Label labccode;
+        private System.Windows.Forms.Label labpdate;
+        private System.Windows.Forms.Label labbatchno;
+        private System.Windows.Forms.Label labshippername;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnNext1;
     }
 }

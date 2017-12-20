@@ -52,6 +52,12 @@ namespace Rf_Wms.Out
                 
                 return;
             }
+            init();
+            this.txtbarcode.Text = "";
+            this.txttoslname.Enabled = true;
+            this.cmbtoslname.Enabled = true;
+            this.txttoslname.Focus();
+
         }
 
         private void txttoslname_KeyPress(object sender, KeyPressEventArgs e)
@@ -85,6 +91,8 @@ namespace Rf_Wms.Out
             this.txtbarcode.Focus();
         }
 
+        Model.locationStockList ml;
+        int row = 0;
         private void txtbarcode_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 27)
@@ -151,12 +159,12 @@ namespace Rf_Wms.Out
                         throw new Exception("错误信息捕捉失败");
                     if (!msg.success)
                         throw new Exception(msg.msg);
-                    m = (Model.Mmaterialcode)JsonConvert.DeserializeObject(x, typeof(Model.Mmaterialcode));
-                    if (m == null)
+                    ml = (Model.locationStockList)JsonConvert.DeserializeObject(x, typeof(Model.locationStockList));
+                    if (ml == null)
                     {
                         throw new Exception("数据信息捕捉失败");
                     }
-                   
+                    row = 0;
                     Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)
@@ -175,6 +183,32 @@ namespace Rf_Wms.Out
                 this.txtbarcode.SelectAll();
                 return;
             }
+            showTxt();
+            this.txtbarcode.Enabled = false;
+            this.txtcommonqty.Enabled = true;
+            this.txtcommonqty.Focus();
+        }
+
+        void showTxt()
+        {
+            this.labbatchno.Text = ml.data[row].batchNo;
+            this.labpdate.Text = ml.data[row].pdateStr;
+            this.labmaterial.Text = ml.data[row].materialCodeName;
+            int imax = ml.data[row].canUseTotalQuantity * ml.data[row].spec + ml.data[row].canUseMinTotalQuantity;
+            //if (maxminquantity < 0 || maxminquantity < 0)
+            //{
+            int maxquantity = ml.data[row].canUseTotalQuantity;
+            int maxminquantity = ml.data[row].canUseMinTotalQuantity;
+            if (maxquantity < 0 || maxminquantity < 0)
+            {
+                maxquantity = imax / ml.data[row].spec;
+                maxminquantity = imax % ml.data[row].spec;
+            }
+
+            this.labqty.Text = maxquantity + ml.data[row].unit + maxminquantity + ml.data[row].minUnit;
+            this.labcommonUnit.Text = ml.data[row].unit;
+            this.labminunit.Text = ml.data[row].minUnit;
+            this.labshippername.Text = ml.data[row].shipperCodeName;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -182,8 +216,426 @@ namespace Rf_Wms.Out
             this.Close();
         }
 
-        
+        int commonqty;
+        private void txtcommonqty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 27)
+            {
+
+                this.txtcommonqty.Enabled = false;
+                this.txtbarcode.Enabled = true;
+                this.txtbarcode.SelectAll();
+                this.labqty.Text = "";
+                this.labbatchno.Text = "";
+                this.labpdate.Text = "";
+                this.labminunit.Text = "";
+                this.labcommonUnit.Text = "";
+                this.labshippername.Text = "";
+                this.labbatchno.Text = "";
+                this.txtcommonqty.Text = "";
+                this.txtbarcode.Focus();
+                return;
+            }
+            if (e.KeyChar != 13)
+                return;
+            try
+            {
+                commonqty = Convert.ToInt32(this.txtcommonqty.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("请输入数量");
+                this.txtcommonqty.SelectAll();
+                return;
+            }
+            if (commonqty < 0)
+            {
+                MessageBox.Show("数量不能小于0");
+                this.txtcommonqty.SelectAll();
+                return;
+            }
+            //if (!isNew)
+            //{
+            if (commonqty * ml.data[row].spec > ml.data[row].canUseMinTotalQuantity + ml.data[row].canUseTotalQuantity * ml.data[row].spec)
+           
+            {
+                MessageBox.Show("输入数量大于系统数量");
+                this.txtcommonqty.SelectAll();
+                return;
+            }
+
+            
+            this.txtcommonqty.Enabled = false;
+            this.txtminqty.Enabled = true;
+            this.txtminqty.Focus();
+        }
+
+        int minqty;
+        private void txtminqty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 27)
+            {
+
+                this.txtcommonqty.Enabled = true;
+                this.txtminqty.Enabled = false;
+                this.txtminqty.Text = "";
+                this.txtcommonqty.Focus();
+                this.txtcommonqty.SelectAll();
+                return;
+            }
+            if (e.KeyChar != 13)
+                return;
+            try
+            {
+                minqty = Convert.ToInt32(this.txtminqty.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("请输入数量");
+                this.txtminqty.SelectAll();
+                return;
+            }
+            if (minqty < 0)
+            {
+                MessageBox.Show("数量不能小于0");
+                this.txtcommonqty.SelectAll();
+                return;
+            }
+
+
+            if (minqty + commonqty * ml.data[row].spec > ml.data[row].canUseMinTotalQuantity + ml.data[row].canUseTotalQuantity * ml.data[row].spec)
+            {
+                MessageBox.Show("输入数量大于系统数量");
+                this.txtminqty.SelectAll();
+                return;
+            }
+
+                this.txtminqty.Enabled = false;
+                this.txttotraycode.Enabled = true;
+                this.txttotraycode.Focus();
+            
+
+        }
 
       
+    
+
+        private void txttotraycode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            if (e.KeyChar == 27)
+            {
+
+                this.txtminqty.Enabled = true;
+                this.txttotraycode.Enabled = false;
+                this.txttotraycode.Text = "";
+                this.txtminqty.Focus();
+                this.txtminqty.SelectAll();
+                return;
+            }
+            if (e.KeyChar != 13)
+                return;
+            if(this.txttotraycode.Text=="")
+                return;
+            if (this.txttotraycode.Text.Length < Comm.lcCode.Length)
+            {
+                MessageBox.Show("请扫描正确托盘码！");
+                //this.txttraycode.SelectAll();
+                this.txttotraycode.Text = "";
+                return;
+            }
+            if (Comm.lcCode != this.txttotraycode.Text.Substring(0, Comm.lcCode.Length))
+                {
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                        msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                        if (msg == null)
+                            throw new Exception("错误信息捕捉失败");
+                        if (!msg.success)
+                            throw new Exception(msg.msg);
+                        Model.MTrayByBox mm = (Model.MTrayByBox)JsonConvert.DeserializeObject(x, typeof(Model.MTrayByBox));
+                        if (mm == null)
+                            throw new Exception("错误信息捕捉失败");
+                        this.txttotraycode.Text = mm.data.trayCode;
+                        Cursor.Current = Cursors.Default;
+                    }
+                    catch (Exception ex)
+                    {
+                        Cursor.Current = Cursors.Default;
+                        //this.txtToTraycode.SelectAll();
+                        this.txttotraycode.Text = "";
+                        MessageBox.Show(ex.Message);
+                        return;
+
+                    }
+                }
+              
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        string x = HttpHelper.HttpPost("verifyTrayCode", @"trayCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode);
+                        msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                        if (msg == null)
+                            throw new Exception("verifyTrayCode错误信息捕捉失败");
+                        if (!msg.success)
+                            throw new Exception(msg.msg);
+                        Cursor.Current = Cursors.Default;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Cursor.Current = Cursors.Default;
+                        MessageBox.Show(ex.Message);
+                        return;
+
+                    }
+                    this.txttotraycode.Enabled = false;
+            this.txttoslid.Enabled = true;
+            this.txttoslid.Text = "";
+            this.txttoslid.Focus();
+
+                
+        }
+
+        int slid;
+        private void txttoslid_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 27)
+            {
+
+                this.txttotraycode.Enabled = true;
+                this.txttoslid.Enabled = false;
+                this.txttoslid.Text = "";
+                this.txttotraycode.Focus();
+                this.txttotraycode.SelectAll();
+                return;
+            }
+            if (e.KeyChar != 13)
+                return;
+            if (this.txttoslid.Text == "")
+                return;
+            Model.MSlIdBySlName ms;
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txttoslid.Text);
+                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                if (msg == null)
+                    throw new Exception("findSlIdBySlName错误信息捕捉失败");
+                if (!msg.success)
+                    throw new Exception(msg.msg);
+                ms = (Model.MSlIdBySlName)JsonConvert.DeserializeObject(x, typeof(Model.MSlIdBySlName));
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.Message);
+                this.txttoslid.SelectAll();
+                return;
+            }
+            slid = ms.data.slId;
+            try
+            {
+                 Cursor.Current = Cursors.WaitCursor;
+                 Save();
+                 Cursor.Current = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            ml.data[row].canUseTotalQuantity -= commonqty;
+            ml.data[row].canUseMinTotalQuantity -= minqty;
+            this.txttoslid.Enabled = false;
+            bool isfinish = true;
+            foreach (Model.locationStockLists v in ml.data)
+            {
+                if (v.canUseMinTotalQuantity + v.canUseTotalQuantity * v.spec != 0)
+                {
+                    isfinish = false;
+                    break;
+                }
+            }
+            if (isfinish)
+            {
+                init();
+                this.txtbarcode.Text = "";
+                this.txttoslname.Enabled = true;
+                this.cmbtoslname.Enabled = true;
+                this.txttoslname.Focus();
+                return;
+            }
+            if (ml.data[row].canUseMinTotalQuantity + ml.data[row].canUseTotalQuantity * ml.data[row].spec == 0)
+            {
+                return;
+            }
+            showTxt();
+            this.txttoslid.Text = "";
+            this.txttotraycode.Text = "";
+            this.txtcommonqty.Text = "";
+            this.txtminqty.Text = "";
+            this.txttoslid.Enabled = false;
+            this.txtcommonqty.Enabled = true;
+            this.txtcommonqty.Focus();
+        }
+
+        void Save()
+        {
+            string x = HttpHelper.HttpPost("submitBalanceTransferOrder", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&toslId=" + slid.ToString() + "&updater=" + Comm.usercode + "&fromSlId=" + ml.data[row].slId + "&toTrayCode=" + this.txttotraycode.Text + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&materialCode=" + ml.data[row].materialCode + "&orderId=" + this.labccode.Text + "&batchNo=" + ml.data[row].batchNo + "&pdate=" + ml.data[row].pDate + "&inDate=" + ml.data[row].inDate + "&shipperCode="+ml.data[row].shipperCode);
+            msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+            if (msg == null)
+                throw new Exception("submitBalanceTransferOrder错误信息捕捉失败");
+            if (!msg.success)
+                throw new Exception(msg.msg);
+        }
+
+        void init()
+        {
+            ml = null;
+            this.labmaterial.Text = "";
+            this.labpdate.Text = "";
+            this.labminunit.Text = "";
+            this.labcommonUnit.Text = "";
+            this.labshippername.Text = "";
+            this.labbatchno.Text = "";
+            this.txtcommonqty.Text = "";
+            this.txtminqty.Text = "";
+            this.txttoslid.Text = "";
+            this.txttotraycode.Text = "";
+            this.labqty.Text = "";
+        }
+
+        private void btnNext1_Click(object sender, EventArgs e)
+        {
+            if (ml == null)
+                return;
+            while (true)
+            {
+                row++;
+                if (row == ml.data.Count)
+                {
+                    row = 0;
+                }
+                if (ml.data[row].canUseMinTotalQuantity + ml.data[row].canUseTotalQuantity * ml.data[row].spec != 0)
+                {
+                    showTxt();
+                    this.txttoslid.Text = "";
+                    this.txttotraycode.Text = "";
+                    this.txtcommonqty.Text = "";
+                    this.txtminqty.Text = "";
+                    this.txttoslid.Enabled = false;
+                    this.txttotraycode.Enabled = false;
+                    this.txtminqty.Enabled = false;
+                    this.txtcommonqty.Enabled = true;
+                    this.txtcommonqty.Focus();
+                    break;
+                }
+           
+            }
+        }
+
+        private void btnData_Click(object sender, EventArgs e)
+        {
+            if (ml == null)
+                return;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("materialCode");
+            dt.Columns.Add("materialName");
+            dt.Columns.Add("pdate");
+            dt.Columns.Add("batchNo");
+            dt.Columns.Add("qty");
+            dt.Columns.Add("slName");
+            dt.Columns.Add("fromSlIdName");
+            dt.Columns.Add("toSlIdName");
+            dt.Columns.Add("trayCode");
+            DataRow dr;
+            foreach (Model.locationStockLists v in ml.data)
+            {
+                //if (v.quantity == v.realQuantity && v.minQuantity == v.realMinquantity)
+                //    continue;
+                dr = dt.NewRow();
+                dr["materialCode"] = v.materialCode;
+                dr["materialName"] = v.materialCodeName;
+                if (!string.IsNullOrEmpty(v.pdateStr))
+                {
+                    dr["pdate"] = v.pdateStr;
+                }
+                else
+                {
+                    dr["pdate"] = "";
+                }
+                if (!string.IsNullOrEmpty(v.batchNo))
+                {
+                    dr["batchNo"] = v.batchNo;
+                }
+                else
+                {
+                    dr["batchNo"] = "";
+                }
+                dr["slName"] = "";
+                int _quantity = v.canUseTotalQuantity;
+                //if (_quantity < 0)
+                //    _quantity = 0;
+                int _minquantity = v.canUseMinTotalQuantity;
+                //if (_minquantity < 0)
+                //    _minquantity = 0;
+
+                if (_quantity < 0 || _minquantity < 0)
+                {
+                    int imax = _quantity * v.spec + _minquantity;
+                    //_quantity = (int)(Math.Ceiling(((double)(imax) / v.spec)));
+                    _quantity = imax / v.spec;
+                    _minquantity = imax % v.spec;
+
+                }
+                dr["qty"] = _quantity.ToString() + v.unit + _minquantity.ToString() + v.minUnit;
+                dr["fromSlIdName"] = "";
+                dr["toSlIdName"] = "";
+                dr["trayCode"] = "";
+                if (string.IsNullOrEmpty(v.pdateStr))
+                {
+                    v.pdateStr = "";
+                }
+                if (string.IsNullOrEmpty(v.batchNo))
+                {
+                    v.batchNo = "";
+                }
+                dt.Rows.Add(dr);
+            }
+            Ot.frmList frm = new Rf_Wms.Ot.frmList();
+            frm.dt = dt;
+            frm.ShowDialog();
+            foreach (Control v in this.Controls)
+            {
+                if (v is TextBox)
+                {
+                    if (v.Enabled)
+                        v.Focus();
+                }
+            }
+        }
+
+        private void btnkeyboard_Click(object sender, EventArgs e)
+        {
+            //RIL_IME.ShowIME("键盘");
+            RIL_IME.ShowIME("Letter Recognizer");
+            foreach (Control v in this.Controls)
+            {
+                if (v is TextBox)
+                {
+                    if (v.Enabled)
+                        v.Focus();
+                }
+            }
+        }
+
+      
+
+       
     }
 }

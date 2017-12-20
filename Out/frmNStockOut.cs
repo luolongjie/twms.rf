@@ -702,6 +702,10 @@ namespace Rf_Wms.Out
             {
                 conn += "&sendToCode=" + msec.data[secrow].sendToCode + "&sendToName=" + msec.data[secrow].sendToName;
             }
+            if (mss.data.sortingType == null)
+            {
+                conn += "&pdateString=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].pDate + "&batchNo=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].batchNo;
+            }
             string x = HttpHelper.HttpPost("doSecondarySorting", conn);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)

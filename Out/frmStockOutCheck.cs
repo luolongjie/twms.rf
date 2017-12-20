@@ -248,7 +248,10 @@ namespace Rf_Wms.Out
                 {
                     Cursor.Current = Cursors.WaitCursor;
                     string conn = @"pickNo=" + mss.data.pickNo + "&lcCode=" + Comm.lcCode + "&checkQuantity=" + commonqty.ToString() + "&checkMinQuantity=" + minqty.ToString() + "&updater=" + Comm.usercode + "&trayCode=" + mss.data.trayCode + "&sortingType=" + mss.data.sortingType + "&pickType=" + mss.data.pickType + "&checkType=" + mss.data.checkType;
-                   
+                    if (mss.data.sortingType == null)
+                    {
+                        conn += "&pdateString=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].pDate + "&batchNo=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].batchNo;
+                    }
                    
                     string x = HttpHelper.HttpPost("doSecondarySorting", conn);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -493,7 +496,11 @@ namespace Rf_Wms.Out
                 string conn = @"pickNo=" + mss.data.pickNo + "&lcCode=" + Comm.lcCode + "&checkQuantity=" + checkqty.ToString() + "&checkMinQuantity=" + checkminqty.ToString() + "&updater=" + Comm.usercode + "&trayCode=" + mss.data.trayCode + "&pickType=" + mss.data.pickType + "&checkType=" + mss.data.checkType;
                 if (mss.data.sortingType != null)
                 {
-                    conn+="&sortingType=" + mss.data.sortingType;
+                    conn += "&sortingType=" + mss.data.sortingType;
+                }
+                else
+                {
+                    conn += "&pdateString=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].pDate + "&batchNo=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].batchNo;
                 }
                 conn += "&pickOperateId=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].pickOperateId + "&fromTrayCode=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].fromTrayCode + "&toTrayCode=" + mss.data.pickOperateSecondarySortingRFDTOS[mssrow].toTrayCode;
 

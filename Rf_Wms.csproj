@@ -50,7 +50,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.Windowsce.Forms" />
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\exe\Rf_Wms\bin\Debug\Newtonsoft.Json.Compact.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -166,6 +168,7 @@
       <DependentUpon>frmShelveMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\getRegionList.cs" />
+    <Compile Include="Model\locationStockList.cs" />
     <Compile Include="Model\MContainer.cs" />
     <Compile Include="Model\MdoStockUpConfirm.cs" />
     <Compile Include="Model\MergeRefundOrder.cs" />
