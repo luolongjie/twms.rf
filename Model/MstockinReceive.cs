@@ -63,76 +63,7 @@ namespace Rf_Wms.Model
                 _recommendSlName = value;
             }
         }
-
-        private List<recommends> _recommendList;
-        public List<recommends> recommendList
-        {
-            get
-            {
-                return _recommendList;
-            }
-            set
-            {
-                _recommendList = value;
-            }
-        }
         
-    }
-
-    [Serializable]
-    public class recommends
-    {
-        private string _batch;
-        public string batch
-        {
-            get
-            {
-                return _batch;
-            }
-            set
-            {
-                _batch = value;
-            }
-        }
-
-        private string _pdate;
-        public string pdate
-        {
-            get
-            {
-                return _pdate;
-            }
-            set
-            {
-                _pdate = value;
-            }
-        }
-
-        private int _id;
-        public int id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
-
-        private string _name;
-        public string name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
     }
 
 

@@ -45,7 +45,6 @@
             this.btnkeyboard = new System.Windows.Forms.Button();
             this.txttotraycode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnslid = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtcarton
@@ -75,7 +74,7 @@
             // 
             this.labrecommendSlId.Location = new System.Drawing.Point(90, 157);
             this.labrecommendSlId.Name = "labrecommendSlId";
-            this.labrecommendSlId.Size = new System.Drawing.Size(67, 20);
+            this.labrecommendSlId.Size = new System.Drawing.Size(145, 20);
             // 
             // label4
             // 
@@ -183,18 +182,6 @@
             this.label3.Size = new System.Drawing.Size(77, 20);
             this.label3.Text = "合并托盘";
             // 
-            // btnslid
-            // 
-            this.btnslid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
-            this.btnslid.ForeColor = System.Drawing.Color.White;
-            this.btnslid.Location = new System.Drawing.Point(163, 155);
-            this.btnslid.Name = "btnslid";
-            this.btnslid.Size = new System.Drawing.Size(72, 20);
-            this.btnslid.TabIndex = 295;
-            this.btnslid.Text = "建议库位";
-            this.btnslid.Visible = false;
-            this.btnslid.Click += new System.EventHandler(this.btnslid_Click);
-            // 
             // frmrefundshelveOne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -202,7 +189,6 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(240, 294);
-            this.Controls.Add(this.btnslid);
             this.Controls.Add(this.txttotraycode);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnkeyboard);
@@ -248,6 +234,5 @@
         private System.Windows.Forms.Button btnkeyboard;
         private System.Windows.Forms.TextBox txttotraycode;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnslid;
     }
 }
