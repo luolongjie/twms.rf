@@ -404,8 +404,7 @@ namespace Rf_Wms.Out
             }
             if (this.txttotraycode.Text == this.txttraycode.Text)
             {
-                //if (mt.data.quantity != commonqty || mt.data.minQuantity != minqty)
-                if (mt.data.quantity * mt.data.spec + mt.data.minQuantity != commonqty * mt.data.spec + minqty)
+                if (mt.data.quantity != commonqty || mt.data.minQuantity != minqty)
                 {
                     MessageBox.Show("部分转储不允许使用同一托盘");
                     this.txttotraycode.SelectAll();

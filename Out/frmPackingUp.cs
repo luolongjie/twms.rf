@@ -617,7 +617,7 @@ namespace Rf_Wms.Out
                 //if (_mt.data.quantity != commonqty || _mt.data.minQuantity != minqty)
                 if (_mt.data.quantity*ms.data[c].spec+_mt.data.minQuantity != commonqty*ms.data[c].spec+ minqty)
                 {
-                    MessageBox.Show("部分拣货不允许使用同一托盘");
+                    MessageBox.Show("部分转储不允许使用同一托盘");
                     //this.txtToTraycode.SelectAll();
                     this.txtToTraycode.Text = "";
                     return;
