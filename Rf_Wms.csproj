@@ -299,6 +299,12 @@
     <Compile Include="Ot\frmWarehouse.Designer.cs">
       <DependentUpon>frmWarehouse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Out\frmBalTranMove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmBalTranMove.Designer.cs">
+      <DependentUpon>frmBalTranMove.cs</DependentUpon>
+    </Compile>
     <Compile Include="Out\frmDirTranMove.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -511,6 +517,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ot\frmWarehouse.resx">
       <DependentUpon>frmWarehouse.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmBalTranMove.resx">
+      <DependentUpon>frmBalTranMove.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Out\frmDirTranMove.resx">
