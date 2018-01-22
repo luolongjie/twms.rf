@@ -637,7 +637,7 @@ namespace Rf_Wms.Out
 
         private void frmDirTranMove_Closing(object sender, CancelEventArgs e)
         {
-            CloseOrderid();
+            //CloseOrderid();
         }
 
        

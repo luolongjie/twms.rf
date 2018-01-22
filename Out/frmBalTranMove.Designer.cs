@@ -74,7 +74,7 @@
             // txttotraycode
             // 
             this.txttotraycode.Enabled = false;
-            this.txttotraycode.Location = new System.Drawing.Point(84, 220);
+            this.txttotraycode.Location = new System.Drawing.Point(68, 221);
             this.txttotraycode.Name = "txttotraycode";
             this.txttotraycode.Size = new System.Drawing.Size(140, 23);
             this.txttotraycode.TabIndex = 318;
@@ -94,7 +94,7 @@
             // txttoslid
             // 
             this.txttoslid.Enabled = false;
-            this.txttoslid.Location = new System.Drawing.Point(84, 247);
+            this.txttoslid.Location = new System.Drawing.Point(68, 247);
             this.txttoslid.Name = "txttoslid";
             this.txttoslid.Size = new System.Drawing.Size(140, 23);
             this.txttoslid.TabIndex = 316;
@@ -102,22 +102,22 @@
             // 
             // label14
             // 
-            this.label14.Location = new System.Drawing.Point(1, 222);
+            this.label14.Location = new System.Drawing.Point(1, 223);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(77, 20);
             this.label14.Text = "移入托盘";
             // 
             // labqty
             // 
-            this.labqty.Location = new System.Drawing.Point(75, 172);
+            this.labqty.Location = new System.Drawing.Point(68, 177);
             this.labqty.Name = "labqty";
-            this.labqty.Size = new System.Drawing.Size(118, 20);
+            this.labqty.Size = new System.Drawing.Size(118, 16);
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(1, 172);
+            this.label10.Location = new System.Drawing.Point(1, 177);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 20);
+            this.label10.Size = new System.Drawing.Size(77, 16);
             this.label10.Text = "待转储量";
             // 
             // labfromsIId
@@ -147,7 +147,7 @@
             // txtminqty
             // 
             this.txtminqty.Enabled = false;
-            this.txtminqty.Location = new System.Drawing.Point(131, 194);
+            this.txtminqty.Location = new System.Drawing.Point(131, 196);
             this.txtminqty.Name = "txtminqty";
             this.txtminqty.Size = new System.Drawing.Size(47, 23);
             this.txtminqty.TabIndex = 313;
@@ -155,22 +155,21 @@
             // 
             // labminunit
             // 
-            this.labminunit.Location = new System.Drawing.Point(180, 197);
+            this.labminunit.Location = new System.Drawing.Point(180, 199);
             this.labminunit.Name = "labminunit";
             this.labminunit.Size = new System.Drawing.Size(44, 20);
             this.labminunit.Text = "单位2";
             // 
             // labcommonUnit
             // 
-            this.labcommonUnit.Location = new System.Drawing.Point(92, 197);
+            this.labcommonUnit.Location = new System.Drawing.Point(92, 199);
             this.labcommonUnit.Name = "labcommonUnit";
             this.labcommonUnit.Size = new System.Drawing.Size(45, 20);
-            this.labcommonUnit.Text = "单位1";
             // 
             // txtcommonqty
             // 
             this.txtcommonqty.Enabled = false;
-            this.txtcommonqty.Location = new System.Drawing.Point(40, 194);
+            this.txtcommonqty.Location = new System.Drawing.Point(40, 196);
             this.txtcommonqty.Name = "txtcommonqty";
             this.txtcommonqty.Size = new System.Drawing.Size(47, 23);
             this.txtcommonqty.TabIndex = 312;
@@ -178,7 +177,7 @@
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(1, 197);
+            this.label13.Location = new System.Drawing.Point(1, 199);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 20);
             this.label13.Text = "数量";
@@ -192,9 +191,9 @@
             // 
             // labmaterial
             // 
-            this.labmaterial.Location = new System.Drawing.Point(0, 80);
+            this.labmaterial.Location = new System.Drawing.Point(0, 75);
             this.labmaterial.Name = "labmaterial";
-            this.labmaterial.Size = new System.Drawing.Size(238, 20);
+            this.labmaterial.Size = new System.Drawing.Size(238, 36);
             // 
             // label1
             // 
@@ -205,29 +204,29 @@
             // 
             // label11
             // 
-            this.label11.Location = new System.Drawing.Point(1, 55);
+            this.label11.Location = new System.Drawing.Point(1, 52);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(77, 20);
             this.label11.Text = "商品码";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(1, 127);
+            this.label2.Location = new System.Drawing.Point(1, 138);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 20);
+            this.label2.Size = new System.Drawing.Size(77, 16);
             this.label2.Text = "批次";
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(1, 105);
+            this.label4.Location = new System.Drawing.Point(1, 117);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 20);
+            this.label4.Size = new System.Drawing.Size(77, 16);
             this.label4.Text = "生产日期";
             // 
             // txtbarcode
             // 
             this.txtbarcode.Enabled = false;
-            this.txtbarcode.Location = new System.Drawing.Point(84, 52);
+            this.txtbarcode.Location = new System.Drawing.Point(68, 49);
             this.txtbarcode.Name = "txtbarcode";
             this.txtbarcode.Size = new System.Drawing.Size(140, 23);
             this.txtbarcode.TabIndex = 345;
@@ -235,7 +234,7 @@
             // 
             // txttoslname
             // 
-            this.txttoslname.Location = new System.Drawing.Point(70, 24);
+            this.txttoslname.Location = new System.Drawing.Point(68, 24);
             this.txttoslname.Name = "txttoslname";
             this.txttoslname.Size = new System.Drawing.Size(80, 23);
             this.txttoslname.TabIndex = 347;
@@ -257,34 +256,34 @@
             // 
             // labpdate
             // 
-            this.labpdate.Location = new System.Drawing.Point(75, 103);
+            this.labpdate.Location = new System.Drawing.Point(68, 115);
             this.labpdate.Name = "labpdate";
-            this.labpdate.Size = new System.Drawing.Size(118, 20);
+            this.labpdate.Size = new System.Drawing.Size(118, 16);
             // 
             // labbatchno
             // 
-            this.labbatchno.Location = new System.Drawing.Point(75, 127);
+            this.labbatchno.Location = new System.Drawing.Point(68, 138);
             this.labbatchno.Name = "labbatchno";
-            this.labbatchno.Size = new System.Drawing.Size(118, 20);
+            this.labbatchno.Size = new System.Drawing.Size(118, 16);
             // 
             // labshippername
             // 
-            this.labshippername.Location = new System.Drawing.Point(78, 147);
+            this.labshippername.Location = new System.Drawing.Point(68, 158);
             this.labshippername.Name = "labshippername";
-            this.labshippername.Size = new System.Drawing.Size(153, 20);
+            this.labshippername.Size = new System.Drawing.Size(163, 16);
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(1, 149);
+            this.label6.Location = new System.Drawing.Point(1, 157);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 20);
+            this.label6.Size = new System.Drawing.Size(77, 16);
             this.label6.Text = "货主";
             // 
             // btnNext1
             // 
             this.btnNext1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnNext1.ForeColor = System.Drawing.Color.White;
-            this.btnNext1.Location = new System.Drawing.Point(159, 125);
+            this.btnNext1.Location = new System.Drawing.Point(159, 136);
             this.btnNext1.Name = "btnNext1";
             this.btnNext1.Size = new System.Drawing.Size(72, 20);
             this.btnNext1.TabIndex = 367;
