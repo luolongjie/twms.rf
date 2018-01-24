@@ -762,7 +762,20 @@ namespace Rf_Wms.Out
                 if (!msg.success)
                     throw new Exception(msg.msg);
                 mz = (Model.MZcqSlList)JsonConvert.DeserializeObject(x, typeof(Model.MZcqSlList));
-                this.cmbtoslname.DataSource = mz.data;
+                List<Model.zcq> zcql = new List<Rf_Wms.Model.zcq>();
+                foreach (Model.zcq v in mz.data)
+                {
+                    if (v.status == "EFFECTIVE")
+                    {
+                        zcql.Add(v);
+                    }
+                }
+                if (zcql.Count == 0)
+                {
+                    throw new Exception("没有可用的转储区信息");
+                }
+                this.cmbtoslname.DataSource = zcql;
+                //this.cmbtoslname.DataSource = mz.data;
                 this.cmbtoslname.ValueMember = "slId";
                 this.cmbtoslname.DisplayMember = "slName";
                 Cursor.Current = Cursors.Default;

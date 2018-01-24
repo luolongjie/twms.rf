@@ -40,7 +40,18 @@ namespace Rf_Wms.Model
             }
         }
 
-
+        private string _status;
+        public string status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+            }
+        }
 
         private int _slId;
         public int slId

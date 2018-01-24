@@ -131,7 +131,7 @@ namespace Rf_Wms.Out
             {
                 Cursor.Current = Cursors.WaitCursor;
                 //string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttraycode.Text + "&type=2" );
-                string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttraycode.Text+"&whId="+Comm.warehousecode);
+                string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttraycode.Text + "&whId=" + Comm.warehousecode + "&transferType=1");
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -469,7 +469,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttotraycode.Text+"&whId="+Comm.warehousecode);
+                string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttotraycode.Text + "&whId=" + Comm.warehousecode + "&transferType=1");
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("trayStock/findTrayStockByOrderType错误信息捕捉失败");

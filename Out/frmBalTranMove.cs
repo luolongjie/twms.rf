@@ -31,7 +31,20 @@ namespace Rf_Wms.Out
                 if (!msg.success)
                     throw new Exception(msg.msg);
                 mz = (Model.MZcqSlList)JsonConvert.DeserializeObject(x, typeof(Model.MZcqSlList));
-                this.cmbtoslname.DataSource = mz.data;
+                //var v = from q in mz.data where q.status == "EFFECTIVE" select q;
+                List<Model.zcq> zcql = new List<Rf_Wms.Model.zcq>();
+                foreach (Model.zcq v in mz.data)
+                {
+                    if (v.status == "EFFECTIVE")
+                    {
+                        zcql.Add(v);
+                    }
+                }
+                if (zcql.Count == 0)
+                {
+                    throw new Exception("没有可用的转储区信息");
+                }
+                this.cmbtoslname.DataSource = zcql;
                 this.cmbtoslname.ValueMember = "slId";
                 this.cmbtoslname.DisplayMember = "slName";
 
@@ -167,6 +180,10 @@ namespace Rf_Wms.Out
                     {
                         throw new Exception("数据信息捕捉失败");
                     }
+                    if (ml.data.Count == 0)
+                    {
+                        throw new Exception("未找到待转储库存");
+                    }
                     row = 0;
                     Cursor.Current = Cursors.Default;
                 }
@@ -201,11 +218,12 @@ namespace Rf_Wms.Out
             this.labbatchno.Text = ml.data[row].batchNo;
             this.labpdate.Text = ml.data[row].pdateStr;
             this.labmaterial.Text = ml.data[row].materialCodeName;
-            int imax = ml.data[row].canUseTotalQuantity * ml.data[row].spec + ml.data[row].canUseMinTotalQuantity;
+            int imax = ml.data[row].totalQuantity * ml.data[row].spec + ml.data[row].minTotalQuantity;
+            //int imax = ml.data[row].canUseTotalQuantity * ml.data[row].spec + ml.data[row].canUseMinTotalQuantity;
             //if (maxminquantity < 0 || maxminquantity < 0)
             //{
-            maxquantity = ml.data[row].canUseTotalQuantity;
-            maxminquantity = ml.data[row].canUseMinTotalQuantity;
+            maxquantity = ml.data[row].totalQuantity;
+            maxminquantity = ml.data[row].minTotalQuantity;
             if (maxquantity < 0 || maxminquantity < 0)
             {
                 maxquantity = imax / ml.data[row].spec;
@@ -336,12 +354,17 @@ namespace Rf_Wms.Out
             if (minqty < 0)
             {
                 MessageBox.Show("数量不能小于0");
-                this.txtcommonqty.SelectAll();
+                this.txtminqty.SelectAll();
+                return;
+            }
+            if (commonqty == 0 && minqty == 0)
+            {
+                MessageBox.Show("转储数量必须大于0");
+                this.txtminqty.SelectAll();
                 return;
             }
 
-
-            if (minqty + commonqty * ml.data[row].spec > ml.data[row].canUseMinTotalQuantity + ml.data[row].canUseTotalQuantity * ml.data[row].spec)
+            if (minqty + commonqty * ml.data[row].spec > ml.data[row].minTotalQuantity + ml.data[row].totalQuantity * ml.data[row].spec)
             {
                 MessageBox.Show("输入数量大于待转储量");
                 this.txtminqty.SelectAll();
@@ -355,9 +378,9 @@ namespace Rf_Wms.Out
 
         }
 
-      
-    
 
+
+        Model.MTrayStockByOrderType nmt = null;
         private void txttotraycode_KeyPress(object sender, KeyPressEventArgs e)
         {
             
@@ -410,26 +433,51 @@ namespace Rf_Wms.Out
                     }
                 }
               
-                    try
-                    {
-                        Cursor.Current = Cursors.WaitCursor;
-                        string x = HttpHelper.HttpPost("verifyTrayCode", @"trayCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode);
-                        msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
-                        if (msg == null)
-                            throw new Exception("verifyTrayCode错误信息捕捉失败");
-                        if (!msg.success)
-                            throw new Exception(msg.msg);
-                        Cursor.Current = Cursors.Default;
+                    //try
+                    //{
+                    //    Cursor.Current = Cursors.WaitCursor;
+                    //    string x = HttpHelper.HttpPost("verifyTrayCode", @"trayCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode);
+                    //    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    //    if (msg == null)
+                    //        throw new Exception("verifyTrayCode错误信息捕捉失败");
+                    //    if (!msg.success)
+                    //        throw new Exception(msg.msg);
+                    //    Cursor.Current = Cursors.Default;
 
-                    }
-                    catch (Exception ex)
-                    {
-                        Cursor.Current = Cursors.Default;
-                        MessageBox.Show(ex.Message);
-                        return;
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Cursor.Current = Cursors.Default;
+                    //    MessageBox.Show(ex.Message);
+                    //    return;
 
-                    }
-                    this.txttotraycode.Enabled = false;
+                    //}
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttotraycode.Text + "&whId=" + Comm.warehousecode+"&transferType=2");
+                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                if (msg == null)
+                    throw new Exception("trayStock/findTrayStockByOrderType错误信息捕捉失败");
+                if (!msg.success)
+                    throw new Exception(msg.msg);
+                nmt = (Model.MTrayStockByOrderType)JsonConvert.DeserializeObject(x, typeof(Model.MTrayStockByOrderType));
+                if (nmt == null)
+                {
+                    throw new Exception("findTrayStockByOrderType捕捉失败");
+                }
+
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                txttotraycode.SelectAll();
+                MessageBox.Show(ex.Message);
+                return;
+
+            }
+            this.txttotraycode.Enabled = false;
             this.txttoslid.Enabled = true;
             this.txttoslid.Text = "";
             this.txttoslid.Focus();
@@ -452,6 +500,13 @@ namespace Rf_Wms.Out
             }
             if (e.KeyChar != 13)
                 return;
+            var o = from x in mz.data where x.slName == this.txttoslid.Text select x;
+            if (o.Count() >0)
+            {
+                MessageBox.Show("不能输入暂存区库位");
+                this.txttoslid.SelectAll();
+                return;
+            }
             if (this.txttoslid.Text != "")
             {
                 Model.MSlIdBySlName ms;
@@ -488,13 +543,13 @@ namespace Rf_Wms.Out
                 MessageBox.Show(ex.Message);
                 return;
             }
-            ml.data[row].canUseTotalQuantity -= commonqty;
-            ml.data[row].canUseMinTotalQuantity -= minqty;
+            ml.data[row].totalQuantity -= commonqty;
+            ml.data[row].minTotalQuantity -= minqty;
             this.txttoslid.Enabled = false;
             bool isfinish = true;
             foreach (Model.locationStockLists v in ml.data)
             {
-                if (v.canUseMinTotalQuantity + v.canUseTotalQuantity * v.spec != 0)
+                if (v.minTotalQuantity + v.totalQuantity * v.spec != 0)
                 {
                     isfinish = false;
                     break;
@@ -509,7 +564,7 @@ namespace Rf_Wms.Out
                 this.txttoslname.Focus();
                 return;
             }
-            if (ml.data[row].canUseMinTotalQuantity + ml.data[row].canUseTotalQuantity * ml.data[row].spec == 0)
+            if (ml.data[row].minTotalQuantity + ml.data[row].totalQuantity * ml.data[row].spec == 0)
             {
                 return;
             }
@@ -566,7 +621,7 @@ namespace Rf_Wms.Out
                 {
                     row = 0;
                 }
-                if (ml.data[row].canUseMinTotalQuantity + ml.data[row].canUseTotalQuantity * ml.data[row].spec != 0)
+                if (ml.data[row].minTotalQuantity + ml.data[row].totalQuantity * ml.data[row].spec != 0)
                 {
                     showTxt();
                     this.txttoslid.Text = "";
@@ -623,10 +678,10 @@ namespace Rf_Wms.Out
                     dr["batchNo"] = "";
                 }
                 dr["slName"] = "";
-                int _quantity = v.canUseTotalQuantity;
+                int _quantity = v.totalQuantity;
                 //if (_quantity < 0)
                 //    _quantity = 0;
-                int _minquantity = v.canUseMinTotalQuantity;
+                int _minquantity = v.minTotalQuantity;
                 //if (_minquantity < 0)
                 //    _minquantity = 0;
 

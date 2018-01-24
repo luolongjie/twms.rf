@@ -222,6 +222,32 @@ namespace Rf_Wms.Model
             }
         }
 
+        private int _minTotalQuantity;
+        public int minTotalQuantity
+        {
+            get
+            {
+                return _minTotalQuantity;
+            }
+            set
+            {
+                _minTotalQuantity = value;
+            }
+        }
+
+        private int _totalQuantity;
+        public int totalQuantity
+        {
+            get
+            {
+                return _totalQuantity;
+            }
+            set
+            {
+                _totalQuantity = value;
+            }
+        }
+
         private int _spec;
         public int spec
         {
