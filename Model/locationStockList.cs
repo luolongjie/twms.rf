@@ -118,7 +118,7 @@ namespace Rf_Wms.Model
 
 
         private string _inDate;
-             public string inDate
+        public string inDate
         {
             get
             {
@@ -130,8 +130,21 @@ namespace Rf_Wms.Model
             }
         }
 
+        private int _materialStatusCode;
+        public int materialStatusCode
+        {
+            get
+            {
+                return _materialStatusCode;
+            }
+            set
+            {
+                _materialStatusCode = value;
+            }
+        }
+
         private string _materialStatus;
-         public string materialStatus
+        public string materialStatus
         {
             get
             {
@@ -142,7 +155,6 @@ namespace Rf_Wms.Model
                 _materialStatus = value;
             }
         }
-
 
          private string _pdateStr;
             public string pdateStr
@@ -219,6 +231,32 @@ namespace Rf_Wms.Model
             set
             {
                 _id = value;
+            }
+        }
+
+        private string _qtStatus;
+        public string qtStatus
+        {
+            get
+            {
+                return _qtStatus;
+            }
+            set
+            {
+                _qtStatus = value;
+            }
+        }
+
+        private int _qtStatusCode;
+        public int qtStatusCode
+        {
+            get
+            {
+                return _qtStatusCode;
+            }
+            set
+            {
+                _qtStatusCode = value;
             }
         }
 

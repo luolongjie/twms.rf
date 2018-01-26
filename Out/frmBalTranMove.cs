@@ -79,7 +79,7 @@ namespace Rf_Wms.Out
                 return;
             if (this.txttoslname.Text != "")
             {
-                var v = from x in mz.data where x.slName == this.txttoslname.Text select x;
+                var v = from x in mz.data where x.slName == this.txttoslname.Text && x.status  == "EFFECTIVE" select x;
                 if (v.Count() == 0)
                 {
                     MessageBox.Show("暂存区没有该库位");
@@ -190,7 +190,7 @@ namespace Rf_Wms.Out
                 catch (Exception ex)
                 {
                     Cursor.Current = Cursors.Default;
-                    this.txtbarcode.Text = "";
+                    this.txtbarcode.SelectAll();
                     MessageBox.Show(ex.Message);
                     return;
 
@@ -426,7 +426,7 @@ namespace Rf_Wms.Out
                     {
                         Cursor.Current = Cursors.Default;
                         //this.txtToTraycode.SelectAll();
-                        this.txttotraycode.Text = "";
+                        txttotraycode.SelectAll();
                         MessageBox.Show(ex.Message);
                         return;
 
@@ -476,6 +476,37 @@ namespace Rf_Wms.Out
                 MessageBox.Show(ex.Message);
                 return;
 
+            }
+            if (!string.IsNullOrEmpty(nmt.data.status))
+            {
+                MessageBox.Show("该托盘是暂存区托盘");
+                this.txttotraycode.SelectAll();
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(nmt.data.materialCode))//不是空托盘
+            {
+                //if (nmt.data.slId != mt.data.t)
+                //{
+                //    MessageBox.Show("该托盘不在目标库位上,请换一个托盘");
+                //    this.txttotraycode.SelectAll();
+                //    return;
+                //}
+                if (ml.data[row].materialCode != nmt.data.materialCode)
+                {
+                    MessageBox.Show("新托盘上的物料是" + nmt.data.materialName + ",不能合托,请换托盘");
+                    this.txttotraycode.SelectAll();
+                    return;
+                }
+                if (ml.data[row].inDateStr != nmt.data.inDate || ml.data[row].batchNo != nmt.data.batchNo || ml.data[row].pdateStr != nmt.data.pdate || ml.data[row].materialStatusCode != nmt.data.materialStatus)
+                {
+                    DialogResult dr = MessageBox.Show("移入托盘的批次、生产日期、物料状态、质检状态、入库日期存在与待转入物料不一致的情况，确认是否合托?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    if (dr != DialogResult.Yes)
+                    {
+                        this.txttotraycode.SelectAll();
+                        return;
+                    }
+                }
             }
             this.txttotraycode.Enabled = false;
             this.txttoslid.Enabled = true;

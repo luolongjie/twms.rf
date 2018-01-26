@@ -137,6 +137,8 @@ namespace Rf_Wms.Out
             //MessageBox.Show(e.KeyChar.ToString());
             if (e.KeyChar != 13)
                 return;
+            if (this.txtorderid.Text == "")
+                return;
             //try
             //{
             //    Cursor.Current = Cursors.WaitCursor;

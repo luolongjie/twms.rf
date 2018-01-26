@@ -27,6 +27,8 @@ namespace Rf_Wms.In
         {
             if (e.KeyChar != 13)
                 return;
+            if (this.txtcarton.Text == "")
+                return;
             GetValue();
         }
 
