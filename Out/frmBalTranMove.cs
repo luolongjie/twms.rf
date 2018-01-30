@@ -231,6 +231,8 @@ namespace Rf_Wms.Out
             }
 
             this.labqty.Text = maxquantity + ml.data[row].unit + maxminquantity + ml.data[row].minUnit;
+            commonqty = maxquantity;
+            minqty = maxminquantity;
             this.txtcommonqty.Text = maxquantity.ToString();
             this.txtminqty.Text = maxminquantity.ToString();
             this.labcommonUnit.Text = ml.data[row].unit;
@@ -251,7 +253,7 @@ namespace Rf_Wms.Out
             {
                 Cursor.Current = Cursors.WaitCursor;
                 string conn = @"orderId=" + this.labccode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode;
-                string x = HttpHelper.HttpPost("deleteTransOrder", conn);
+                string x = HttpHelper.HttpPost("deleteOrSubmitTransferOrder", conn);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -597,25 +599,33 @@ namespace Rf_Wms.Out
             }
             if (ml.data[row].minTotalQuantity + ml.data[row].totalQuantity * ml.data[row].spec == 0)
             {
-                return;
+                row++;
             }
-            showTxt();
-            this.txttoslid.Text = "";
-            this.txttotraycode.Text = "";
-            this.txtcommonqty.Text = "";
-            this.txtminqty.Text = "";
-            this.txttoslid.Enabled = false;
-            this.txtcommonqty.Enabled = true;
-            this.txtcommonqty.Focus();
+            row--;
+            btnNext1_Click(null, null);
+            //showTxt();
+            //this.txttoslid.Text = "";
+            //this.txttotraycode.Text = "";
+           
+            //this.txtminqty.Enabled = true;
+            //this.txtminqty.Focus();
+            //this.txtminqty.SelectAll();
         }
 
         void Save()
         {
-            string x = HttpHelper.HttpPost("submitBalanceTransferOrder", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode +  "&updater=" + Comm.usercode + "&fromSlId=" + ml.data[row].slId + "&toTrayCode=" + this.txttotraycode.Text + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&materialCode=" + ml.data[row].materialCode + "&orderId=" + this.labccode.Text + "&batchNo=" + ml.data[row].batchNo + "&pdate=" + ml.data[row].pDate + "&inDate=" + ml.data[row].inDate + "&shipperCode="+ml.data[row].shipperCode);
-            if (this.txttoslid.Text != "")
+            string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode + "&fromSlId=" + ml.data[row].slId + "&toTrayCode=" + this.txttotraycode.Text + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&materialCode=" + ml.data[row].materialCode + "&orderId=" + this.labccode.Text + "&batchNo=" + ml.data[row].batchNo + "&pdate=" + ml.data[row].pDate + "&inDate=" + ml.data[row].inDate + "&shipperCode=" + ml.data[row].shipperCode + "&oldMaterialStatus=" + ml.data[row].materialStatusCode;
+            if (!string.IsNullOrEmpty(nmt.data.materialCode))
             {
-                x += "&toSlId=" + slid.ToString() ;
+                conn += "&materialStatus=" + nmt.data.materialStatus;
             }
+              if (this.txttoslid.Text != "")
+            {
+                conn += "&toSlId=" + slid.ToString() ;
+            }
+            string x = HttpHelper.HttpPost("submitBalanceTransferOrder",conn );
+          
+            //string xx = HttpHelper.HttpPost("submitBalanceTransferOrder", x);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("submitBalanceTransferOrder错误信息捕捉失败");
@@ -663,6 +673,7 @@ namespace Rf_Wms.Out
                     this.txttotraycode.Enabled = false;
                     this.txtminqty.Enabled = true;
                     //this.txtcommonqty.Enabled = true;
+                    this.txtminqty.SelectAll();
                     this.txtminqty.Focus();
                     break;
                 }

@@ -224,7 +224,7 @@ namespace Rf_Wms.Out
             {
                 Cursor.Current = Cursors.WaitCursor;
                 string conn = @"orderId=" + this.laborderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode;
-                string x = HttpHelper.HttpPost("deleteTransOrder", conn);
+                string x = HttpHelper.HttpPost("deleteOrSubmitTransferOrder", conn);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -491,6 +491,12 @@ namespace Rf_Wms.Out
                 return;
 
             }
+            if (!string.IsNullOrEmpty(nmt.data.status))
+            {
+                MessageBox.Show("该托盘是暂存区托盘");
+                this.txttotraycode.SelectAll();
+                return;
+            }
             if (!string.IsNullOrEmpty(nmt.data.materialCode))//不是空托盘
             {
                 //if (nmt.data.slId != mt.data.t)
@@ -542,7 +548,8 @@ namespace Rf_Wms.Out
             //    return;
             //}
             //this.txttoslid.Text = this.txttoslid.Text.ToUpper();
-
+            if (this.txttoslid.Text == "")
+                return;
 
             try
             {

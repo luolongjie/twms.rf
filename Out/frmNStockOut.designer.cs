@@ -185,8 +185,8 @@
             // 
             this.label3.Location = new System.Drawing.Point(3, 149);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 20);
-            this.label3.Text = "应拣数量";
+            this.label3.Size = new System.Drawing.Size(91, 20);
+            this.label3.Text = "待分拣数量";
             // 
             // labpickType
             // 

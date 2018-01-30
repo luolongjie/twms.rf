@@ -619,7 +619,7 @@ namespace Rf_Wms.Out
                 //if (_mt.data.quantity != commonqty || _mt.data.minQuantity != minqty)
                 if (_mt.data.quantity*ms.data[c].spec+_mt.data.minQuantity != commonqty*ms.data[c].spec+ minqty)
                 {
-                    MessageBox.Show("部分转储不允许使用同一托盘");
+                    MessageBox.Show("非整托拣货，移入托盘不能使用原托盘");
                     //this.txtToTraycode.SelectAll();
                     this.txtToTraycode.Text = "";
                     return;
@@ -950,7 +950,7 @@ namespace Rf_Wms.Out
                 var v = from x in mz.data where x.slName == this.txttoslname.Text select x;
                 if (v.Count() == 0)
                 {
-                    MessageBox.Show("没有该暂存区");
+                    MessageBox.Show("当前仓库暂存区未找到该库位");
                     this.txttoslname.SelectAll();
                     return;
                 }
