@@ -491,12 +491,12 @@ namespace Rf_Wms.Out
                 return;
 
             }
-            if (!string.IsNullOrEmpty(nmt.data.status))
-            {
-                MessageBox.Show("该托盘是暂存区托盘");
-                this.txttotraycode.SelectAll();
-                return;
-            }
+            //if (!string.IsNullOrEmpty(nmt.data.status))
+            //{
+            //    MessageBox.Show("该托盘是暂存区托盘");
+            //    this.txttotraycode.SelectAll();
+            //    return;
+            //}
             if (!string.IsNullOrEmpty(nmt.data.materialCode))//不是空托盘
             {
                 //if (nmt.data.slId != mt.data.t)
@@ -513,7 +513,7 @@ namespace Rf_Wms.Out
                 }
                 if (mt.data.inDate != nmt.data.inDate || mt.data.batchNo != nmt.data.batchNo || mt.data.pdate!=nmt.data.pdate || mt.data.materialStatus!= nmt.data.materialStatus)
                 {
-                    DialogResult dr = MessageBox.Show("批次 生产日期 状态 入库日期有和原来的不同的属性，是否合托?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    DialogResult dr = MessageBox.Show("移入托盘的批次、生产日期、物料状态、入库日期存在与待转入物料不一致的情况，确认是否合托?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (dr != DialogResult.Yes)
                     {
                         this.txttotraycode.SelectAll();
@@ -548,43 +548,48 @@ namespace Rf_Wms.Out
             //    return;
             //}
             //this.txttoslid.Text = this.txttoslid.Text.ToUpper();
-            if (this.txttoslid.Text == "")
-                return;
-
-            try
+            ms1 = null;
+            if (this.txttoslid.Text != "")
             {
-                Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txttoslid.Text);
-                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
-                if (msg == null)
-                    throw new Exception("findSlIdBySlName错误信息捕捉失败");
-                if (!msg.success)
-                    throw new Exception(msg.msg);
-                ms1 = (Model.MSlIdBySlName)JsonConvert.DeserializeObject(x, typeof(Model.MSlIdBySlName));
-                Cursor.Current = Cursors.Default;
-                if (this.txttraycode.Text != this.txttotraycode.Text)
+
+                try
                 {
-                    if (!string.IsNullOrEmpty(nmt.data.materialCode))
+                    Cursor.Current = Cursors.WaitCursor;
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txttoslid.Text);
+                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    if (msg == null)
+                        throw new Exception("findSlIdBySlName错误信息捕捉失败");
+                    if (!msg.success)
+                        throw new Exception(msg.msg);
+                    ms1 = (Model.MSlIdBySlName)JsonConvert.DeserializeObject(x, typeof(Model.MSlIdBySlName));
+                    Cursor.Current = Cursors.Default;
+                    if (this.txttraycode.Text != this.txttotraycode.Text)
                     {
-                        if (nmt.data.slId != ms1.data.slId)
-                            throw new Exception("该托盘不属于该库位,请换托盘或库位");
+                        if (!string.IsNullOrEmpty(nmt.data.materialCode))
+                        {
+                            if (nmt.data.slId != ms1.data.slId)
+                                throw new Exception("该托盘不属于该库位,请换托盘或库位");
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    MessageBox.Show(ex.Message);
+                    this.txttoslid.SelectAll();
+                    return;
+                }
             }
-            catch (Exception ex)
-            {
-                Cursor.Current = Cursors.Default;
-                MessageBox.Show(ex.Message);
-                this.txttoslid.SelectAll();
-                return;
-            }
-            
             //slid = ms.data.slId;   
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
                 string conn=@"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&orderId=" + this.laborderid.Text;
-                conn += "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toTrayCode=" + this.txttotraycode.Text + "&updater=" + Comm.usercode + "&fromSlId=" + mt.data.slId + "&materialCode=" + mt.data.materialCode + "&toSlId=" + ms1.data.slId + "&pdate=" + mt.data.pdate + "&batchNo=" + mt.data.batchNo + "&oldMaterialStatus=" + mt.data.materialStatus + "&newMaterialStatus=" + this.cmbmaterialSurface.SelectedValue.ToString() + "&inDate=" + mt.data.inDate + "&shipperCode=" + mt.data.shipperCode;
+                conn += "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toTrayCode=" + this.txttotraycode.Text + "&updater=" + Comm.usercode + "&fromSlId=" + mt.data.slId + "&materialCode=" + mt.data.materialCode  + "&pdate=" + mt.data.pdate + "&batchNo=" + mt.data.batchNo + "&oldMaterialStatus=" + mt.data.materialStatus + "&newMaterialStatus=" + this.cmbmaterialSurface.SelectedValue.ToString() + "&inDate=" + mt.data.inDate + "&shipperCode=" + mt.data.shipperCode;
+                if (ms1 != null)
+                {
+                    conn += "&toSlId=" + ms1.data.slId;
+                }
                 string x = HttpHelper.HttpPost("submitNoOrderTransfer", conn);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)

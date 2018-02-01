@@ -122,6 +122,8 @@ namespace Rf_Wms.In
             }
             if (e.KeyChar != 13)
                 return;
+            if (this.txtshelve.Text == "")
+                return;
             //this.txtshelve.Text = this.txtshelve.Text.ToUpper();
             int slid = mRec.data.recommendSlId;
             if (this.labrecommendSlId.Text == "")
@@ -129,7 +131,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");
@@ -158,7 +160,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");

@@ -479,12 +479,12 @@ namespace Rf_Wms.Out
                 return;
 
             }
-            if (!string.IsNullOrEmpty(nmt.data.status))
-            {
-                MessageBox.Show("该托盘是暂存区托盘");
-                this.txttotraycode.SelectAll();
-                return;
-            }
+            //if (!string.IsNullOrEmpty(nmt.data.status))
+            //{
+            //    MessageBox.Show("该托盘是暂存区托盘");
+            //    this.txttotraycode.SelectAll();
+            //    return;
+            //}
 
             if (!string.IsNullOrEmpty(nmt.data.materialCode))//不是空托盘
             {
@@ -502,7 +502,7 @@ namespace Rf_Wms.Out
                 }
                 if (ml.data[row].inDateStr != nmt.data.inDate || ml.data[row].batchNo != nmt.data.batchNo || ml.data[row].pdateStr != nmt.data.pdate || ml.data[row].materialStatusCode != nmt.data.materialStatus)
                 {
-                    DialogResult dr = MessageBox.Show("移入托盘的批次、生产日期、物料状态、质检状态、入库日期存在与待转入物料不一致的情况，确认是否合托?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    DialogResult dr = MessageBox.Show("移入托盘的批次、生产日期、物料状态、入库日期存在与待转入物料不一致的情况，确认是否合托?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (dr != DialogResult.Yes)
                     {
                         this.txttotraycode.SelectAll();
@@ -514,8 +514,6 @@ namespace Rf_Wms.Out
             this.txttoslid.Enabled = true;
             this.txttoslid.Text = "";
             this.txttoslid.Focus();
-
-                
         }
 
         int slid;
@@ -546,7 +544,7 @@ namespace Rf_Wms.Out
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txttoslid.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txttoslid.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");
@@ -735,6 +733,8 @@ namespace Rf_Wms.Out
                     _minquantity = imax % v.spec;
 
                 }
+                if (_quantity * v.spec + _minquantity == 0)
+                    continue;
                 dr["qty"] = _quantity.ToString() + v.unit + _minquantity.ToString() + v.minUnit;
                 dr["fromSlIdName"] = "";
                 dr["toSlIdName"] = "";

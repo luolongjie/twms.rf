@@ -141,7 +141,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");
