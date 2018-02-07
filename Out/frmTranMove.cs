@@ -177,6 +177,8 @@ namespace Rf_Wms.Out
             }
             if (e.KeyChar != 13)
                 return;
+            if (this.txttraycode.Text == "")
+                return;
             //this.txttraycode.Text = this.txttraycode.Text.ToUpper();
             //Model.MTrayByBox mm = null;
             //if (this.txttraycode.Text.Length < Comm.lcCode.Length || Comm.lcCode != this.txttraycode.Text.Substring(0, Comm.lcCode.Length))
@@ -582,7 +584,7 @@ namespace Rf_Wms.Out
                 }
                 if (mtrans.data.batchNo != nmt.data.batchNo || nmt.data.inDate != mtrans.data.inDate || mtrans.data.pdate != nmt.data.pdate || mtrans.data.materialStatusCode != nmt.data.materialStatus)
                 {
-                    DialogResult dr = MessageBox.Show("批次 生产日期 状态 入库日期有和原来的不同的属性，是否合托?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    DialogResult dr = MessageBox.Show("移入托盘的批次、生产日期、物料状态、入库日期存在与待转入物料不一致的情况，确认是否合托?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (dr != DialogResult.Yes)
                     {
                         this.txttotraycode.SelectAll();
@@ -623,7 +625,7 @@ namespace Rf_Wms.Out
             slid = mtrans.data.toSlId;
             if (this.txttoslid.Text != mtrans.data.toSlName.ToString())
             {
-                MessageBox.Show("移入库位有问题");
+                MessageBox.Show("请移入指定库位["+mtrans.data.toSlName+"]");
                 this.txttoslid.SelectAll();
                 return;
                 //DialogResult dr = MessageBox.Show("移入库位不是指定库位,是否继续?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
@@ -703,7 +705,7 @@ namespace Rf_Wms.Out
             string con=@"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
             if (mtrans != null && mtrans.data!=null && !benter)
             {
-                con += "&orderItemId=" + mtrans.data.orderItemId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toTrayCode=" + this.txttotraycode.Text + "&materialStatus=" + this.cmbmaterialSurface.SelectedValue.ToString() + "&updater=" + Comm.usercode;
+                con += "&orderItemId=" + mtrans.data.orderItemId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toTrayCode=" + this.txttotraycode.Text + "&materialStatus=" + this.cmbmaterialSurface.SelectedValue.ToString() + "&updater=" + Comm.usercode + "&qtStatus=" + _mt.data.qtStatus;
             }
             if (benter)
             {

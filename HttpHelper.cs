@@ -54,7 +54,7 @@ namespace Rf_Wms
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             //request.ContentLength = postDataStr.Length;
-            request.Timeout = 10000;//yy
+            request.Timeout = 30000;//yy
             //StreamWriter writer = new StreamWriter(request.GetRequestStream(), Encoding.UTF8);
             //writer.Write(postDataStr);
             //writer.Flush();

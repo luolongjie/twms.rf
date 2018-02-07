@@ -326,5 +326,18 @@ namespace Rf_Wms.Model
                 _spec = value;
             }
         }
+
+          private string _qtStatus;
+          public string qtStatus
+          {
+              get
+              {
+                  return _qtStatus;
+              }
+              set
+              {
+                  _qtStatus = value;
+              }
+          }
     }
 }
