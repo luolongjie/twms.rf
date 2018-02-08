@@ -110,10 +110,11 @@ namespace Rf_Wms
 
         private void pictureBox12_Click(object sender, EventArgs e)
         {
-            Ot.frmWarehouse frm = new Rf_Wms.Ot.frmWarehouse();
+            //Ot.frmWarehouse frm = new Rf_Wms.Ot.frmWarehouse();
+            //frm.ShowDialog();
+            //this.label1.Text = "当前仓库 " + Comm.warehousename;
+           Ot.frmOrderAssister frm=new Rf_Wms.Ot.frmOrderAssister();
             frm.ShowDialog();
-            this.label1.Text = "当前仓库 " + Comm.warehousename;
-            //this.labwarehousename.Text = Comm.warehousename;
         }
 
         private void pictureBox13_Click(object sender, EventArgs e)
