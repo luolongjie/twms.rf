@@ -561,7 +561,7 @@ namespace Rf_Wms.Out
                     Cursor.Current = Cursors.Default;
                     if (this.txttraycode.Text != this.txttotraycode.Text)
                     {
-                        if (!string.IsNullOrEmpty(nmt.data.materialCode))
+                        if (nmt.data!=null)
                         {
                             if (nmt.data.slId != ms1.data.slId)
                                 throw new Exception("该托盘不属于该库位,请换托盘或库位");
