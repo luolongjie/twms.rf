@@ -1,0 +1,3 @@
+﻿方法名: http://10.227.113.238:8081/twms-hand/api/createBillAssister
+参数: lcCode=G046&orderNo=CK1234&unit=吨&operatorCode=001&comAssisters=aaa-201802,yh-201803
+返回值: {"msg":"操作成功","success":true}

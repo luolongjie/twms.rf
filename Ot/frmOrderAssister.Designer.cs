@@ -31,37 +31,109 @@
             this.txtorderid = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbmaterialSurface = new System.Windows.Forms.ComboBox();
+            this.cmboperation = new System.Windows.Forms.ComboBox();
+            this.txtAssister = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnkeybord = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.cmbunit = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labinfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtorderid
             // 
-            this.txtorderid.Location = new System.Drawing.Point(25, 49);
+            this.txtorderid.Location = new System.Drawing.Point(25, 25);
             this.txtorderid.Name = "txtorderid";
             this.txtorderid.Size = new System.Drawing.Size(188, 23);
             this.txtorderid.TabIndex = 3;
+            this.txtorderid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtorderid_KeyPress_1);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(25, 18);
+            this.label1.Location = new System.Drawing.Point(25, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 20);
             this.label1.Text = "转储单号";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(25, 97);
+            this.label2.Location = new System.Drawing.Point(25, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 20);
             this.label2.Text = "状态";
             // 
-            // cmbmaterialSurface
+            // cmboperation
             // 
-            this.cmbmaterialSurface.Enabled = false;
-            this.cmbmaterialSurface.Location = new System.Drawing.Point(25, 135);
-            this.cmbmaterialSurface.Name = "cmbmaterialSurface";
-            this.cmbmaterialSurface.Size = new System.Drawing.Size(188, 23);
-            this.cmbmaterialSurface.TabIndex = 292;
+            this.cmboperation.Enabled = false;
+            this.cmboperation.Location = new System.Drawing.Point(25, 74);
+            this.cmboperation.Name = "cmboperation";
+            this.cmboperation.Size = new System.Drawing.Size(188, 23);
+            this.cmboperation.TabIndex = 292;
+            this.cmboperation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmboperation_KeyPress);
+            // 
+            // txtAssister
+            // 
+            this.txtAssister.Location = new System.Drawing.Point(25, 224);
+            this.txtAssister.Name = "txtAssister";
+            this.txtAssister.Size = new System.Drawing.Size(188, 23);
+            this.txtAssister.TabIndex = 294;
+            this.txtAssister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAssister_KeyPress);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(94)))), ((int)(((byte)(75)))));
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(83, 258);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(72, 20);
+            this.btnSave.TabIndex = 297;
+            this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnkeybord
+            // 
+            this.btnkeybord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(154)))), ((int)(((byte)(224)))));
+            this.btnkeybord.ForeColor = System.Drawing.Color.White;
+            this.btnkeybord.Location = new System.Drawing.Point(1, 258);
+            this.btnkeybord.Name = "btnkeybord";
+            this.btnkeybord.Size = new System.Drawing.Size(72, 20);
+            this.btnkeybord.TabIndex = 296;
+            this.btnkeybord.Text = "键盘";
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(171)))), ((int)(((byte)(110)))));
+            this.btnExit.ForeColor = System.Drawing.Color.White;
+            this.btnExit.Location = new System.Drawing.Point(165, 258);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(72, 20);
+            this.btnExit.TabIndex = 295;
+            this.btnExit.Text = "返回";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // cmbunit
+            // 
+            this.cmbunit.Items.Add("吨");
+            this.cmbunit.Items.Add("件");
+            this.cmbunit.Location = new System.Drawing.Point(25, 120);
+            this.cmbunit.Name = "cmbunit";
+            this.cmbunit.Size = new System.Drawing.Size(188, 23);
+            this.cmbunit.TabIndex = 300;
+            this.cmbunit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbunit_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(25, 101);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 20);
+            this.label3.Text = "单位";
+            // 
+            // labinfo
+            // 
+            this.labinfo.Location = new System.Drawing.Point(25, 150);
+            this.labinfo.Name = "labinfo";
+            this.labinfo.Size = new System.Drawing.Size(188, 65);
             // 
             // frmOrderAssister
             // 
@@ -70,14 +142,22 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.labinfo);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cmbunit);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnkeybord);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.txtAssister);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmbmaterialSurface);
+            this.Controls.Add(this.cmboperation);
             this.Controls.Add(this.txtorderid);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmOrderAssister";
             this.Text = "工单记录";
+            this.Load += new System.EventHandler(this.frmOrderAssister_Load);
             this.ResumeLayout(false);
 
         }
@@ -87,6 +167,13 @@
         private System.Windows.Forms.TextBox txtorderid;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbmaterialSurface;
+        private System.Windows.Forms.ComboBox cmboperation;
+        private System.Windows.Forms.TextBox txtAssister;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnkeybord;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.ComboBox cmbunit;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labinfo;
     }
 }

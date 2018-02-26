@@ -168,12 +168,15 @@
       <DependentUpon>frmShelveMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\getRegionList.cs" />
+    <Compile Include="Model\MAssisterByOperation.cs" />
+    <Compile Include="Model\MAssisterInfo.cs" />
     <Compile Include="Model\MContainer.cs" />
     <Compile Include="Model\MdoStockUpConfirm.cs" />
     <Compile Include="Model\MergeRefundOrder.cs" />
     <Compile Include="Model\MgetMaterialsByBar.cs" />
     <Compile Include="Model\MgetSecondarySortingInfo.cs" />
     <Compile Include="Model\MLocationTray.cs" />
+    <Compile Include="Model\MOperationByOrder.cs" />
     <Compile Include="Model\MQuantityListByTray.cs" />
     <Compile Include="Model\MRefundBanlance.cs" />
     <Compile Include="Model\MstartSecondarySorting.cs" />
