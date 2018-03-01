@@ -59,6 +59,9 @@ namespace Rf_Wms.Ot
             }
             this.dataGrid1.DataSource = m.data;
             Bind();
+            #region 测试
+           
+            #endregion
 
             if (!isRed)
             {

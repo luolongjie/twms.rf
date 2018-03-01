@@ -52,6 +52,12 @@ namespace Rf_Wms.Out
             this.Close();
         }
 
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            frmBalTranMove frm = new frmBalTranMove();
+            frm.ShowDialog();
+        }
+
        
     }
 }

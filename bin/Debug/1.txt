@@ -1,0 +1,3 @@
+﻿方法名: http://10.229.255.31:8050/twms-hand/api/ submitNoOrderTransfer
+参数: lcCode=G046&whId=191&orderId=ZCG04620180226000017&quantity=108&minQuantity=8&fromTrayCode=G04620180127000000006&toTrayCode=G04620180127000000006&updater=T503&fromSlId=5211&materialCode=7.02100902330903&pdate=2018-01-01&batchNo=20180101&oldMaterialStatus=2&newMaterialStatus=2&inDate=2018-01-26&shipperCode=JY01&qtStatus=1
+返回值: {"msg":"库位不能为空","success":false}
