@@ -578,7 +578,16 @@ namespace Rf_Wms.Out
             }
             else
             {
-                if (nmt.data == null)
+                if (this.txttotraycode.Text == this.txttraycode.Text)
+                {
+                    if (nmt == null || nmt.data == null)
+                    {
+                        MessageBox.Show("整托转储移入库位不能为空");
+                        this.txttoslid.SelectAll();
+                        return;
+                    }
+                }
+                else if (nmt == null || nmt.data == null)
                 {
                     MessageBox.Show("新托盘移入库位不能为空");
                     this.txttoslid.SelectAll();
