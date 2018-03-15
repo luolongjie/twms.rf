@@ -39,11 +39,12 @@
             this.cmbunit = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.labinfo = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtorderid
             // 
-            this.txtorderid.Location = new System.Drawing.Point(25, 25);
+            this.txtorderid.Location = new System.Drawing.Point(25, 23);
             this.txtorderid.Name = "txtorderid";
             this.txtorderid.Size = new System.Drawing.Size(188, 23);
             this.txtorderid.TabIndex = 3;
@@ -54,19 +55,19 @@
             this.label1.Location = new System.Drawing.Point(25, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 20);
-            this.label1.Text = "转储单号";
+            this.label1.Text = "单据号";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(25, 54);
+            this.label2.Location = new System.Drawing.Point(25, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 20);
-            this.label2.Text = "状态";
+            this.label2.Text = "操作项";
             // 
             // cmboperation
             // 
             this.cmboperation.Enabled = false;
-            this.cmboperation.Location = new System.Drawing.Point(25, 74);
+            this.cmboperation.Location = new System.Drawing.Point(25, 71);
             this.cmboperation.Name = "cmboperation";
             this.cmboperation.Size = new System.Drawing.Size(188, 23);
             this.cmboperation.TabIndex = 292;
@@ -74,7 +75,7 @@
             // 
             // txtAssister
             // 
-            this.txtAssister.Location = new System.Drawing.Point(25, 224);
+            this.txtAssister.Location = new System.Drawing.Point(25, 161);
             this.txtAssister.Name = "txtAssister";
             this.txtAssister.Size = new System.Drawing.Size(188, 23);
             this.txtAssister.TabIndex = 294;
@@ -116,7 +117,7 @@
             // 
             this.cmbunit.Items.Add("吨");
             this.cmbunit.Items.Add("件");
-            this.cmbunit.Location = new System.Drawing.Point(25, 120);
+            this.cmbunit.Location = new System.Drawing.Point(25, 117);
             this.cmbunit.Name = "cmbunit";
             this.cmbunit.Size = new System.Drawing.Size(188, 23);
             this.cmbunit.TabIndex = 300;
@@ -124,16 +125,23 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(25, 101);
+            this.label3.Location = new System.Drawing.Point(25, 98);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 20);
-            this.label3.Text = "单位";
+            this.label3.Text = "计量单位";
             // 
             // labinfo
             // 
-            this.labinfo.Location = new System.Drawing.Point(25, 150);
+            this.labinfo.Location = new System.Drawing.Point(25, 188);
             this.labinfo.Name = "labinfo";
             this.labinfo.Size = new System.Drawing.Size(188, 65);
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(28, 141);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 20);
+            this.label4.Text = "辅助人";
             // 
             // frmOrderAssister
             // 
@@ -142,6 +150,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.labinfo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbunit);
@@ -175,5 +184,6 @@
         private System.Windows.Forms.ComboBox cmbunit;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labinfo;
+        private System.Windows.Forms.Label label4;
     }
 }
