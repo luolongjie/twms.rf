@@ -322,6 +322,7 @@ namespace Rf_Wms.Out
             {
                 try
                 {
+                    Cursor.Current = Cursors.WaitCursor;
                     string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
@@ -332,10 +333,11 @@ namespace Rf_Wms.Out
                     if (mm == null)
                         throw new Exception("错误信息捕捉失败");
                     this.txttotraycode.Text = mm.data.trayCode;
-
+                    Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)
                 {
+                    Cursor.Current = Cursors.Default;
                     this.txttraycode.SelectAll();
                     MessageBox.Show(ex.Message);
                     return;
@@ -379,6 +381,7 @@ namespace Rf_Wms.Out
 
                 try
                 {
+                    Cursor.Current = Cursors.WaitCursor;
                     string conn = @"orderItemId=" + mtrans.data.orderItemId.ToString() + "&lcCode=" + Comm.lcCode;
 
 
@@ -390,9 +393,11 @@ namespace Rf_Wms.Out
                         throw new Exception("replenishOrder/judgeSourceTrayCode错误信息捕捉失败");
                     if (!msg.success)
                         throw new Exception(msg.msg);
+                    Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)
                 {
+                    Cursor.Current = Cursors.Default;
                     MessageBox.Show(ex.Message);
                     this.txttotraycode.SelectAll();
                     return;

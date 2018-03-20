@@ -167,6 +167,7 @@ namespace Rf_Wms.Out
             Model.PickRrList rr = null;
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 string x = HttpHelper.HttpPost("getPickRrList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -182,9 +183,11 @@ namespace Rf_Wms.Out
                     throw new Exception("库区没有数据");
                 if(rr.data.Count==0)
                     throw new Exception("单据已经完成");
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 return;
 

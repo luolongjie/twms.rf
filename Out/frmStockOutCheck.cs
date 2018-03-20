@@ -709,6 +709,7 @@ namespace Rf_Wms.Out
             //{
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 string x = HttpHelper.HttpPost("getQuantityListByTray", @"pickNo=" + this.lblpickno.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&toTrayCode=" + this.lbltraycode.Text);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -720,9 +721,11 @@ namespace Rf_Wms.Out
                 {
                     throw new Exception("MQuantityListByTray数据信息捕捉失败");
                 }
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 return;
             }

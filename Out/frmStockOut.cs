@@ -30,16 +30,18 @@ namespace Rf_Wms.Out
             //和复核一样的代码
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 string x = HttpHelper.HttpPost("getSortingFlg", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
                 if (!msg.success)
                     throw new Exception(msg.msg);
-               
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 this.txtorderid.SelectAll();
                 return;
@@ -412,10 +414,13 @@ namespace Rf_Wms.Out
                 {
                     try
                     {
+                        Cursor.Current = Cursors.WaitCursor;
                         GetSTList();
+                        Cursor.Current = Cursors.Default;
                     }
                     catch (Exception ex)
                     {
+                        Cursor.Current = Cursors.Default;
                         MessageBox.Show(ex.Message);
                         return;
                     }
@@ -673,6 +678,7 @@ namespace Rf_Wms.Out
             mssrow = 0;
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 string x = HttpHelper.HttpPost("getSecondarySortingInfo", @"sortingType=" + mss.data.sortingType.ToString() + "&lcCode=" + Comm.lcCode + "&pickOperateId="+mss.data.pickOperateSecondarySortingRFDTOS[mssrow].pickOperateId);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -684,10 +690,11 @@ namespace Rf_Wms.Out
                 //{
                 //    throw new Exception("数据信息捕捉失败");
                 //}
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 this.txttraycode.SelectAll();
                 return;
@@ -1026,17 +1033,20 @@ namespace Rf_Wms.Out
             this.labstockoutno.Text = "";
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 if (mm != null || st!=null)
                 {
                     c++;
                     checkMul();
                 }
+                Cursor.Current = Cursors.Default;
                 this.txtcommonqty.Enabled = true;
 
                 this.txtcommonqty.Focus();
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 return;
             }
@@ -1081,10 +1091,13 @@ namespace Rf_Wms.Out
             {
                 try
                 {
+                    Cursor.Current = Cursors.WaitCursor;
                     GetMultiMaterialList();
+                    Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)
                 {
+                    Cursor.Current = Cursors.Default;
                     MessageBox.Show(ex.Message);
                 }
                 
@@ -1092,15 +1105,18 @@ namespace Rf_Wms.Out
             }
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 GetSOIList();
 
                 MyShow();
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
             }
-          
+            Cursor.Current = Cursors.Default;
         }
 
        

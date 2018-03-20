@@ -32,6 +32,7 @@ namespace Rf_Wms.Out
             Model.MstartSecondarySorting v = null;
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 string x = HttpHelper.HttpPost("startSecondarySorting", @"trayCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode+"&whId=" + Comm.warehousecode );
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -44,10 +45,11 @@ namespace Rf_Wms.Out
                     throw new Exception("数据信息捕捉失败");
                 }
                 //this.labstockUpConfirmMsg.Text = v.data.stockUpConfirmMsg;
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 this.txttraycode.SelectAll();
                 return;

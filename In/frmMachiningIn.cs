@@ -401,11 +401,13 @@ namespace Rf_Wms.In
 
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 Save();
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
-
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 return;
             }

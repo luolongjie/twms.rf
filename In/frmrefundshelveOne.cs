@@ -273,7 +273,7 @@ namespace Rf_Wms.In
             }
             try
             {
-
+                Cursor.Current = Cursors.WaitCursor;
                 string x = HttpHelper.HttpPost("unbindTray", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -281,10 +281,11 @@ namespace Rf_Wms.In
                 if (!msg.success)
                     throw new Exception(msg.msg);
                 //getmaterial = (Model.MgetMaterial)JsonConvert.DeserializeObject(x, typeof(Model.MgetMaterial));
-                
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 this.txtshelve.SelectAll();
                 return;

@@ -49,6 +49,7 @@ namespace Rf_Wms.Out
                 return;
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 string x = HttpHelper.HttpPost("doStockUpConfirm", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&updater=" + Comm.usercode + "&whId=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -64,10 +65,11 @@ namespace Rf_Wms.Out
                 this.labpick.Text = v.data.pickQuantity + "箱" + v.data.pickMinQuantity + "个";
                 this.labcheck.Text = v.data.checkQuantity + "箱" + v.data.checkMinQuantity + "个";
                 this.labcheckorder.Text = v.data.checkOrderQuantity + "箱" + v.data.checkOrderMinQuantity + "个";
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
                 this.txtorderid.SelectAll();
                 return;
