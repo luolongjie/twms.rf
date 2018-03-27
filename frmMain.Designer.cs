@@ -43,7 +43,7 @@
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.labwarehousename = new System.Windows.Forms.Label();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.cmbwarehouse = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -158,14 +158,14 @@
             this.pictureBox14.Size = new System.Drawing.Size(20, 30);
             this.pictureBox14.Click += new System.EventHandler(this.pictureBox14_Click);
             // 
-            // label1
+            // cmbwarehouse
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(154)))), ((int)(((byte)(224)))));
-            this.label1.Location = new System.Drawing.Point(30, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 16);
-            this.label1.Text = "当前仓库";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.cmbwarehouse.Location = new System.Drawing.Point(49, 3);
+            this.cmbwarehouse.Name = "cmbwarehouse";
+            this.cmbwarehouse.Size = new System.Drawing.Size(140, 23);
+            this.cmbwarehouse.TabIndex = 19;
+            this.cmbwarehouse.LostFocus += new System.EventHandler(this.cmbwarehouse_LostFocus);
+            this.cmbwarehouse.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbwarehouse_KeyPress);
             // 
             // frmMain
             // 
@@ -174,7 +174,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 295);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmbwarehouse);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.labwarehousename);
             this.Controls.Add(this.pictureBox13);
@@ -214,7 +214,7 @@
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.Label labwarehousename;
         private System.Windows.Forms.PictureBox pictureBox14;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbwarehouse;
 
 
     }

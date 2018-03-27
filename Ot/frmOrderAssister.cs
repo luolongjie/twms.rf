@@ -163,6 +163,11 @@ namespace Rf_Wms.Ot
         {
             if (!this.txtAssister.Enabled)
                 return;
+            if (malist == null || malist.data == null || malist.data.Count == 0)
+            {
+                MessageBox.Show("请先录入协助人");
+                return;
+            }
             string conn = @"lcCode=" + Comm.lcCode + "&orderNo=" + this.txtorderid.Text + "&unit=" + this.cmbunit.Text + "&operatorCode=" + this.cmboperation.SelectedValue.ToString() + "&comAssisters=";
             foreach (Model.Assisters v in malist.data)
             {
