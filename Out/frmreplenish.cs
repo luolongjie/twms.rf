@@ -21,7 +21,7 @@ namespace Rf_Wms.Out
         {
             if (this.txtorderid.Enabled)
             {
-                MessageBox.Show("请先扫描单据");
+                //MessageBox.Show("请先扫描单据");
                 this.txtorderid.Focus();
                 this.txtorderid.SelectAll();
                 return;
@@ -70,6 +70,8 @@ namespace Rf_Wms.Out
         private void txtorderid_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 13)
+                return;
+            if (this.txtorderid.Text == "")
                 return;
             try
             {
@@ -146,6 +148,8 @@ namespace Rf_Wms.Out
                 return;
             }
             if (e.KeyChar != 13)
+                return;
+            if (this.txttraycode.Text == "")
                 return;
             ////this.txttraycode.Text = this.txttraycode.Text.ToUpper();
             try
@@ -311,7 +315,9 @@ namespace Rf_Wms.Out
             }
             if (e.KeyChar != 13)
                 return;
-            if (this.txttraycode.Text.Length < Comm.lcCode.Length)
+            if (this.txttotraycode.Text.Length == 0)
+                return;
+            if (this.txttotraycode.Text.Length < Comm.lcCode.Length)
             {
                 MessageBox.Show("请扫描条码");
                 this.txttotraycode.SelectAll();
