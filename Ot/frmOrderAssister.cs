@@ -122,7 +122,7 @@ namespace Rf_Wms.Ot
                 return;
             try
             {
-                string x = HttpHelper.HttpPost("getAssisterByOperation", @"operatorCode=" + this.cmboperation.SelectedValue.ToString() + "&orderNo="+this.txtorderid.Text);
+                string x = HttpHelper.HttpPost("getAssisterByOperation", @"operatorCode=" + this.cmboperation.SelectedValue.ToString() + "&orderNo="+this.txtorderid.Text+"&lcCode=" + Comm.lcCode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");

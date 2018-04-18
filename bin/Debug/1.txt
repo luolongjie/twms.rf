@@ -1,3 +1,3 @@
-﻿方法名: http://10.229.255.31:8250/twms-hand/api/getOperationByOrder
-参数: lcCode=G046&orderNo=RKG04620180205000001&whId=191
-返回值: 
+﻿方法名: http://10.229.255.31:8250/twms-hand/api/pickOperate
+参数: pickNo=JHG04620180206000003&lcCode=G046&whId=191&recommendSlId=98266&quantity=1&minQuantity=1&fromTrayCode=G04620180118000000001&toSlId=25490&updater=T500&toTrayCode=G04620180402000000001&materialCode=G046CS4321-G046ceshi-123456&assister=sh002&rrId=415
+返回值: {"msg":"系统异常","success":false}
