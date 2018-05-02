@@ -66,6 +66,17 @@ namespace Rf_Wms.Ot
         Model.MAssisterInfo ma = null;
         private void txtAssister_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == 27)
+            {
+                this.labinfo.Text = "";
+
+                this.txtAssister.Enabled = false;
+                this.txtAssister.Text = "";
+                this.cmbunit.Enabled = true;
+                this.cmbunit.Focus();
+               
+                return;
+            }
             if (e.KeyChar != 13)
                 return;
             if (this.txtAssister.Text == "")
@@ -116,6 +127,11 @@ namespace Rf_Wms.Ot
         {
             if (e.KeyChar == 27)
             {
+                malist = null;
+                this.cmboperation.Enabled = false;
+                this.txtorderid.Enabled = true;
+                this.txtorderid.Focus();
+                this.txtorderid.SelectAll();
                 return;
             }
             if (e.KeyChar != 13)
@@ -149,6 +165,7 @@ namespace Rf_Wms.Ot
             {
                 ShowInfo();
             }
+            this.cmboperation.Enabled = false;
             this.cmbunit.Enabled = true;
             this.cmbunit.Focus();
            
@@ -213,6 +230,14 @@ namespace Rf_Wms.Ot
 
         private void cmbunit_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == 27)
+            {
+                this.cmboperation.Enabled = true;
+                this.cmbunit.Enabled = false;
+                this.cmboperation.Focus();
+             
+                return;
+            }
             if (e.KeyChar != 13)
                 return;
             this.txtAssister.Enabled = true;
