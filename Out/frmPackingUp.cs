@@ -33,11 +33,14 @@ namespace Rf_Wms.Out
                 //this.txtslid.Enabled = true;
                 //this.txtslid.Text = "";
                 //this.txtslid.Focus();
-                this.labmaterialname.Text = "物料描述";
-                this.labneedqty.Text = "";
-                this.labSlname.Text = "";
-                this.cbxrr.Enabled = true;
-                this.cbxrr.Focus();
+                //this.labmaterialname.Text = "物料描述";
+                //this.labneedqty.Text = "";
+                //this.labSlname.Text = "";
+                this.txtAssister.Text = "";
+                this.txtAssister.Enabled = true;
+                this.txtAssister.Focus();
+                //this.cbxrr.Enabled = true;
+                //this.cbxrr.Focus();
                 return;
             }
             if (e.KeyChar != 13)
@@ -192,7 +195,8 @@ namespace Rf_Wms.Out
                 return;
 
             }
-            this.btnAssistance.Text = rr.data[0].assistanceName;
+            //this.btnAssistance.Text = rr.data[0].assistanceName;
+            this.txtAssister.Text = rr.data[0].assistanceName;
             this.txtorderid.Enabled = false;
             this.cbxrr.DataSource = null;
             this.cbxrr.DataSource = rr.data;
@@ -212,7 +216,7 @@ namespace Rf_Wms.Out
             {
                 //con += "&recommendSlId=" + ms.data[c].recommendSlId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toSlId=" + this.cmbtoslname.SelectedValue.ToString() + "&updater=" + Comm.usercode + "&toTrayCode="+this.txtToTraycode.Text;
                 con += "&recommendSlId=" + ms.data[c].recommendSlId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toSlId=" + this.cmbtoslname.SelectedValue.ToString() + "&updater=" + Comm.usercode + "&toTrayCode=" + this.txtToTraycode.Text + "&materialCode=" + ms.data[c].materialCode;
-              
+                con += "&assister="+ma.data.code;
                
             }
             if (benter)
@@ -818,6 +822,8 @@ namespace Rf_Wms.Out
             this.labcommonUnit.Text = "";
             this.labtrayqty.Text = "";
             this.labmaterialname.Text = "物料描述";
+            //this.txtAssister.Text = "";
+
             this.labminunit.Text = "";
             this.labneedqty.Text = "";
           
@@ -1001,8 +1007,60 @@ namespace Rf_Wms.Out
             }
             this.cbxrr.Enabled = false;
             this.txtorderid.Enabled = false;
-            //this.txtslid.Enabled = true;
-            //this.txtslid.Focus();
+            this.txtAssister.Enabled = true;
+            this.txtAssister.Text = "";
+            this.txtAssister.Focus();
+            //this.txttraycode.Enabled = true;
+            //this.txttraycode.Focus();
+        }
+
+        Model.MAssisterInfo ma = null;
+        private void txtAssister_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 27)
+            {
+                this.txtAssister.Text = "";
+                this.txtAssister.Enabled = false;
+                //this.txtslid.Enabled = true;
+                //this.txtslid.Text = "";
+                //this.txtslid.Focus();
+                this.labmaterialname.Text = "物料描述";
+                this.labneedqty.Text = "";
+                this.labSlname.Text = "";
+                this.cbxrr.Enabled = true;
+                this.txtAssister.Enabled = false;
+                this.cbxrr.Focus();
+                //this.cbxrr.Enabled = true;
+                //this.cbxrr.Focus();
+                return;
+            }
+            if (e.KeyChar != 13)
+                return;
+            if (this.txtAssister.Text == "")
+                return;
+            try
+            {
+                string x = HttpHelper.HttpPost("getAssisterInfo", @"lcCode=" + Comm.lcCode + "&assisterCode=" + this.txtAssister.Text);
+                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                if (msg == null)
+                    throw new Exception("错误信息捕捉失败");
+                if (!msg.success)
+                    throw new Exception(msg.msg);
+                ma = (Model.MAssisterInfo)JsonConvert.DeserializeObject(x, typeof(Model.MAssisterInfo));
+                if (ma == null)
+                {
+                    throw new Exception("getAssisterInfo捕捉失败");
+                }
+                this.txtAssister.Text = ma.data.name;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.txtAssister.SelectAll();
+                return;
+            }
+            this.txtAssister.Enabled = false;
             this.txttraycode.Enabled = true;
             this.txttraycode.Focus();
         }

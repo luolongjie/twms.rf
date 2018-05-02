@@ -26,8 +26,11 @@ namespace Rf_Wms
         {
             this.Text = Comm.userame;
             //this.labwarehousename.Text = "当前仓库 " + Comm.warehousename;
-            this.label1.Text = "当前仓库 " + Comm.warehousename;
-
+            //this.label1.Text = "当前仓库 " + Comm.warehousename;
+            this.cmbwarehouse.DataSource = Comm.warehouseList;
+            this.cmbwarehouse.DisplayMember = "name";
+            this.cmbwarehouse.ValueMember = "whId";
+            this.cmbwarehouse.Text = Comm.warehousename;
 
         }
 
@@ -110,10 +113,11 @@ namespace Rf_Wms
 
         private void pictureBox12_Click(object sender, EventArgs e)
         {
-            Ot.frmWarehouse frm = new Rf_Wms.Ot.frmWarehouse();
+            //Ot.frmWarehouse frm = new Rf_Wms.Ot.frmWarehouse();
+            //frm.ShowDialog();
+            //this.label1.Text = "当前仓库 " + Comm.warehousename;
+           Ot.frmOrderAssister frm=new Rf_Wms.Ot.frmOrderAssister();
             frm.ShowDialog();
-            this.label1.Text = "当前仓库 " + Comm.warehousename;
-            //this.labwarehousename.Text = Comm.warehousename;
         }
 
         private void pictureBox13_Click(object sender, EventArgs e)
@@ -121,7 +125,7 @@ namespace Rf_Wms
             //Ot.frmTray frm = new Rf_Wms.Ot.frmTray();
             Out.frmTrayMenu frm = new Rf_Wms.Out.frmTrayMenu();
             frm.ShowDialog();
-            this.label1.Text = "当前仓库 " + Comm.warehousename;
+            //this.label1.Text = "当前仓库 " + Comm.warehousename;
             //this.labwarehousename.Text = Comm.warehousename;
         }
 
@@ -144,5 +148,37 @@ namespace Rf_Wms
                 sw.Close();
             }
         }
+
+
+
+        private void cmbwarehouse_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+            if (e.KeyChar != 13)
+                return;
+            Comm.warehousecode = this.cmbwarehouse.SelectedValue.ToString();
+            Comm.warehousename = this.cmbwarehouse.Text;
+            string filePath = System.IO.Path.GetDirectoryName
+                 (System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            if (filePath.Substring(0, 6) == @"file:\")
+            {
+                filePath = filePath.Substring(6);
+            }
+            filePath = System.IO.Path.Combine(filePath, "1.txt");
+            using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8))
+            {
+                sw.WriteLine("方法名: " + Comm.fun);
+                sw.WriteLine("参数: " + Comm.par);
+                sw.WriteLine("返回值: " + Comm.retval);
+                sw.Close();
+            }
+        }
+
+        private void cmbwarehouse_LostFocus(object sender, EventArgs e)
+        {
+            this.cmbwarehouse.Text = Comm.warehousename;
+        }
+
+       
     }
 }

@@ -58,6 +58,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbxrr = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtAssister = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnExit
@@ -257,6 +258,7 @@
             this.btnAssistance.Name = "btnAssistance";
             this.btnAssistance.Size = new System.Drawing.Size(57, 20);
             this.btnAssistance.TabIndex = 223;
+            this.btnAssistance.Visible = false;
             this.btnAssistance.Click += new System.EventHandler(this.btnAssistance_Click);
             // 
             // btnkeyboard
@@ -289,7 +291,7 @@
             // 
             this.cbxrr.Location = new System.Drawing.Point(73, 27);
             this.cbxrr.Name = "cbxrr";
-            this.cbxrr.Size = new System.Drawing.Size(105, 23);
+            this.cbxrr.Size = new System.Drawing.Size(83, 23);
             this.cbxrr.TabIndex = 307;
             this.cbxrr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbxrr_KeyPress);
             // 
@@ -300,6 +302,15 @@
             this.label5.Size = new System.Drawing.Size(68, 20);
             this.label5.Text = "应拣数量";
             // 
+            // txtAssister
+            // 
+            this.txtAssister.Enabled = false;
+            this.txtAssister.Location = new System.Drawing.Point(159, 27);
+            this.txtAssister.Name = "txtAssister";
+            this.txtAssister.Size = new System.Drawing.Size(75, 23);
+            this.txtAssister.TabIndex = 323;
+            this.txtAssister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAssister_KeyPress);
+            // 
             // frmPackingUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -307,6 +318,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 305);
+            this.Controls.Add(this.txtAssister);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbxrr);
             this.Controls.Add(this.label2);
@@ -378,5 +390,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbxrr;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtAssister;
     }
 }
