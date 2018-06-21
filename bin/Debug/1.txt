@@ -1,3 +1,3 @@
-﻿方法名: http://10.229.255.31:8050/twms-hand/api/replenishOrder/processorSourceOperate
-参数: orderId=BHG04620180327000002&lcCode=G046&whId=192
-返回值: {"data":{"assistance":"","batchNo":"20180101","commonUnitName":"箱","fromSlId":25495,"fromSlIdName":"A01-01","inDate":"2018-02-26","lcCode":"G046","materialCode":"7.02100902330903","materialName":"金龙鱼原香稻5KG*4(纸箱)","minQuantity":0,"minUnitName":"包","orderId":"BHG04620180327000002","orderItemId":26266,"pdate":"2018-01-01","quantity":75,"recommendId":19912,"toSlId":32667,"toSlIdName":"JH01","whId":192},"msg":"操作成功","success":true}
+﻿方法名: http://10.118.150.17:8350/twms-hand/api/deleteStockInOrder
+参数: orderId=RKG04620180601000002&lcCode=G046&whId=192&updater=11111
+返回值: {"msg":"操作成功","success":true}

@@ -52,3 +52,4 @@ F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.csproj.GenerateResource.Cache
 F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.exe
 F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.pdb
 F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Out.frmBalTranMove.resources
+F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Ot.frmOrderAssister.resources

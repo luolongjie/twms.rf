@@ -225,7 +225,7 @@ namespace Rf_Wms.Ot
             string con=@"shipperCode=" + shippercode + "&lcCode=" + Comm.lcCode + "&orderType=" + this.cmbordertype.SelectedValue.ToString() + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode + "&oid=" + this.txtorder.Text;
              if (this.cmbbusinessType.Text != "")
             {
-                con += "&transportMethods=" + this.cmbbusinessType.SelectedValue.ToString();
+                con += "&transportMethod=" + this.cmbbusinessType.SelectedValue.ToString();
             }
             string x = HttpHelper.HttpPost("createStockInNoOrder", con);
            

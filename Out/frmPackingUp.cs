@@ -216,7 +216,10 @@ namespace Rf_Wms.Out
             {
                 //con += "&recommendSlId=" + ms.data[c].recommendSlId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toSlId=" + this.cmbtoslname.SelectedValue.ToString() + "&updater=" + Comm.usercode + "&toTrayCode="+this.txtToTraycode.Text;
                 con += "&recommendSlId=" + ms.data[c].recommendSlId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toSlId=" + this.cmbtoslname.SelectedValue.ToString() + "&updater=" + Comm.usercode + "&toTrayCode=" + this.txtToTraycode.Text + "&materialCode=" + ms.data[c].materialCode;
-                con += "&assister="+ma.data.code;
+                if (ma != null)
+                {
+                    con += "&assister=" + ma.data.code;
+                }
                
             }
             if (benter)
@@ -1037,7 +1040,13 @@ namespace Rf_Wms.Out
             if (e.KeyChar != 13)
                 return;
             if (this.txtAssister.Text == "")
+            {
+                ma = null;
+                this.txtAssister.Enabled = false;
+                this.txttraycode.Enabled = true;
+                this.txttraycode.Focus();
                 return;
+            }
             try
             {
                 string x = HttpHelper.HttpPost("getAssisterInfo", @"lcCode=" + Comm.lcCode + "&assisterCode=" + this.txtAssister.Text);
