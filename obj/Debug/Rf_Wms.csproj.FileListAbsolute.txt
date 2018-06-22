@@ -53,3 +53,9 @@ F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.exe
 F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.pdb
 F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Out.frmBalTranMove.resources
 F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Ot.frmOrderAssister.resources
+F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Out.frmBalOper.resources
+F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Out.frmStockPlateMain.resources
+F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Out.frmTcod.resources
+F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Out.frmUsePlate.resources
+F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Ot.frmBalMaterial.resources
+F:\程序\益海嘉里\rf\obj\Debug\Rf_Wms.Out.frmBalBlnoSearch.resources

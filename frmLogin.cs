@@ -108,7 +108,8 @@ namespace Rf_Wms
             }
             else
             {
-                File.Create(filePath);
+                File.Create(filePath).Close();
+               
             }
             if (string.IsNullOrEmpty(Comm.url))
             {

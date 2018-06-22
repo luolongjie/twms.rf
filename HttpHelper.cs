@@ -54,7 +54,12 @@ namespace Rf_Wms
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             //request.ContentLength = postDataStr.Length;
+            
             request.Timeout = 30000;//yy
+            if (func == "getStockInOrderInfoByFromTray")
+            {
+                request.Timeout = 1;
+            }
             //StreamWriter writer = new StreamWriter(request.GetRequestStream(), Encoding.UTF8);
             //writer.Write(postDataStr);
             //writer.Flush();
