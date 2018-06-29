@@ -339,5 +339,18 @@ namespace Rf_Wms.Model
                   _qtStatus = value;
               }
           }
+
+          private string _trayCode;
+          public string trayCode
+          {
+              get
+              {
+                  return _trayCode;
+              }
+              set
+              {
+                  _trayCode = value;
+              }
+          }
     }
 }

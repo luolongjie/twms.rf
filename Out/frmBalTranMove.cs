@@ -469,7 +469,7 @@ namespace Rf_Wms.Out
                 {
                     throw new Exception("findTrayStockByOrderType捕捉失败");
                 }
-
+               
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -489,6 +489,7 @@ namespace Rf_Wms.Out
 
             if (nmt.data!=null)//不是空托盘
             {
+               
                 //if (nmt.data.slId != mt.data.t)
                 //{
                 //    MessageBox.Show("该托盘不在目标库位上,请换一个托盘");
@@ -508,6 +509,13 @@ namespace Rf_Wms.Out
                     {
                         this.txttotraycode.SelectAll();
                         return;
+                    }
+                }
+                if (!string.IsNullOrEmpty(nmt.data.trayCode))
+                {
+                    if (nmt.data.trayCode != this.txttotraycode.Text)
+                    {
+                        this.txttotraycode.Text = nmt.data.trayCode;
                     }
                 }
             }

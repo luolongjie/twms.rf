@@ -94,39 +94,39 @@ namespace Rf_Wms.Out
                 this.txttraycode.SelectAll();
                 return;
             }
-            if (Comm.lcCode != this.txttraycode.Text.Substring(0, Comm.lcCode.Length))
-            {
-                try
-                {
-                    Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/getTrayStockByBoxCode", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
-                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
-                    if (msg == null)
-                        throw new Exception("getTrayByBox错误信息捕捉失败");
-                    if (!msg.success)
-                        throw new Exception(msg.msg);
-                    mm = (Model.MTrayByBox)JsonConvert.DeserializeObject(x, typeof(Model.MTrayByBox));
-                    if (mm == null)
-                        throw new Exception("getTrayByBox错误信息捕捉失败1");
-                    //if (mm.data == null)
-                    //{
-                    //    throw new Exception("该托盘是空托盘");
-                    //}
-                    this.txttraycode.Text =mm.data.trayCode;
+            //if (Comm.lcCode != this.txttraycode.Text.Substring(0, Comm.lcCode.Length))
+            //{
+            //    try
+            //    {
+            //        Cursor.Current = Cursors.WaitCursor;
+            //        string x = HttpHelper.HttpPost("trayStock/getTrayStockByBoxCode", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+            //        msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+            //        if (msg == null)
+            //            throw new Exception("getTrayByBox错误信息捕捉失败");
+            //        if (!msg.success)
+            //            throw new Exception(msg.msg);
+            //        mm = (Model.MTrayByBox)JsonConvert.DeserializeObject(x, typeof(Model.MTrayByBox));
+            //        if (mm == null)
+            //            throw new Exception("getTrayByBox错误信息捕捉失败1");
+            //        //if (mm.data == null)
+            //        //{
+            //        //    throw new Exception("该托盘是空托盘");
+            //        //}
+            //        this.txttraycode.Text =mm.data.trayCode;
                   
                    
-                    Cursor.Current = Cursors.Default;
+            //        Cursor.Current = Cursors.Default;
                    
-                }
-                catch (Exception ex)
-                {
-                    Cursor.Current = Cursors.Default;
-                    txttraycode.SelectAll();
-                    MessageBox.Show(ex.Message);
-                    return;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Cursor.Current = Cursors.Default;
+            //        txttraycode.SelectAll();
+            //        MessageBox.Show(ex.Message);
+            //        return;
 
-                }
-            }
+            //    }
+            //}
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -140,7 +140,7 @@ namespace Rf_Wms.Out
                 mt = (Model.MTrayStockByOrderType)JsonConvert.DeserializeObject(x, typeof(Model.MTrayStockByOrderType));
                 if (mt == null)
                 {
-                    throw new Exception("findTrayStockByOrderType捕捉失败");
+                    throw new Exception("verifyFromTrayCodeNotZC捕捉失败");
                 }
                 if (mt.data == null || string.IsNullOrEmpty(mt.data.materialCode))
                 {
@@ -161,6 +161,13 @@ namespace Rf_Wms.Out
                 //}
                 //this.labtrayqty.Text = mt.data.quantity.ToString() + mtrans.data.commonUnitName + mt.data.minQuantity.ToString() + mtrans.data.minUnitName;
                 //this.cmbmaterialCondition.SelectedValue = mt.data.materialStatus;
+                if (!string.IsNullOrEmpty(mt.data.trayCode))
+                {
+                    if (mt.data.trayCode != this.txttraycode.Text)
+                    {
+                        this.txttraycode.Text = mt.data.trayCode;
+                    }
+                }
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -478,7 +485,7 @@ namespace Rf_Wms.Out
                     {
                         throw new Exception("findTrayStockByOrderType捕捉失败");
                     }
-
+                  
                     Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)
@@ -511,6 +518,13 @@ namespace Rf_Wms.Out
                         {
                             this.txttotraycode.SelectAll();
                             return;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(nmt.data.trayCode))
+                    {
+                        if (nmt.data.trayCode != this.txttotraycode.Text)
+                        {
+                            this.txttotraycode.Text = nmt.data.trayCode;
                         }
                     }
                 }
