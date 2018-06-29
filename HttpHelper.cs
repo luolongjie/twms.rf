@@ -56,10 +56,10 @@ namespace Rf_Wms
             //request.ContentLength = postDataStr.Length;
             
             request.Timeout = 30000;//yy
-            if (func == "getStockInOrderInfoByFromTray")
-            {
-                request.Timeout = 1;
-            }
+            //if (func == "getStockInOrderInfoByFromTray")
+            //{
+            //    request.Timeout = 1;
+            //}
             //StreamWriter writer = new StreamWriter(request.GetRequestStream(), Encoding.UTF8);
             //writer.Write(postDataStr);
             //writer.Flush();
