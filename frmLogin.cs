@@ -86,7 +86,7 @@ namespace Rf_Wms
         private void frmLogin_Load(object sender, EventArgs e)
         {
             this.panel1.Visible = false;
-            version=Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            version=Assembly.GetExecutingAssembly().GetName().Version.ToString().Trim();
             lblVersion.Text = "当前版本:" + version;
             string filePath = System.IO.Path.GetDirectoryName
                (System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
@@ -139,7 +139,7 @@ namespace Rf_Wms
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream myResponseStream = response.GetResponseStream();
                 StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.UTF8);
-                string retString = myStreamReader.ReadToEnd();
+                string retString = myStreamReader.ReadToEnd().Trim();
                 myStreamReader.Close();
                 myResponseStream.Close();
                 if (retString != version)
