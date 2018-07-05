@@ -165,6 +165,7 @@
             this.cmbwarehouse.Size = new System.Drawing.Size(140, 23);
             this.cmbwarehouse.TabIndex = 19;
             this.cmbwarehouse.LostFocus += new System.EventHandler(this.cmbwarehouse_LostFocus);
+            this.cmbwarehouse.SelectedIndexChanged += new System.EventHandler(this.cmbwarehouse_SelectedIndexChanged);
             this.cmbwarehouse.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbwarehouse_KeyPress);
             // 
             // frmMain

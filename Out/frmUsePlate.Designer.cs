@@ -32,6 +32,7 @@
             this.dataGrid1 = new System.Windows.Forms.DataGrid();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnren = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -54,22 +55,34 @@
             // 
             this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(94)))), ((int)(((byte)(75)))));
             this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(19, 263);
+            this.btnOK.Location = new System.Drawing.Point(4, 263);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 20);
             this.btnOK.TabIndex = 66;
             this.btnOK.Text = "确定";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnExit
             // 
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(171)))), ((int)(((byte)(110)))));
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(147, 263);
+            this.btnExit.Location = new System.Drawing.Point(162, 263);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(72, 20);
             this.btnExit.TabIndex = 65;
             this.btnExit.Text = "返回";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnren
+            // 
+            this.btnren.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
+            this.btnren.ForeColor = System.Drawing.Color.White;
+            this.btnren.Location = new System.Drawing.Point(83, 263);
+            this.btnren.Name = "btnren";
+            this.btnren.Size = new System.Drawing.Size(72, 20);
+            this.btnren.TabIndex = 68;
+            this.btnren.Text = "刷新";
+            this.btnren.Click += new System.EventHandler(this.btnren_Click);
             // 
             // frmUsePlate
             // 
@@ -78,6 +91,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 305);
+            this.Controls.Add(this.btnren);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.dataGrid1);
@@ -97,5 +111,6 @@
         private System.Windows.Forms.DataGrid dataGrid1;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnren;
     }
 }

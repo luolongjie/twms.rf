@@ -37,16 +37,16 @@ namespace Rf_Wms.Model
             }
         }
 
-        private string _materialCodeName;
-        public string materialCodeName
+        private string _materialName;
+        public string materialName
         {
             get
             {
-                return _materialCodeName;
+                return _materialName;
             }
             set
             {
-                _materialCodeName = value;
+                _materialName = value;
             }
         }
 
@@ -73,6 +73,19 @@ namespace Rf_Wms.Model
             set
             {
                 _pDate = value;
+            }
+        }
+
+        private string _pdateString;
+        public string pdateString
+        {
+            get
+            {
+                return _pdateString;
+            }
+            set
+            {
+                _pdateString = value;
             }
         }
     }

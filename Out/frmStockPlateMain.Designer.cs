@@ -71,6 +71,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmStockPlateMain";
+            this.Text = "备装确认";
             this.ResumeLayout(false);
 
         }

@@ -12,6 +12,7 @@ namespace Rf_Wms.Out
     public partial class frmTcod : Form
     {
         public string tcod = "";
+        public string plateNo = "";
         public frmTcod()
         {
             InitializeComponent();
@@ -22,12 +23,17 @@ namespace Rf_Wms.Out
         Model.Mtcod mt = null;
         private void frmTcod_Load(object sender, EventArgs e)
         {
+            Init();
+        }
+
+        void Init()
+        {
             try
             {
                 i = 0;
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode+"&tcod="+tcod;
-                string x = HttpHelper.HttpPost("", con);
+                string con = @"&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&tcod=" + tcod;
+                string x = HttpHelper.HttpPost("loadTcodQuantityList", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -43,7 +49,7 @@ namespace Rf_Wms.Out
                 //    throw new Exception("没有数据");
                 //}
                 Cursor.Current = Cursors.Default;
-              
+                ShowTxt();
             }
             catch (Exception ex)
             {
@@ -53,8 +59,14 @@ namespace Rf_Wms.Out
             }
         }
 
-        void Show()
+        void ShowTxt()
         {
+            this.labblnum.Text = mt.data.blNum.ToString();
+            this.labdriver.Text = mt.data.driver;
+            this.labload.Text = mt.data.loadQuantity + "箱" + mt.data.loadMinQuantity + "件";
+            this.labreal.Text = mt.data.realQuantity + "箱" + mt.data.realMinQuantity + "件";
+            this.labplantNo.Text = plateNo;
+            this.labtcod.Text = tcod;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -68,8 +80,8 @@ namespace Rf_Wms.Out
             {
                 i = 0;
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&tcod=" + tcod;
-                string x = HttpHelper.HttpPost("", con);
+                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&tcod=" + tcod;
+                string x = HttpHelper.HttpPost("loadConfirm", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -86,6 +98,15 @@ namespace Rf_Wms.Out
                 return;
             }
             this.Close();
+        }
+
+        private void btnbalance_Click(object sender, EventArgs e)
+        {
+            frmBalOper frm = new frmBalOper();
+            frm.tcod = tcod;
+            frm.ShowDialog();
+            Comm.islog = false;
+            Init();
         }
      
 

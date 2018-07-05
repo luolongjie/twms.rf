@@ -253,6 +253,7 @@ namespace Rf_Wms.Out
             {
                 Cursor.Current = Cursors.WaitCursor;
                 string conn = @"orderId=" + this.labccode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode;
+                Comm.islog = false;
                 string x = HttpHelper.HttpPost("deleteOrSubmitTransferOrder", conn);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)

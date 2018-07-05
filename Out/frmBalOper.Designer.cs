@@ -39,6 +39,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.labmaterialname = new System.Windows.Forms.Label();
+            this.btnkeyboard = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labblNoqty = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -58,6 +62,7 @@
             // 
             // cbopdate
             // 
+            this.cbopdate.Enabled = false;
             this.cbopdate.Location = new System.Drawing.Point(96, 114);
             this.cbopdate.Name = "cbopdate";
             this.cbopdate.Size = new System.Drawing.Size(132, 23);
@@ -66,6 +71,7 @@
             // 
             // txtblno
             // 
+            this.txtblno.Enabled = false;
             this.txtblno.Location = new System.Drawing.Point(94, 154);
             this.txtblno.Name = "txtblno";
             this.txtblno.Size = new System.Drawing.Size(131, 23);
@@ -83,6 +89,7 @@
             // 
             // txtcommonqty
             // 
+            this.txtcommonqty.Enabled = false;
             this.txtcommonqty.Location = new System.Drawing.Point(78, 233);
             this.txtcommonqty.Name = "txtcommonqty";
             this.txtcommonqty.Size = new System.Drawing.Size(47, 23);
@@ -114,7 +121,7 @@
             // 
             this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(94)))), ((int)(((byte)(75)))));
             this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(30, 265);
+            this.btnOK.Location = new System.Drawing.Point(83, 265);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 20);
             this.btnOK.TabIndex = 65;
@@ -125,12 +132,42 @@
             // 
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(171)))), ((int)(((byte)(110)))));
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(136, 265);
+            this.btnExit.Location = new System.Drawing.Point(161, 265);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(72, 20);
             this.btnExit.TabIndex = 64;
             this.btnExit.Text = "返回";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // labmaterialname
+            // 
+            this.labmaterialname.Location = new System.Drawing.Point(3, 59);
+            this.labmaterialname.Name = "labmaterialname";
+            this.labmaterialname.Size = new System.Drawing.Size(225, 35);
+            // 
+            // btnkeyboard
+            // 
+            this.btnkeyboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(154)))), ((int)(((byte)(224)))));
+            this.btnkeyboard.ForeColor = System.Drawing.Color.White;
+            this.btnkeyboard.Location = new System.Drawing.Point(5, 265);
+            this.btnkeyboard.Name = "btnkeyboard";
+            this.btnkeyboard.Size = new System.Drawing.Size(72, 20);
+            this.btnkeyboard.TabIndex = 321;
+            this.btnkeyboard.Text = "键盘";
+            this.btnkeyboard.Click += new System.EventHandler(this.btnkeyboard_Click);
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(3, 195);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 20);
+            this.label4.Text = "提单数量";
+            // 
+            // labblNoqty
+            // 
+            this.labblNoqty.Location = new System.Drawing.Point(94, 195);
+            this.labblNoqty.Name = "labblNoqty";
+            this.labblNoqty.Size = new System.Drawing.Size(131, 20);
             // 
             // frmBalOper
             // 
@@ -139,6 +176,10 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.labblNoqty);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btnkeyboard);
+            this.Controls.Add(this.labmaterialname);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.label3);
@@ -171,5 +212,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label labmaterialname;
+        private System.Windows.Forms.Button btnkeyboard;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labblNoqty;
     }
 }

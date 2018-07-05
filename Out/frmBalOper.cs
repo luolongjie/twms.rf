@@ -28,8 +28,8 @@ namespace Rf_Wms.Out
             {
              
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&barCode=" + this.txtbarcode.Text.Trim() ;
-                string x = HttpHelper.HttpPost("", con);
+                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&barCode=" + this.txtbarcode.Text.Trim() ;
+                string x = HttpHelper.HttpPost("loadMaterialList", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -43,6 +43,7 @@ namespace Rf_Wms.Out
             {
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
+                this.txtbarcode.SelectAll();
                 return;
             }
             if (mb.data.Count > 1)
@@ -52,40 +53,63 @@ namespace Rf_Wms.Out
                 frm.ShowDialog();
                 if (frm.mbs != null)
                     mbody = frm.mbs;
+                if (mbody == null)
+                {
+                    this.txtbarcode.Text="";
+                    this.txtbarcode.Focus();
+                    return;
+                }
+                //FindBalPdate();
+                //this.txtbarcode.Enabled = false;
+
+                //this.cbopdate.Enabled = true;
+                //this.cbopdate.Focus();
+                //return;
+            }
+            else
+            {
+                mbody = mb.data[0];
+            }
+            this.labmaterialname.Text = mbody.materialName;
+            if (string.IsNullOrEmpty(mbody.pdateString))
+            {
                 FindBalPdate();
                 this.txtbarcode.Enabled = false;
+
                 this.cbopdate.Enabled = true;
                 this.cbopdate.Focus();
                 return;
             }
-            mbody = mb.data[0];
+            this.cbopdate.Items.Insert(0,mbody.pdateString );
+            cbopdate.SelectedIndex = 0; 
             this.txtblno.Enabled = true;
             this.txtbarcode.Enabled = false;
             this.txtblno.Focus();
         }
 
-        void Show()
+        void ShowTxt()
         {
         }
 
         public string tcod = "";
+        Model.MbalPdate mp = null;
         void FindBalPdate()
         {
             try
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&materialCode=" + this.txtbarcode.Text.Trim() + "&tcod=" + tcod;
-                string x = HttpHelper.HttpPost("", con);
+                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + this.txtbarcode.Text.Trim() + "&tcod=" + tcod;
+                string x = HttpHelper.HttpPost("loadPdateList", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
                 if (!msg.success)
                     throw new Exception(msg.msg);
-                Model.MbalPdate mp = (Model.MbalPdate)JsonConvert.DeserializeObject(x, typeof(Model.MbalPdate));
+                mp = (Model.MbalPdate)JsonConvert.DeserializeObject(x, typeof(Model.MbalPdate));
                 Cursor.Current = Cursors.Default;
                 this.cbopdate.DataSource = mp.data;
-                this.cbopdate.DisplayMember = "pDate";
+                this.cbopdate.DisplayMember = "pdateString";
                 this.cbopdate.SelectedItem = 1;
             }
             catch (Exception ex)
@@ -101,6 +125,13 @@ namespace Rf_Wms.Out
         {
             if (e.KeyChar == 27)
             {
+                mp = null;
+                this.cbopdate.DataSource = null;
+                this.cbopdate.Enabled = false;
+                this.txtbarcode.Enabled = true;
+                this.txtbarcode.Text = "";
+                this.labmaterialname.Text = "";
+                this.txtbarcode.Focus();
                 return;
             }
             if (e.KeyChar != 13)
@@ -115,6 +146,23 @@ namespace Rf_Wms.Out
         {
             if (e.KeyChar == 27)
             {
+                this.txtblno.Enabled = false;
+                this.txtblno.Text = "";
+                if (mp == null)
+                {
+                    //this.cbopdate.DataSource = null;
+                    cbopdate.Items.Clear();
+                    this.cbopdate.DataSource = null;
+                    this.txtbarcode.Enabled = true;
+                    this.txtbarcode.Text = "";
+                    this.labmaterialname.Text = "";
+                    this.txtbarcode.Focus();
+                }
+                else
+                {
+                    this.cbopdate.Enabled = true;
+                    this.cbopdate.Focus();
+                }
                 return;
             }
             if (e.KeyChar != 13)
@@ -126,9 +174,9 @@ namespace Rf_Wms.Out
                 {
 
                     Cursor.Current = Cursors.WaitCursor;
-                    string con = @"&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&materialCode=" + mbody.materialCode + "&tcod=" + tcod;
+                    string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + mbody.materialCode + "&tcod=" + tcod;
                     //outletcode
-                    string x = HttpHelper.HttpPost("", con);
+                    string x = HttpHelper.HttpPost("loadBlnoList", con);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
@@ -158,7 +206,7 @@ namespace Rf_Wms.Out
                     frm.ShowDialog();
                     if (!string.IsNullOrEmpty(frm.blNo))
                     {
-                        mbs=(from xx in mbl.data where xx.blNo==frm.blNo select xx).First();
+
                         this.txtblno.Text = frm.blNo;
                     }
                     else
@@ -166,17 +214,99 @@ namespace Rf_Wms.Out
                         return;
                     }
                 }
-                 this.txtcommonqty.Enabled = true;
-                    this.txtblno.Enabled = false;
-                    this.txtcommonqty.Focus();
-                    
-            }
-        }
 
+
+            }
+            else//直接输入提单号
+            {
+                try
+                {
+
+                    Cursor.Current = Cursors.WaitCursor;
+                    string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + mbody.materialCode + "&tcod=" + tcod;
+                    //outletcode
+                    string x = HttpHelper.HttpPost("loadBlnoList", con);
+                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    if (msg == null)
+                        throw new Exception("错误信息捕捉失败");
+                    if (!msg.success)
+                        throw new Exception(msg.msg);
+                    mbl = (Model.MbalBlno)JsonConvert.DeserializeObject(x, typeof(Model.MbalBlno));
+                    Cursor.Current = Cursors.Default;
+
+                }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    MessageBox.Show(ex.Message);
+
+                    return;
+                }
+            }
+            mbs = (from xx in mbl.data where xx.blNo == this.txtblno.Text select xx).First();
+            if (mbs == null)
+            {
+                this.txtblno.SelectAll();
+                return;
+            }
+            try
+            {
+
+                Cursor.Current = Cursors.WaitCursor;
+                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + mbody.materialCode + "&blNo=" + this.txtblno.Text + "&pdateString="+this.cbopdate.Text;
+                //outletcode
+                string x = HttpHelper.HttpPost("loadPickQuantity", con);
+                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                if (msg == null)
+                    throw new Exception("错误信息捕捉失败");
+                if (!msg.success)
+                    throw new Exception(msg.msg);
+                Model.MloadPickQuantity mlp = (Model.MloadPickQuantity)JsonConvert.DeserializeObject(x, typeof(Model.MloadPickQuantity));
+                Cursor.Current = Cursors.Default;
+                if (mbs.realQuantity > mlp.data.realQuantity)
+                {
+                    realqty = mlp.data.realQuantity;
+                }
+                else
+                {
+                    realqty = mbs.realQuantity;
+                }
+
+                if (mbs.realMinquantity > mlp.data.realMinquantity)
+                {
+                    realminqty = mlp.data.realMinquantity;
+                }
+                else
+                {
+                    realminqty = mbs.realMinquantity;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.Message);
+
+                return;
+            }
+
+            this.labblNoqty.Text = realqty + "箱" + realminqty + "件";
+            this.txtcommonqty.Enabled = true;
+            this.txtblno.Enabled = false;
+            this.txtcommonqty.Focus();
+        }
+        int realqty = 0;
+        int realminqty = 0;
         private void txtminqty_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 27)
             {
+                minqty = 0;
+                this.txtminqty.Text = "";
+                this.txtminqty.Enabled = false;
+                this.txtcommonqty.Enabled = true;
+                this.txtcommonqty.SelectAll();
+                this.txtcommonqty.Focus();
                 return;
             }
             if (e.KeyChar != 13)
@@ -191,7 +321,7 @@ namespace Rf_Wms.Out
                 this.txtminqty.SelectAll();
                 return;
             }
-            if (minqty > mbs.realMinquantity)
+            if (minqty > realminqty)
             {
                 MessageBox.Show("不能大于结余数量");
                 this.txtminqty.SelectAll();
@@ -207,6 +337,12 @@ namespace Rf_Wms.Out
         {
             if (e.KeyChar == 27)
             {
+                this.txtcommonqty.Enabled = false;
+                this.txtcommonqty.Text = "";
+                this.labblNoqty.Text = "";
+                this.txtblno.Enabled = true;
+                this.txtblno.SelectAll();
+                this.txtblno.Focus();
                 return;
             }
             if (e.KeyChar != 13)
@@ -221,7 +357,7 @@ namespace Rf_Wms.Out
                 this.txtcommonqty.SelectAll();
                 return;
             }
-            if (commonqty > mbs.realQuantity)
+            if (commonqty > realqty)
             {
                 MessageBox.Show("不能大于结余数量");
                 this.txtcommonqty.SelectAll();
@@ -252,6 +388,7 @@ namespace Rf_Wms.Out
 
                 return;
             }
+            this.Close();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -261,14 +398,27 @@ namespace Rf_Wms.Out
 
         void Save()
         {
-            string con = @"&lcCode=" + Comm.lcCode + "&stockOutNo=" + mbs.stockOutNo + "&materialCode=" + mbody.materialCode + "&pDate=" + this.cbopdate.Text + "&balanceQuantity=" + commonqty + "&balanceMinQuantity="+minqty;
+            string con = @"lcCode=" + Comm.lcCode + "&stockOutNo=" + mbs.stockOutNo + "&materialCode=" + mbody.materialCode + "&pdateString=" + this.cbopdate.Text + "&balanceQuantity=" + commonqty + "&balanceMinQuantity=" + minqty;
             //outletcode
-            string x = HttpHelper.HttpPost("", con);
+            string x = HttpHelper.HttpPost("loadBalance", con);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");
             if (!msg.success)
                 throw new Exception(msg.msg);
+        }
+
+        private void btnkeyboard_Click(object sender, EventArgs e)
+        {
+            RIL_IME.ShowIME("Letter Recognizer");
+            foreach (Control v in this.Controls)
+            {
+                if (v is TextBox)
+                {
+                    if (v.Enabled)
+                        v.Focus();
+                }
+            }
         }
     }
 }

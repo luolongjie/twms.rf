@@ -37,6 +37,12 @@
             this.btnbalance = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.labplantNo = new System.Windows.Forms.Label();
+            this.labtcod = new System.Windows.Forms.Label();
+            this.labdriver = new System.Windows.Forms.Label();
+            this.labblnum = new System.Windows.Forms.Label();
+            this.labreal = new System.Windows.Forms.Label();
+            this.labload = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -90,6 +96,7 @@
             this.btnbalance.Size = new System.Drawing.Size(72, 20);
             this.btnbalance.TabIndex = 67;
             this.btnbalance.Text = "结余";
+            this.btnbalance.Click += new System.EventHandler(this.btnbalance_Click);
             // 
             // btnOK
             // 
@@ -113,6 +120,48 @@
             this.btnExit.Text = "返回";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // labplantNo
+            // 
+            this.labplantNo.Location = new System.Drawing.Point(86, 10);
+            this.labplantNo.Name = "labplantNo";
+            this.labplantNo.Size = new System.Drawing.Size(77, 20);
+            this.labplantNo.Text = "车牌号";
+            // 
+            // labtcod
+            // 
+            this.labtcod.Location = new System.Drawing.Point(86, 58);
+            this.labtcod.Name = "labtcod";
+            this.labtcod.Size = new System.Drawing.Size(147, 32);
+            this.labtcod.Text = "运单号";
+            // 
+            // labdriver
+            // 
+            this.labdriver.Location = new System.Drawing.Point(86, 101);
+            this.labdriver.Name = "labdriver";
+            this.labdriver.Size = new System.Drawing.Size(77, 20);
+            this.labdriver.Text = "运单号";
+            // 
+            // labblnum
+            // 
+            this.labblnum.Location = new System.Drawing.Point(86, 139);
+            this.labblnum.Name = "labblnum";
+            this.labblnum.Size = new System.Drawing.Size(77, 20);
+            this.labblnum.Text = "运单号";
+            // 
+            // labreal
+            // 
+            this.labreal.Location = new System.Drawing.Point(86, 185);
+            this.labreal.Name = "labreal";
+            this.labreal.Size = new System.Drawing.Size(77, 20);
+            this.labreal.Text = "运单号";
+            // 
+            // labload
+            // 
+            this.labload.Location = new System.Drawing.Point(86, 220);
+            this.labload.Name = "labload";
+            this.labload.Size = new System.Drawing.Size(77, 20);
+            this.labload.Text = "运单号";
+            // 
             // frmTcod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -120,6 +169,12 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.labload);
+            this.Controls.Add(this.labreal);
+            this.Controls.Add(this.labblnum);
+            this.Controls.Add(this.labdriver);
+            this.Controls.Add(this.labtcod);
+            this.Controls.Add(this.labplantNo);
             this.Controls.Add(this.btnbalance);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnExit);
@@ -149,5 +204,11 @@
         private System.Windows.Forms.Button btnbalance;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label labplantNo;
+        private System.Windows.Forms.Label labtcod;
+        private System.Windows.Forms.Label labdriver;
+        private System.Windows.Forms.Label labblnum;
+        private System.Windows.Forms.Label labreal;
+        private System.Windows.Forms.Label labload;
     }
 }

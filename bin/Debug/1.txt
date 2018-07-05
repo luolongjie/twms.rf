@@ -1,3 +1,3 @@
-﻿方法名: http://10.118.150.17:8350/twms-hand/api/deleteStockInOrder
-参数: orderId=RKG04620180601000002&lcCode=G046&whId=192&updater=11111
-返回值: {"msg":"操作成功","success":true}
+﻿方法名: http://10.227.114.85:8280/api/loadTcodList
+参数: lcCode=ZA01&whCode=225
+返回值: {"data":[{"desIsNull":false,"plateNo":"豫P1A641","tcod":"YHZA0120180628000005"}],"msg":"操作成功","success":true}

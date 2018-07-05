@@ -18,10 +18,23 @@ namespace Rf_Wms.Ot
 
         public Model.MBalanceBarcode mb = null;
         public Model.BalanceBarcodes mbs = null;
+        DataTable dt = null;
         private void frmBalMaterial_Load(object sender, EventArgs e)
         {
+           
+            
+            dt = new DataTable();
+            dt.Columns.Add("materialName");
+            dt.Columns.Add("spec");
+            foreach (Model.BalanceBarcodes v in mb.data)
+            {
+                DataRow dr = dt.NewRow();
+                dr["materialName"] = v.materialName;
+                dr["spec"] = v.spec;
+                dt.Rows.Add(dr);
+            }
+            this.dataGrid1.DataSource = dt;
             Bind();
-            this.dataGrid1.DataSource = mb.data;
             frmList.SizeColumnsToContent(this.dataGrid1, -1);//yy
         }
 
@@ -30,11 +43,11 @@ namespace Rf_Wms.Ot
             dataGrid1.TableStyles.Clear();
             DataGridTableStyle dts = new DataGridTableStyle();
 
-            dts.MappingName = mb.data.GetType().Name;
+            dts.MappingName = dt.TableName;
 
             DataGridTextBoxColumn dtbc = new DataGridTextBoxColumn();
             dtbc.HeaderText = "物料名称";
-            dtbc.MappingName = "materialCodeName";
+            dtbc.MappingName = "materialName";
             dtbc.Width = 120;
             dts.GridColumnStyles.Add(dtbc);
 

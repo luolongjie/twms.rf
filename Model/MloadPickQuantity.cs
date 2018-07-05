@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Rf_Wms.Model
 {
-    public class MbalPdate
+    public class MloadPickQuantity
     {
-        private List<balPdates> _data;
-        public List<balPdates> data
+        private loadPickQuantitys _data;
+        public loadPickQuantitys data
         {
             get
             {
@@ -21,31 +21,34 @@ namespace Rf_Wms.Model
         }
     }
 
-    public class balPdates
+    [Serializable]
+    public class loadPickQuantitys
     {
-        private string _pDate;
-        public string pDate
+        
+
+        private int _realQuantity;
+        public int realQuantity
         {
             get
             {
-                return _pDate;
+                return _realQuantity;
             }
             set
             {
-                _pDate = value;
+                _realQuantity = value;
             }
         }
 
-        private string _pdateString;
-        public string pdateString
+        private int _realMinquantity;
+        public int realMinquantity
         {
             get
             {
-                return _pdateString;
+                return _realMinquantity;
             }
             set
             {
-                _pdateString = value;
+                _realMinquantity = value;
             }
         }
     }

@@ -180,6 +180,7 @@
     <Compile Include="Model\MergeRefundOrder.cs" />
     <Compile Include="Model\MgetMaterialsByBar.cs" />
     <Compile Include="Model\MgetSecondarySortingInfo.cs" />
+    <Compile Include="Model\MloadPickQuantity.cs" />
     <Compile Include="Model\MLocationTray.cs" />
     <Compile Include="Model\MOperationByOrder.cs" />
     <Compile Include="Model\MoutletInfo.cs" />

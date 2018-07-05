@@ -17,9 +17,10 @@ namespace Rf_Wms.Out
         }
 
         bool ischeck = false;
+        int _int;
         private void dataGrid1_Click(object sender, EventArgs e)
         {
-            int _int;
+            //int _int;
             _int = dataGrid1.CurrentCell.RowNumber;
 
             if (_int < 0)
@@ -40,12 +41,13 @@ namespace Rf_Wms.Out
 
         void Init()
         {
+            ischeck = false;
             m = null;
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
-                string x = HttpHelper.HttpPost("", con);
+                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode;
+                string x = HttpHelper.HttpPost("loadTcodList", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -82,7 +84,7 @@ namespace Rf_Wms.Out
             DataGridTextBoxColumn dtbc = new DataGridTextBoxColumn();
             dtbc.HeaderText = "车辆";
             dtbc.MappingName = "plateNo";
-            dtbc.Width = 120;
+            dtbc.Width = 80;
             dts.GridColumnStyles.Add(dtbc);
 
             dtbc = new DataGridTextBoxColumn();
@@ -117,6 +119,26 @@ namespace Rf_Wms.Out
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (!ischeck)
+            {
+                MessageBox.Show("请选择一条记录");
+                return;
+            }
+            frmTcod frm = new frmTcod();
+            frm.tcod = m.data[_int].tcod;
+            frm.plateNo = m.data[_int].plateNo;
+            frm.ShowDialog();
+            Comm.islog = false;
+            Init();
+        }
+
+        private void btnren_Click(object sender, EventArgs e)
+        {
+            Init();
         }
 
        

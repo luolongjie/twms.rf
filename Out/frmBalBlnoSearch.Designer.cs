@@ -42,6 +42,7 @@
             this.cbooutlet.Name = "cbooutlet";
             this.cbooutlet.Size = new System.Drawing.Size(132, 23);
             this.cbooutlet.TabIndex = 4;
+            this.cbooutlet.SelectedIndexChanged += new System.EventHandler(this.cbooutlet_SelectedIndexChanged);
             this.cbooutlet.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbooutlet_KeyPress);
             // 
             // label3
