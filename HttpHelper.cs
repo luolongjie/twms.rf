@@ -40,6 +40,9 @@ namespace Rf_Wms
         {
             //byte[] buffer = Encoding.UTF8.GetBytes(func);
             //string msg = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+            string logfun = Comm.fun;
+            string logpar = Comm.par;
+            string logretval = Comm.retval;
             Comm.fun = Comm.url + func;
 
             //Comm.fun = Comm.url + Encoding.UTF8.GetString(buffer, 0, buffer.Length);
@@ -54,7 +57,12 @@ namespace Rf_Wms
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             //request.ContentLength = postDataStr.Length;
+            
             request.Timeout = 30000;//yy
+            //if (func == "getStockInOrderInfoByFromTray")
+            //{
+            //    request.Timeout = 1;
+            //}
             //StreamWriter writer = new StreamWriter(request.GetRequestStream(), Encoding.UTF8);
             //writer.Write(postDataStr);
             //writer.Flush();
@@ -75,6 +83,13 @@ namespace Rf_Wms
             StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(encoding));
             string retString = reader.ReadToEnd();
             Comm.retval = retString;
+            if (!Comm.islog)
+            {
+                Comm.fun = logfun;
+                Comm.par = logpar;
+                Comm.retval = logretval;
+            }
+            Comm.islog = true;
             request.KeepAlive = false;
             if (response != null)
             {

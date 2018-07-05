@@ -30,6 +30,7 @@ namespace Rf_Wms.In
                 return;
             if (this.txtorderid.Enabled)
                 return;
+            Comm.islog = false;
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
