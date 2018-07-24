@@ -24,6 +24,8 @@ namespace Rf_Wms.Out
         {
             if (e.KeyChar != 13)
                 return;
+            if (string.IsNullOrEmpty(this.txtbarcode.Text))
+                return;
             try
             {
              
@@ -52,7 +54,13 @@ namespace Rf_Wms.Out
                 frm.mb = mb;
                 frm.ShowDialog();
                 if (frm.mbs != null)
+                {
                     mbody = frm.mbs;
+                }
+                else
+                {
+                    mbody = null;
+                }
                 if (mbody == null)
                 {
                     this.txtbarcode.Text="";
@@ -99,7 +107,7 @@ namespace Rf_Wms.Out
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + this.txtbarcode.Text.Trim() + "&tcod=" + tcod;
+                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + mbody.materialCode + "&tcod=" + tcod;
                 string x = HttpHelper.HttpPost("loadPdateList", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -129,7 +137,7 @@ namespace Rf_Wms.Out
                 this.cbopdate.DataSource = null;
                 this.cbopdate.Enabled = false;
                 this.txtbarcode.Enabled = true;
-                this.txtbarcode.Text = "";
+                this.txtbarcode.SelectAll();
                 this.labmaterialname.Text = "";
                 this.txtbarcode.Focus();
                 return;
@@ -154,7 +162,7 @@ namespace Rf_Wms.Out
                     cbopdate.Items.Clear();
                     this.cbopdate.DataSource = null;
                     this.txtbarcode.Enabled = true;
-                    this.txtbarcode.Text = "";
+                    this.txtbarcode.SelectAll();
                     this.labmaterialname.Text = "";
                     this.txtbarcode.Focus();
                 }
@@ -327,8 +335,36 @@ namespace Rf_Wms.Out
                 this.txtminqty.SelectAll();
                 return;
             }
-            this.txtminqty.Enabled = false;
-            this.btnOK.Focus();
+            if (minqty < 0)
+            {
+                MessageBox.Show("不能小于0");
+                this.txtminqty.SelectAll();
+                return;
+            }
+            if (minqty == 0 && commonqty == 0)
+            {
+                MessageBox.Show("结余数量不能都输入0");
+                this.txtminqty.SelectAll();
+                return;
+            }
+            try
+            {
+
+                Cursor.Current = Cursors.WaitCursor;
+                Save();
+                Cursor.Current = Cursors.Default;
+
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.Message);
+
+                return;
+            }
+            this.Close();
+            //this.txtminqty.Enabled = false;
+            //this.btnOK.Focus();
         }
 
         int commonqty = 0;
@@ -360,6 +396,12 @@ namespace Rf_Wms.Out
             if (commonqty > realqty)
             {
                 MessageBox.Show("不能大于结余数量");
+                this.txtcommonqty.SelectAll();
+                return;
+            }
+            if (commonqty < 0)
+            {
+                MessageBox.Show("不能小于0");
                 this.txtcommonqty.SelectAll();
                 return;
             }

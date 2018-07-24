@@ -27,10 +27,13 @@ namespace Rf_Wms
             this.Text = Comm.userame;
             //this.labwarehousename.Text = "当前仓库 " + Comm.warehousename;
             //this.label1.Text = "当前仓库 " + Comm.warehousename;
+            string whcode = Comm.warehousecode;
             this.cmbwarehouse.DataSource = Comm.warehouseList;
             this.cmbwarehouse.DisplayMember = "name";
             this.cmbwarehouse.ValueMember = "whId";
-            this.cmbwarehouse.Text = Comm.warehousename;
+            //this.cmbwarehouse.Text = Comm.warehousename;
+            this.cmbwarehouse.SelectedValue = whcode;
+            Comm.warehousecode = whcode;
 
         }
 

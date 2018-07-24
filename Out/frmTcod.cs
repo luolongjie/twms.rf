@@ -89,6 +89,11 @@ namespace Rf_Wms.Out
                     throw new Exception(msg.msg);
                 
                 Cursor.Current = Cursors.Default;
+                if (!string.IsNullOrEmpty(msg.msg))
+                {
+                    MessageBox.Show(msg.msg);
+                }
+
 
             }
             catch (Exception ex)

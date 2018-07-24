@@ -84,13 +84,13 @@ namespace Rf_Wms.Out
             DataGridTextBoxColumn dtbc = new DataGridTextBoxColumn();
             dtbc.HeaderText = "车辆";
             dtbc.MappingName = "plateNo";
-            dtbc.Width = 80;
+            dtbc.Width = 60;
             dts.GridColumnStyles.Add(dtbc);
 
             dtbc = new DataGridTextBoxColumn();
             dtbc.HeaderText = "运单号";
             dtbc.MappingName = "tcod";
-            dtbc.Width = 110;
+            dtbc.Width = 130;
             dts.GridColumnStyles.Add(dtbc);
 
 

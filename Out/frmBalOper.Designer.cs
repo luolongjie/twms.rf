@@ -72,7 +72,7 @@
             // txtblno
             // 
             this.txtblno.Enabled = false;
-            this.txtblno.Location = new System.Drawing.Point(94, 154);
+            this.txtblno.Location = new System.Drawing.Point(97, 154);
             this.txtblno.Name = "txtblno";
             this.txtblno.Size = new System.Drawing.Size(131, 23);
             this.txtblno.TabIndex = 4;
@@ -126,13 +126,14 @@
             this.btnOK.Size = new System.Drawing.Size(72, 20);
             this.btnOK.TabIndex = 65;
             this.btnOK.Text = "确定";
+            this.btnOK.Visible = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnExit
             // 
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(171)))), ((int)(((byte)(110)))));
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(161, 265);
+            this.btnExit.Location = new System.Drawing.Point(142, 265);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(72, 20);
             this.btnExit.TabIndex = 64;
@@ -149,7 +150,7 @@
             // 
             this.btnkeyboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(154)))), ((int)(((byte)(224)))));
             this.btnkeyboard.ForeColor = System.Drawing.Color.White;
-            this.btnkeyboard.Location = new System.Drawing.Point(5, 265);
+            this.btnkeyboard.Location = new System.Drawing.Point(25, 265);
             this.btnkeyboard.Name = "btnkeyboard";
             this.btnkeyboard.Size = new System.Drawing.Size(72, 20);
             this.btnkeyboard.TabIndex = 321;
@@ -180,7 +181,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnkeyboard);
             this.Controls.Add(this.labmaterialname);
-            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -191,6 +191,7 @@
             this.Controls.Add(this.cbopdate);
             this.Controls.Add(this.txtbarcode);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnOK);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmBalOper";
