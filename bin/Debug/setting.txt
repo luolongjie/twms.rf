@@ -1,2 +1,2 @@
-﻿http://10.118.150.17:8050/twms-hand/api/
+﻿http://10.118.150.17:8150/twms-hand/api/
 

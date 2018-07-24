@@ -27,7 +27,7 @@ namespace Rf_Wms.In
         {
             if (e.KeyChar != 13)
                 return;
-            if (this.txtcarton.Text == "")
+            if (string.IsNullOrEmpty(this.txtcarton.Text))
                 return;
             GetValue();
         }
@@ -72,6 +72,8 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+                if (string.IsNullOrEmpty(this.txtcarton.Text))
+                    throw new Exception("请扫描托盘码");
                 string x = HttpHelper.HttpPost("stockinReceive", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -96,6 +98,8 @@ namespace Rf_Wms.In
             catch (Exception ex)
             {
                 Cursor.Current = Cursors.Default;
+                this.txtcarton.Focus();
+                this.txtcarton.SelectAll();
                 MessageBox.Show(ex.Message);
                 return;
 
