@@ -39,7 +39,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("/getPickOperateList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.lblpickno.Text + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("/getPickOperateList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.lblpickno.Text + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -377,7 +377,7 @@ namespace Rf_Wms.Out
             {
                 try
                 {
-                    string x = HttpHelper.HttpPost("startSecondarySorting", @"trayCode=" + mss.data.trayCode + "&lcCode=" + Comm.lcCode+"&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("startSecondarySorting", @"trayCode=" + mss.data.trayCode + "&lcCode=" + Comm.lcCode+"&whCode=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
@@ -422,7 +422,7 @@ namespace Rf_Wms.Out
                 {
                     try
                     {
-                        string x = HttpHelper.HttpPost("startSecondarySorting", @"trayCode=" + mss.data.trayCode + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                        string x = HttpHelper.HttpPost("startSecondarySorting", @"trayCode=" + mss.data.trayCode + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                         msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                         if (msg == null)
                             throw new Exception("错误信息捕捉失败");

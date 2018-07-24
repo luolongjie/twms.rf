@@ -27,7 +27,7 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
+                string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode;
                 
                 string x = HttpHelper.HttpPost("packOrder/getProductPackOrder", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -226,7 +226,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
@@ -251,7 +251,7 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttraycode.Text + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttraycode.Text + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("trayStock/findTrayStockByOrderType错误信息捕捉失败");
@@ -436,7 +436,7 @@ namespace Rf_Wms.In
         void Save()
         {
 
-            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&materialCode=" + materialbody.code + "&quantity=" + commonqty + "&minQuantity=" + minqty + "&toTrayCode=" + this.txttraycode.Text + "&fromTrayCode=" + this.txttraycode.Text + "&operatorCode=" + Comm.usercode + "&fromSlId=" + mp.data.toSlId + "&assistance=" + this.labassistance.Text; ;
+            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + materialbody.code + "&quantity=" + commonqty + "&minQuantity=" + minqty + "&toTrayCode=" + this.txttraycode.Text + "&fromTrayCode=" + this.txttraycode.Text + "&operatorCode=" + Comm.usercode + "&fromSlId=" + mp.data.toSlId + "&assistance=" + this.labassistance.Text; ;
 
             string x = HttpHelper.HttpPost("packOrder/machineingPackOrder", con);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));

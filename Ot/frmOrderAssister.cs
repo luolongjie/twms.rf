@@ -32,7 +32,7 @@ namespace Rf_Wms.Ot
             }
             try
             {
-                string x = HttpHelper.HttpPost("getOperationByOrder", @"lcCode=" + Comm.lcCode + "&orderNo=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("getOperationByOrder", @"lcCode=" + Comm.lcCode + "&orderNo=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");

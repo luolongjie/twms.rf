@@ -57,7 +57,7 @@ namespace Rf_Wms.Ot
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost(fun, @"lcCode=" + Comm.lcCode + "&orderId=" + orderid + "&assistance=" + mu.data.userCode + "&whId=" + Comm.warehousecode+"&updater="+Comm.usercode);
+                string x = HttpHelper.HttpPost(fun, @"lcCode=" + Comm.lcCode + "&orderId=" + orderid + "&assistance=" + mu.data.userCode + "&whCode=" + Comm.warehousecode+"&updater="+Comm.usercode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
