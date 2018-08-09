@@ -76,6 +76,7 @@ namespace Rf_Wms.Out
                 this.dataGrid2.DataSource = mp.data;
                 Cursor.Current = Cursors.Default;
                 this.cbooutlet.SelectedIndexChanged += new System.EventHandler(this.cbooutlet_SelectedIndexChanged);
+                cbooutlet_SelectedIndexChanged(null, null);
             }
             catch (Exception ex)
             {
@@ -115,13 +116,21 @@ namespace Rf_Wms.Out
 
         private void cbooutlet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.cbooutlet.Text == "请选择")
+            if (this.cbooutlet.Text == "请选择" && cbooutlet.Items.Count != 1)
                 return;
             try
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + materialCode + "&tcod=" + tcod + "&outletCode=" + this.cbooutlet.SelectedValue.ToString();
+                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + materialCode + "&tcod=" + tcod;
+                if (this.cbooutlet.Text != "请选择")
+                {
+                    con += "&outletCode=" + this.cbooutlet.SelectedValue.ToString();
+                }
+                else
+                {
+                    con += "&outletCode=";
+                }
                 //outletcode
                 string x = HttpHelper.HttpPost("loadBlnoList", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));

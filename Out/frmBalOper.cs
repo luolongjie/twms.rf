@@ -150,6 +150,7 @@ namespace Rf_Wms.Out
         }
 
         Model.balBlnos mbs = null;
+        Model.MloadPickQuantity mlp = null;
         private void txtblno_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 27)
@@ -269,25 +270,25 @@ namespace Rf_Wms.Out
                     throw new Exception("错误信息捕捉失败");
                 if (!msg.success)
                     throw new Exception(msg.msg);
-                Model.MloadPickQuantity mlp = (Model.MloadPickQuantity)JsonConvert.DeserializeObject(x, typeof(Model.MloadPickQuantity));
+               mlp = (Model.MloadPickQuantity)JsonConvert.DeserializeObject(x, typeof(Model.MloadPickQuantity));
                 Cursor.Current = Cursors.Default;
-                if (mbs.realQuantity > mlp.data.realQuantity)
-                {
-                    realqty = mlp.data.realQuantity;
-                }
-                else
-                {
-                    realqty = mbs.realQuantity;
-                }
+                //if (mbs.realQuantity > mlp.data.realQuantity)
+                //{
+                //    realqty = mlp.data.realQuantity;
+                //}
+                //else
+                //{
+                realqty = mbs.realQuantity;
+                //}
 
-                if (mbs.realMinquantity > mlp.data.realMinquantity)
-                {
-                    realminqty = mlp.data.realMinquantity;
-                }
-                else
-                {
-                    realminqty = mbs.realMinquantity;
-                }
+                //if (mbs.realMinquantity > mlp.data.realMinquantity)
+                //{
+                //    realminqty = mlp.data.realMinquantity;
+                //}
+                //else
+                //{
+                realminqty = mbs.realMinquantity;
+                //}
 
             }
             catch (Exception ex)
@@ -329,11 +330,29 @@ namespace Rf_Wms.Out
                 this.txtminqty.SelectAll();
                 return;
             }
-            if (minqty > realminqty)
+            //if (minqty > realminqty)
+            //{
+            //    MessageBox.Show("不能大于结余数量");
+            //    this.txtminqty.SelectAll();
+            //    return;
+            //}
+            if (mbs.realMinquantity > mlp.data.realMinquantity)
             {
-                MessageBox.Show("不能大于结余数量");
-                this.txtminqty.SelectAll();
-                return;
+                if (minqty > mlp.data.realMinquantity)
+                {
+                    MessageBox.Show("结余量大于已选生产日期可结余量");
+                    this.txtminqty.SelectAll();
+                    return;
+                }
+            }
+            else
+            {
+                if (minqty > mbs.realMinquantity)
+                {
+                    MessageBox.Show("结余量大于提单量");
+                    this.txtminqty.SelectAll();
+                    return;
+                }
             }
             if (minqty < 0)
             {
@@ -393,11 +412,29 @@ namespace Rf_Wms.Out
                 this.txtcommonqty.SelectAll();
                 return;
             }
-            if (commonqty > realqty)
+            //if (commonqty > realqty)
+            //{
+            //    MessageBox.Show("不能大于结余数量");
+            //    this.txtcommonqty.SelectAll();
+            //    return;
+            //}
+            if (mbs.realQuantity > mlp.data.realQuantity)
             {
-                MessageBox.Show("不能大于结余数量");
-                this.txtcommonqty.SelectAll();
-                return;
+                if (commonqty > mlp.data.realQuantity)
+                {
+                    MessageBox.Show("结余量大于已选生产日期可结余量");
+                    this.txtcommonqty.SelectAll();
+                    return;
+                }
+            }
+            else
+            {
+                if (commonqty > mbs.realQuantity)
+                {
+                    MessageBox.Show("结余量大于提单量");
+                    this.txtcommonqty.SelectAll();
+                    return;
+                }
             }
             if (commonqty < 0)
             {
