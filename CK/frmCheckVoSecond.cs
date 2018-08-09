@@ -52,7 +52,7 @@ namespace Rf_Wms.CK
         void GetVouch()
         {
             //m = null;
-            string conn = @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode;
+            string conn = @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode;
             if (m != null)
             {
                 conn+="&orderItemId="+m.data.nextItemId;
@@ -245,7 +245,7 @@ namespace Rf_Wms.CK
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
@@ -357,7 +357,7 @@ namespace Rf_Wms.CK
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string conn = @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode;
+                string conn = @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode;
                 conn += "&orderItemId=" + m.data.orderItemId + "&updater=" + Comm.usercode + "&quantity=" + commonqty + "&minQuantity=" + minqty + "&trayCode="+this.txttraycode.Text;
                 conn += "&batchNo=" + m.data.batchNo + "&pdate=" + m.data.pdate + "&inDate=" + m.data.inDate + "&materialStatus=" + (from r in Comm.basein.data.transferMaterialSurfaces where r.description == m.data.materialStatus select r).First().code;
                 string x = HttpHelper.HttpPost("repeatResult", conn);
@@ -472,7 +472,7 @@ namespace Rf_Wms.CK
 
         void Finishtraycode()
         {
-            string conn = @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode;
+            string conn = @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode;
             conn += "&orderItemId=" + m.data.orderItemId + "&updater=" + Comm.usercode;
             string x = HttpHelper.HttpPost("finishRepeat", conn);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));

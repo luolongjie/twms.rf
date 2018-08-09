@@ -50,7 +50,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("doStockUpConfirm", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&updater=" + Comm.usercode + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("doStockUpConfirm", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&updater=" + Comm.usercode + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");

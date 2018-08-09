@@ -24,7 +24,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("getZcqSlList", "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("getZcqSlList", "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -48,7 +48,7 @@ namespace Rf_Wms.Out
                 this.cmbtoslname.ValueMember = "slId";
                 this.cmbtoslname.DisplayMember = "slName";
 
-                x = HttpHelper.HttpPost("getBalanceTransferOrderNumber", "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode);
+                x = HttpHelper.HttpPost("getBalanceTransferOrderNumber", "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -169,7 +169,7 @@ namespace Rf_Wms.Out
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getlocationStockList", @"&whId=" + Comm.warehousecode + "&lcCode=" + Comm.lcCode + "&materialCode=" + materialbody.code + "&slId=" + this.cmbtoslname.SelectedValue.ToString());
+                    string x = HttpHelper.HttpPost("getlocationStockList", @"&whCode=" + Comm.warehousecode + "&lcCode=" + Comm.lcCode + "&materialCode=" + materialbody.code + "&slId=" + this.cmbtoslname.SelectedValue.ToString());
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
@@ -252,7 +252,8 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string conn = @"orderId=" + this.labccode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode;
+                string conn = @"orderId=" + this.labccode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode;
+                Comm.islog = false;
                 string x = HttpHelper.HttpPost("deleteOrSubmitTransferOrder", conn);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -412,7 +413,7 @@ namespace Rf_Wms.Out
             //        try
             //        {
             //            Cursor.Current = Cursors.WaitCursor;
-            //            string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+            //            string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
             //            msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             //            if (msg == null)
             //                throw new Exception("错误信息捕捉失败");
@@ -457,8 +458,8 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                //string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttotraycode.Text + "&whId=" + Comm.warehousecode+"&transferType=2");
-                string x = HttpHelper.HttpPost("trayStock/verifyToTrayCodeNotZC", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttotraycode.Text + "&whId=" + Comm.warehousecode + "&transferType=2");
+                //string x = HttpHelper.HttpPost("trayStock/findTrayStockByOrderType", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttotraycode.Text + "&whCode=" + Comm.warehousecode+"&transferType=2");
+                string x = HttpHelper.HttpPost("trayStock/verifyToTrayCodeNotZC", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttotraycode.Text + "&whCode=" + Comm.warehousecode + "&transferType=2");
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("trayStock/findTrayStockByOrderType错误信息捕捉失败");
@@ -553,7 +554,7 @@ namespace Rf_Wms.Out
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txttoslid.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&slName=" + this.txttoslid.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");
@@ -630,7 +631,7 @@ namespace Rf_Wms.Out
 
         void Save()
         {
-            string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode + "&fromSlId=" + ml.data[row].slId + "&toTrayCode=" + this.txttotraycode.Text + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&materialCode=" + ml.data[row].materialCode + "&orderId=" + this.labccode.Text + "&batchNo=" + ml.data[row].batchNo + "&pdate=" + ml.data[row].pDate + "&inDate=" + ml.data[row].inDate + "&shipperCode=" + ml.data[row].shipperCode + "&oldMaterialStatus=" + ml.data[row].materialStatusCode;
+            string conn = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode + "&fromSlId=" + ml.data[row].slId + "&toTrayCode=" + this.txttotraycode.Text + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&materialCode=" + ml.data[row].materialCode + "&orderId=" + this.labccode.Text + "&batchNo=" + ml.data[row].batchNo + "&pdate=" + ml.data[row].pDate + "&inDate=" + ml.data[row].inDate + "&shipperCode=" + ml.data[row].shipperCode + "&oldMaterialStatus=" + ml.data[row].materialStatusCode;
             if (nmt.data!=null)
             {
                 conn += "&materialStatus=" + nmt.data.materialStatus;

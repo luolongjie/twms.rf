@@ -59,7 +59,7 @@ namespace Rf_Wms.CK
                 return;
             //try
             //{
-            //    string x = HttpHelper.HttpPost("checkResult", @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text+"&whId="+Comm.warehousecode);
+            //    string x = HttpHelper.HttpPost("checkResult", @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text+"&whCode="+Comm.warehousecode);
             //    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             //    if (msg == null)
             //        throw new Exception("错误信息捕捉失败");
@@ -94,7 +94,7 @@ namespace Rf_Wms.CK
              Model.getRegionList rr=null;
             try
             {
-                string x = HttpHelper.HttpPost("getRegionList", @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("getRegionList", @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -306,7 +306,7 @@ namespace Rf_Wms.CK
             //    }
             //}
 
-            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&orderItemId=" + mc.data.orderItemId  + "&updater=" + Comm.usercode ;
+            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&orderItemId=" + mc.data.orderItemId  + "&updater=" + Comm.usercode ;
             if (commonqty != mc.data.quantity || minqty != mc.data.minQuantity || isexception)
             {
                 con += "&exception=1";
@@ -517,7 +517,7 @@ namespace Rf_Wms.CK
             //{
             //    try
             //    {
-            //        string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+            //        string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
             //        msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             //        if (msg == null)
             //            throw new Exception("错误信息捕捉失败");
@@ -623,7 +623,7 @@ namespace Rf_Wms.CK
         Model.MrepeatInfos m;
         void checkAgain()
         {
-            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&orderItemId=" + mc.data.orderItemId + "&updater=" + Comm.usercode;
+            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&orderItemId=" + mc.data.orderItemId + "&updater=" + Comm.usercode;
 
             con += "&exception=1";
             try
@@ -683,7 +683,7 @@ namespace Rf_Wms.CK
             frm.orderid = this.txtorderid.Text;
             frm.ShowDialog();
 
-            x = HttpHelper.HttpPost("checkResult", @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode + "&rrId=" + this.cbxrr.SelectedValue.ToString());
+            x = HttpHelper.HttpPost("checkResult", @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode + "&rrId=" + this.cbxrr.SelectedValue.ToString());
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");
@@ -789,7 +789,7 @@ namespace Rf_Wms.CK
                 return;
             try
             {
-                string x = HttpHelper.HttpPost("checkResult", @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text+"&whId="+Comm.warehousecode+"&rrId="+this.cbxrr.SelectedValue.ToString());
+                string x = HttpHelper.HttpPost("checkResult", @"lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text+"&whCode="+Comm.warehousecode+"&rrId="+this.cbxrr.SelectedValue.ToString());
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");

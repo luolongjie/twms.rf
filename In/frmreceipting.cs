@@ -30,10 +30,11 @@ namespace Rf_Wms.In
                 return;
             if (this.txtorderid.Enabled)
                 return;
+            Comm.islog = false;
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string conn=@"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode+"&whId="+Comm.warehousecode+"&updater=" + Comm.usercode;
+                string conn=@"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode+"&whCode="+Comm.warehousecode+"&updater=" + Comm.usercode;
                 string x = HttpHelper.HttpPost("deleteStockInOrder", conn);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
@@ -87,7 +88,7 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string conn=@"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode+"&whId="+Comm.warehousecode;
+                string conn=@"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode+"&whCode="+Comm.warehousecode;
                 if (isRed)
                 {
                     conn += @"&refund=1";
@@ -245,7 +246,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    //string x = HttpHelper.HttpPost("verifyMaterialStockInOrder", @"materialCode=" + materialbody.code + "&lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode);
+                    //string x = HttpHelper.HttpPost("verifyMaterialStockInOrder", @"materialCode=" + materialbody.code + "&lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode);
                     //msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     //if (msg == null)
                     //    throw new Exception("错误信息捕捉失败");
@@ -310,7 +311,7 @@ namespace Rf_Wms.In
         {
             //if (getmaterial == null || getmaterial.data.Count == 0 || row >= getmaterial.data.Count)
             //{
-            string x = HttpHelper.HttpPost("verifyMaterialStockInOrder", @"materialCode=" + materialbody.code + "&lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode);
+            string x = HttpHelper.HttpPost("verifyMaterialStockInOrder", @"materialCode=" + materialbody.code + "&lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");
@@ -423,7 +424,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("getTrayByBox错误信息捕捉失败");
@@ -848,7 +849,7 @@ namespace Rf_Wms.In
         void Save()
         {
 
-            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&materialCode=" + materialbody.code + "&quantity=" + commonqty + "&minQuantity=" + minqty + "&pDate=" + this.dtdate.Value.ToString("yyyy-MM-dd") + "&batchNo=" + this.txtbatch.Text + "&materialStatus=" + this.cmbmaterialCondition.SelectedValue.ToString() + "&trayCode=" + this.txttraycode.Text + "&updater=" + Comm.usercode;
+            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + materialbody.code + "&quantity=" + commonqty + "&minQuantity=" + minqty + "&pDate=" + this.dtdate.Value.ToString("yyyy-MM-dd") + "&batchNo=" + this.txtbatch.Text + "&materialStatus=" + this.cmbmaterialCondition.SelectedValue.ToString() + "&trayCode=" + this.txttraycode.Text + "&updater=" + Comm.usercode;
             if (getmaterial != null && getmaterial.data.Count > 0)
             {
                 con += "&itemId=" + getmaterial.data[row].itemId.ToString();

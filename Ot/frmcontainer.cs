@@ -70,7 +70,7 @@ namespace Rf_Wms.Ot
         Model.MContainer mm = null;
         void GetInfo()
         {
-            string x = HttpHelper.HttpPost("containerQuery", @"lcCode=" + Comm.lcCode + "&toTrayCode=" + this.txttraycode.Text + "&whId=" + Comm.warehousecode);
+            string x = HttpHelper.HttpPost("containerQuery", @"lcCode=" + Comm.lcCode + "&toTrayCode=" + this.txttraycode.Text + "&whCode=" + Comm.warehousecode);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");

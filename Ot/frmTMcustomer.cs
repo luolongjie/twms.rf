@@ -123,7 +123,7 @@ namespace Rf_Wms.Ot
         void getNewOrder(string shippercode)
         {
 
-            string x = HttpHelper.HttpPost("createNoOrderTransfer", @"shipperCode=" + shippercode + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode);
+            string x = HttpHelper.HttpPost("createNoOrderTransfer", @"shipperCode=" + shippercode + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");

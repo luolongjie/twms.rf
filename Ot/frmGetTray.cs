@@ -110,7 +110,7 @@ namespace Rf_Wms.Ot
 
         void GetInfo()
         {
-            string x = HttpHelper.HttpPost("getStockInOrderInfoByFromTray", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttraycode.Text + "&whId=" + Comm.warehousecode);
+            string x = HttpHelper.HttpPost("getStockInOrderInfoByFromTray", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txttraycode.Text + "&whCode=" + Comm.warehousecode);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");

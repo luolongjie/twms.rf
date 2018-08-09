@@ -46,7 +46,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txtcarton.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txtcarton.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
@@ -70,7 +70,7 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("refundReceive", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode);
+                string x = HttpHelper.HttpPost("refundReceive", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("refundReceive错误信息捕捉失败");
@@ -139,7 +139,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");
@@ -168,7 +168,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");
@@ -213,7 +213,7 @@ namespace Rf_Wms.In
 
         void Save()
         {
-            string con = @"lcCode=" + Comm.lcCode + "&fromTrayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode   + "&updater=" + Comm.usercode + "&recommendSlId=" + mRec.data.recommendSlId;
+            string con = @"lcCode=" + Comm.lcCode + "&fromTrayCode=" + this.txtcarton.Text + "&whCode=" + Comm.warehousecode   + "&updater=" + Comm.usercode + "&recommendSlId=" + mRec.data.recommendSlId;
             if (!string.IsNullOrEmpty(this.txtshelve.Text))
             {
                 con += "&slId=" + slid.ToString();
@@ -269,7 +269,7 @@ namespace Rf_Wms.In
             try
             {
 
-                string x = HttpHelper.HttpPost("unbindRefundTray", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode);
+                string x = HttpHelper.HttpPost("unbindRefundTray", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("unbindRefundTray错误信息捕捉失败");
@@ -350,7 +350,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");

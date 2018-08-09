@@ -27,10 +27,13 @@ namespace Rf_Wms
             this.Text = Comm.userame;
             //this.labwarehousename.Text = "当前仓库 " + Comm.warehousename;
             //this.label1.Text = "当前仓库 " + Comm.warehousename;
+            string whcode = Comm.warehousecode;
             this.cmbwarehouse.DataSource = Comm.warehouseList;
             this.cmbwarehouse.DisplayMember = "name";
             this.cmbwarehouse.ValueMember = "whId";
-            this.cmbwarehouse.Text = Comm.warehousename;
+            //this.cmbwarehouse.Text = Comm.warehousename;
+            this.cmbwarehouse.SelectedValue = whcode;
+            Comm.warehousecode = whcode;
 
         }
 
@@ -95,7 +98,8 @@ namespace Rf_Wms
         {
             //In.frmMachiningIn frm = new Rf_Wms.In.frmMachiningIn();
             //frm.ShowDialog();
-            Out.frmStockUp frm = new Rf_Wms.Out.frmStockUp();
+            //Out.frmStockUp frm = new Rf_Wms.Out.frmStockUp();
+            Out.frmStockPlateMain frm = new Rf_Wms.Out.frmStockPlateMain();
             frm.ShowDialog();
         }
 
@@ -156,8 +160,8 @@ namespace Rf_Wms
            
             if (e.KeyChar != 13)
                 return;
-            Comm.warehousecode = this.cmbwarehouse.SelectedValue.ToString();
-            Comm.warehousename = this.cmbwarehouse.Text;
+            //Comm.warehousecode = this.cmbwarehouse.SelectedValue.ToString();
+            //Comm.warehousename = this.cmbwarehouse.Text;
             string filePath = System.IO.Path.GetDirectoryName
                  (System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             if (filePath.Substring(0, 6) == @"file:\")
@@ -177,6 +181,12 @@ namespace Rf_Wms
         private void cmbwarehouse_LostFocus(object sender, EventArgs e)
         {
             this.cmbwarehouse.Text = Comm.warehousename;
+        }
+
+        private void cmbwarehouse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Comm.warehousecode = this.cmbwarehouse.SelectedValue.ToString();
+            Comm.warehousename = this.cmbwarehouse.Text;
         }
 
        

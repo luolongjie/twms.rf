@@ -20,6 +20,8 @@ namespace Rf_Wms
 
         public static string warehousename = "";
 
+        public static bool islog = true;
+
         public static Model.MbaseIn basein = null;
 
         public static List<Model.Twarehouse> warehouseList = new List<Rf_Wms.Model.Twarehouse>();

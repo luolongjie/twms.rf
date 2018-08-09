@@ -55,7 +55,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string conn = @"orderItemId=" + ms.data[c].recommendSlId.ToString() + "&lcCode=" + Comm.lcCode + "&whId="+Comm.warehousecode;
+                string conn = @"orderItemId=" + ms.data[c].recommendSlId.ToString() + "&lcCode=" + Comm.lcCode + "&whCode="+Comm.warehousecode;
                 if (this.txttraycode.Text.Length < Comm.lcCode.Length || Comm.lcCode != this.txttraycode.Text.Substring(0, Comm.lcCode.Length))
                 {
                     conn += @"&boxCode=" + this.txttraycode.Text;
@@ -171,7 +171,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("getPickRrList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("getPickRrList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -211,7 +211,7 @@ namespace Rf_Wms.Out
         //Model.Mpick mp = null;
         void GetPick(bool benter)
         {
-            string con = @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
+            string con = @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode;
             if (!this.cbxrr.Enabled && !benter)
             {
                 //con += "&recommendSlId=" + ms.data[c].recommendSlId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toSlId=" + this.cmbtoslname.SelectedValue.ToString() + "&updater=" + Comm.usercode + "&toTrayCode="+this.txtToTraycode.Text;
@@ -263,7 +263,7 @@ namespace Rf_Wms.Out
         int c = 0;
         void GetPickSlList()
         {
-            string x = HttpHelper.HttpPost("getPickSlList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode + "&rrId=" + this.cbxrr.SelectedValue.ToString());
+            string x = HttpHelper.HttpPost("getPickSlList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode + "&rrId=" + this.cbxrr.SelectedValue.ToString());
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");
@@ -336,7 +336,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("getPickSlList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode + "&rrId="+this.cbxrr.SelectedValue.ToString());
+                string x = HttpHelper.HttpPost("getPickSlList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode + "&rrId="+this.cbxrr.SelectedValue.ToString());
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -642,7 +642,7 @@ namespace Rf_Wms.Out
                     try
                     {
                         Cursor.Current = Cursors.WaitCursor;
-                        string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txtToTraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                        string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txtToTraycode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                         msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                         if (msg == null)
                             throw new Exception("错误信息捕捉失败");
@@ -767,7 +767,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("getZcqSlList", "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("getZcqSlList", "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");

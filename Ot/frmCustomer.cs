@@ -222,7 +222,7 @@ namespace Rf_Wms.Ot
         Model.Mmsg msg = null;
         void getNewOrder(string shippercode)
         {
-            string con=@"shipperCode=" + shippercode + "&lcCode=" + Comm.lcCode + "&orderType=" + this.cmbordertype.SelectedValue.ToString() + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode + "&oid=" + this.txtorder.Text;
+            string con=@"shipperCode=" + shippercode + "&lcCode=" + Comm.lcCode + "&orderType=" + this.cmbordertype.SelectedValue.ToString() + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode + "&oid=" + this.txtorder.Text;
              if (this.cmbbusinessType.Text != "")
             {
                 con += "&transportMethod=" + this.cmbbusinessType.SelectedValue.ToString();

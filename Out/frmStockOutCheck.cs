@@ -28,7 +28,7 @@ namespace Rf_Wms.Out
         //        return;
         //    try
         //    {
-        //        string x = HttpHelper.HttpPost("getSortingFlg", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+        //        string x = HttpHelper.HttpPost("getSortingFlg", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
         //        msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
         //        if (msg == null)
         //            throw new Exception("错误信息捕捉失败");
@@ -85,7 +85,7 @@ namespace Rf_Wms.Out
         //    try
         //    {
         //        Cursor.Current = Cursors.WaitCursor;
-        //        string x = HttpHelper.HttpPost("getSumQuantityByTray", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&toTrayCode=" + this.txttraycode.Text);
+        //        string x = HttpHelper.HttpPost("getSumQuantityByTray", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&toTrayCode=" + this.txttraycode.Text);
         //        msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
         //        if (msg == null)
         //            throw new Exception("错误信息捕捉失败");
@@ -318,7 +318,7 @@ namespace Rf_Wms.Out
         void getQuantityListByTray()
         {
             c = 0;
-            //string x = HttpHelper.HttpPost("getQuantityListByTray", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&toTrayCode=" + this.txttraycode.Text );
+            //string x = HttpHelper.HttpPost("getQuantityListByTray", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&toTrayCode=" + this.txttraycode.Text );
             //msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             //if (msg == null)
             //    throw new Exception("错误信息捕捉失败");
@@ -710,7 +710,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("getQuantityListByTray", @"pickNo=" + this.lblpickno.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&toTrayCode=" + this.lbltraycode.Text);
+                string x = HttpHelper.HttpPost("getQuantityListByTray", @"pickNo=" + this.lblpickno.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&toTrayCode=" + this.lbltraycode.Text);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");

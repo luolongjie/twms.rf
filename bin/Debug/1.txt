@@ -1,3 +1,3 @@
-﻿方法名: http://10.118.150.17:8050/twms-hand/api/deleteOrSubmitTransferOrder
-参数: orderId=ZCG04620180629000017&lcCode=G046&whId=191&updater=shcsy
-返回值: {"msg":"操作成功","success":true}
+﻿方法名: http://10.118.150.17:8050/twms-hand/api/loadPdateList
+参数: lcCode=ZA01&whCode=223&materialCode=6.4560113&tcod=YHZA0120180717000010
+返回值: {"msg":"查询结果为空","success":false}

@@ -39,7 +39,7 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string conn = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
+                string conn = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode;
 
                 string x = HttpHelper.HttpPost("mergeRefundValidate", conn);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -89,7 +89,7 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("getMaterialCode", @"barCode=" + this.txtbarcode.Text + "&lcCode=" + Comm.lcCode + "&shipperCode=" + stockin.data.shipperInfo.shipperCode + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("getMaterialCode", @"barCode=" + this.txtbarcode.Text + "&lcCode=" + Comm.lcCode + "&shipperCode=" + stockin.data.shipperInfo.shipperCode + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -221,7 +221,7 @@ namespace Rf_Wms.In
         {
             //if (getmaterial == null || getmaterial.data.Count == 0 || row >= getmaterial.data.Count)
             //{
-            string x = HttpHelper.HttpPost("verifyMaterialMergeRefundOrder", @"materialCode=" + materialbody.code + "&lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode+"&balance=true");
+            string x = HttpHelper.HttpPost("verifyMaterialMergeRefundOrder", @"materialCode=" + materialbody.code + "&lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode+"&balance=true");
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");
@@ -312,7 +312,7 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("verifyStockInOrderInMerge", @"stockInOrderId=" + this.txtsorderid.Text + "&lcCode=" + Comm.lcCode + "&refundOrderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode + @"&materialCode=" + materialbody.code);
+                string x = HttpHelper.HttpPost("verifyStockInOrderInMerge", @"stockInOrderId=" + this.txtsorderid.Text + "&lcCode=" + Comm.lcCode + "&refundOrderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode + @"&materialCode=" + materialbody.code);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -349,7 +349,7 @@ namespace Rf_Wms.In
         void ShowVal()
         {
 
-            string x = HttpHelper.HttpPost("getRefundBanlance", @"stockInOrderId=" + this.txtsorderid.Text + "&lcCode=" + Comm.lcCode + "&refundOrderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode + @"&stockInItemId=" + mf.data[row].itemId + "&refundItemId=" + getmaterial.data[0].itemId);
+            string x = HttpHelper.HttpPost("getRefundBanlance", @"stockInOrderId=" + this.txtsorderid.Text + "&lcCode=" + Comm.lcCode + "&refundOrderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode + @"&stockInItemId=" + mf.data[row].itemId + "&refundItemId=" + getmaterial.data[0].itemId);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");
@@ -582,7 +582,7 @@ namespace Rf_Wms.In
         void Save()
         {
 
-            string con = @"stockInOrderId=" + this.txtsorderid.Text + "&lcCode=" + Comm.lcCode + "&refundOrderId=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode + @"&stockInItemId=" + mf.data[row].itemId + "&refundItemId=" + getmaterial.data[0].itemId + "&updater=" + Comm.usercode + "&quantity=" + commonqty + "&minQuantity=" + minqty+"&materialCode="+materialbody.code;
+            string con = @"stockInOrderId=" + this.txtsorderid.Text + "&lcCode=" + Comm.lcCode + "&refundOrderId=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode + @"&stockInItemId=" + mf.data[row].itemId + "&refundItemId=" + getmaterial.data[0].itemId + "&updater=" + Comm.usercode + "&quantity=" + commonqty + "&minQuantity=" + minqty+"&materialCode="+materialbody.code;
            
             string x = HttpHelper.HttpPost("addRefundBanlance", con);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));

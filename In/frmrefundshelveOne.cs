@@ -27,7 +27,7 @@ namespace Rf_Wms.In
         {
             if (e.KeyChar != 13)
                 return;
-            if (this.txtcarton.Text == "")
+            if (string.IsNullOrEmpty(this.txtcarton.Text))
                 return;
             GetValue();
         }
@@ -48,7 +48,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txtcarton.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txtcarton.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
@@ -72,7 +72,9 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("stockinReceive", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode + "&refund=true");
+                if (string.IsNullOrEmpty(this.txtcarton.Text))
+                    throw new Exception("请扫描托盘码");
+                string x = HttpHelper.HttpPost("stockinReceive", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode + "&refund=true");
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("stockinReceive错误信息捕捉失败");
@@ -96,6 +98,8 @@ namespace Rf_Wms.In
             catch (Exception ex)
             {
                 Cursor.Current = Cursors.Default;
+                this.txtcarton.Focus();
+                this.txtcarton.SelectAll();
                 MessageBox.Show(ex.Message);
                 return;
 
@@ -141,7 +145,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlNameNoZC", @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");
@@ -170,7 +174,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
+                    string x = HttpHelper.HttpPost("trayStock/findSlIdBySlName", @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&slName=" + this.txtshelve.Text);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("findSlIdBySlName错误信息捕捉失败");
@@ -216,7 +220,7 @@ namespace Rf_Wms.In
         void Save()
         {
             string fun = "storeOperate";
-            string con = @"lcCode=" + Comm.lcCode + "&fromTrayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode   + "&updater=" + Comm.usercode + "&recommendSlId=" + mRec.data.recommendSlId;
+            string con = @"lcCode=" + Comm.lcCode + "&fromTrayCode=" + this.txtcarton.Text + "&whCode=" + Comm.warehousecode   + "&updater=" + Comm.usercode + "&recommendSlId=" + mRec.data.recommendSlId;
             if (!string.IsNullOrEmpty(this.txtshelve.Text))
             {
                 con += "&slId=" + slid.ToString();
@@ -274,7 +278,7 @@ namespace Rf_Wms.In
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("unbindTray", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode);
+                string x = HttpHelper.HttpPost("unbindTray", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("unbindTray错误信息捕捉失败");
@@ -348,7 +352,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");

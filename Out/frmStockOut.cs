@@ -31,7 +31,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("getSortingFlg", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("getSortingFlg", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -494,7 +494,7 @@ namespace Rf_Wms.Out
         void Saveso()
         {
             string conn = "";
-            conn = @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&trayCode=" + this.txttraycode.Text + "&materialCode=" + mm.data[c].materialCode + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&updater=" + Comm.usercode + "&id=" + mm.data[c].id + "&fromTrayCode=" + mm.data[c].fromTrayCode + "&toTrayCode=" + mm.data[c].toTrayCode + "&pickType="+mm.data[c].pickType;
+            conn = @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&trayCode=" + this.txttraycode.Text + "&materialCode=" + mm.data[c].materialCode + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&updater=" + Comm.usercode + "&id=" + mm.data[c].id + "&fromTrayCode=" + mm.data[c].fromTrayCode + "&toTrayCode=" + mm.data[c].toTrayCode + "&pickType="+mm.data[c].pickType;
             if (ms != null)
             {
                 conn += "&stockOutNo=" + ms.data[d].stockOutNo + "&stockOutItemId=" + ms.data[d].stockOutItemId ;
@@ -523,7 +523,7 @@ namespace Rf_Wms.Out
         void Savest()
         {
             string conn = "";
-            conn = @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&materialCode=" + mm.data[c].materialCode + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&updater=" + Comm.usercode + "&id=" + mm.data[c].id + "&fromTrayCode=" + mm.data[c].fromTrayCode + "&toTrayCode=" + mm.data[c].toTrayCode + "&pickType=" + mm.data[c].pickType + "&sendToCode=" + st.data[d].sendToCode ;
+            conn = @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + mm.data[c].materialCode + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&updater=" + Comm.usercode + "&id=" + mm.data[c].id + "&fromTrayCode=" + mm.data[c].fromTrayCode + "&toTrayCode=" + mm.data[c].toTrayCode + "&pickType=" + mm.data[c].pickType + "&sendToCode=" + st.data[d].sendToCode ;
             if (!string.IsNullOrEmpty(st.data[d].sendToDetailId))
             {
                 conn += "&sendToDetailId=" + st.data[d].sendToDetailId;
@@ -554,7 +554,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string x = HttpHelper.HttpPost("/getPickOperateList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("/getPickOperateList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -756,7 +756,7 @@ namespace Rf_Wms.Out
         Model.StockOutItems currentms = null;
         void GetMultiMaterialList()
         {
-            string x = HttpHelper.HttpPost("getMultiMaterialList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whId=" + Comm.warehousecode + "&toTrayCode="+this.txttraycode.Text);
+            string x = HttpHelper.HttpPost("getMultiMaterialList", @"lcCode=" + Comm.lcCode + "&pickNo=" + this.txtorderid.Text + "&whCode=" + Comm.warehousecode + "&toTrayCode="+this.txttraycode.Text);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
                 throw new Exception("错误信息捕捉失败");
@@ -833,7 +833,7 @@ namespace Rf_Wms.Out
             {
                 if (mm.data[c].pickType == "1")
                 {
-                    string x = HttpHelper.HttpPost("getStockOutItemList", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&id=" + mm.data[c].id);
+                    string x = HttpHelper.HttpPost("getStockOutItemList", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&id=" + mm.data[c].id);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
@@ -858,7 +858,7 @@ namespace Rf_Wms.Out
         void GetSTList()
         {
 
-            string x = HttpHelper.HttpPost("getSendToItemList", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&id=" + mm.data[c].id);
+            string x = HttpHelper.HttpPost("getSendToItemList", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&id=" + mm.data[c].id);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -883,7 +883,7 @@ namespace Rf_Wms.Out
         {
             if (st.data.Count == d)
             {
-                string x = HttpHelper.HttpPost("getSendToItemList", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&id=" + mm.data[c].id);
+                string x = HttpHelper.HttpPost("getSendToItemList", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&id=" + mm.data[c].id);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -915,7 +915,7 @@ namespace Rf_Wms.Out
             //int mi = -2;
             if (ms.data.Count == d)
             {
-                string x = HttpHelper.HttpPost("getStockOutItemList", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&id=" + mm.data[c].id);
+                string x = HttpHelper.HttpPost("getStockOutItemList", @"pickNo=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&id=" + mm.data[c].id);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
