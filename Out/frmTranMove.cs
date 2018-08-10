@@ -82,7 +82,7 @@ namespace Rf_Wms.Out
             //    IDictionary<string, string> parameters = new Dictionary<string, string>();
             //    parameters.Add("orderId", this.txtorderid.Text);
             //    parameters.Add("lcCode", Comm.lcCode);
-            //    parameters.Add("whId", Comm.warehousecode);
+            //    parameters.Add("whCode", Comm.warehousecode);
 
             //    string x = HttpHelper.CreatePostHttpResponse("submitTransOperate", parameters);
             //    MessageBox.Show(x);

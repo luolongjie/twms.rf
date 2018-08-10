@@ -25,7 +25,7 @@ namespace Rf_Wms.Ot
         {
             this.cmbwarehouse.DataSource = Comm.warehouseList;
             this.cmbwarehouse.DisplayMember = "name";
-            this.cmbwarehouse.ValueMember = "whId";
+            this.cmbwarehouse.ValueMember = "whCode";
             this.cmbwarehouse.Text = Comm.warehousename;
         }
 

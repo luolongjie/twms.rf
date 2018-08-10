@@ -1,3 +1,0 @@
-﻿方法名: http://10.118.150.17:8050/twms-hand/api/loadPdateList
-参数: lcCode=ZA01&whCode=223&materialCode=6.4560113&tcod=YHZA0120180717000010
-返回值: {"msg":"查询结果为空","success":false}

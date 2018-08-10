@@ -266,7 +266,7 @@ namespace Rf_Wms.Model
         }
 
         private string _whId;
-        public string whId
+        public string whCode
         {
             get
             {

@@ -29,8 +29,8 @@ namespace Rf_Wms
             //this.label1.Text = "当前仓库 " + Comm.warehousename;
             string whcode = Comm.warehousecode;
             this.cmbwarehouse.DataSource = Comm.warehouseList;
-            this.cmbwarehouse.DisplayMember = "name";
-            this.cmbwarehouse.ValueMember = "whId";
+            this.cmbwarehouse.DisplayMember = "_whName";
+            this.cmbwarehouse.ValueMember = "whCode";
             //this.cmbwarehouse.Text = Comm.warehousename;
             this.cmbwarehouse.SelectedValue = whcode;
             Comm.warehousecode = whcode;

@@ -47,8 +47,8 @@ namespace Rf_Wms
                 Comm.usercode = m.data.code;
                 Comm.warehouseList = m.data.warehourseList;
                 this.cmbwarehouse.DataSource = m.data.warehourseList;
-                this.cmbwarehouse.DisplayMember = "name";
-                this.cmbwarehouse.ValueMember = "whId";
+                this.cmbwarehouse.DisplayMember = "_whName";
+                this.cmbwarehouse.ValueMember = "whCode";
 
                 this.panel1.Visible = true;
                 this.cmbwarehouse.Focus();

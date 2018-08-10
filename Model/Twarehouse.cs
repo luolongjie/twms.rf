@@ -8,7 +8,7 @@ namespace Rf_Wms.Model
     public class Twarehouse
     {
         private string _whId;
-        public string whId
+        public string whCode
         {
             get
             {
@@ -20,16 +20,16 @@ namespace Rf_Wms.Model
             }
         }
 
-        private string _name;
-        public string name
+        private string _whName;
+        public string whName
         {
             get
             {
-                return _name;
+                return _whName;
             }
             set
             {
-                _name = value;
+                _whName = value;
             }
         }
     }
