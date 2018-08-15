@@ -198,9 +198,12 @@ namespace Rf_Wms.Out
             }
             if (mss.data.sortingType == 2)
             {
-                this.labtype.Text = "车辆信息";
-                this.labpickType.Text = msec.data[secrow].plateNo + " " + msec.data[secrow].trainFrequency;
-                this.labstockoutno.Text = msec.data[secrow].platePlan;
+                //this.labtype.Text = "车辆信息";
+                //this.labpickType.Text = msec.data[secrow].plateNo + " " + msec.data[secrow].trainFrequency;
+                //this.labstockoutno.Text = msec.data[secrow].platePlan;
+                this.labtype.Text = "运单号";
+                this.labpickType.Text = msec.data[secrow].tcod ;
+                this.labstockoutno.Text = "车辆信息    "+msec.data[secrow].plateNo;
                
             }
             if (mss.data.sortingType == 3)
@@ -696,7 +699,8 @@ namespace Rf_Wms.Out
             }
             if (mss.data.sortingType == 2)
             {
-                conn += "&plateNo=" + msec.data[secrow].plateNo + "&trainFrequency=" + msec.data[secrow].trainFrequency + "&platePlan=" + msec.data[secrow].platePlan;
+                //conn += "&plateNo=" + msec.data[secrow].plateNo + "&trainFrequency=" + msec.data[secrow].trainFrequency + "&platePlan=" + msec.data[secrow].platePlan;
+                conn += "&plateNo=" + msec.data[secrow].plateNo + "&tcod=" + msec.data[secrow].tcod;
             }
             if (mss.data.sortingType == 3)
             {

@@ -849,7 +849,7 @@ namespace Rf_Wms.In
         void Save()
         {
 
-            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + materialbody.code + "&quantity=" + commonqty + "&minQuantity=" + minqty + "&pDate=" + this.dtdate.Value.ToString("yyyy-MM-dd") + "&batchNo=" + this.txtbatch.Text + "&materialStatus=" + this.cmbmaterialCondition.SelectedValue.ToString() + "&trayCode=" + this.txttraycode.Text + "&updater=" + Comm.usercode;
+            string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + materialbody.code + "&quantity=" + commonqty + "&minQuantity=" + minqty + "&pDate=" + this.dtdate.Value.ToString("yyyy-MM-dd") + "&batchNo=" + this.txtbatch.Text + "&materialStatus=" + this.cmbmaterialCondition.SelectedValue.ToString() + "&trayCode=" + this.txttraycode.Text + "&updater=" + Comm.usercode + "&shipperCode=" + stockin.data.shipperInfo.shipperCode;
             if (getmaterial != null && getmaterial.data.Count > 0)
             {
                 con += "&itemId=" + getmaterial.data[row].itemId.ToString();

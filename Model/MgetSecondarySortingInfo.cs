@@ -38,6 +38,19 @@ namespace Rf_Wms.Model
             }
         }
 
+        private string _tcod;
+        public string tcod
+        {
+            get
+            {
+                return _tcod;
+            }
+            set
+            {
+                _tcod = value;
+            }
+        }
+
         private string _stockOutNo;
         public string stockOutNo
         {

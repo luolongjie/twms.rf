@@ -127,7 +127,12 @@ namespace Rf_Wms
 
         void download()
         {
+            if (File.Exists(filepath1))
+            {
+                return;
+            }
             //获得版本号
+
             bool bv = true;
             try
             {
@@ -162,7 +167,7 @@ namespace Rf_Wms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("请查看自动更新地址填写是否正确");
                 return;
             }
             if (!File.Exists(filepath1))
