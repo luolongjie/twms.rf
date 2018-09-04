@@ -160,7 +160,7 @@ namespace Rf_Wms.Out
                 if (mp == null)
                 {
                     //this.cbopdate.DataSource = null;
-                    cbopdate.Items.Clear();
+                    //cbopdate.Items.Clear();
                     this.cbopdate.DataSource = null;
                     this.txtbarcode.Enabled = true;
                     this.txtbarcode.SelectAll();
@@ -252,7 +252,13 @@ namespace Rf_Wms.Out
                     return;
                 }
             }
-            mbs = (from xx in mbl.data where xx.blNo == this.txtblno.Text select xx).First();
+            var v = from xx in mbl.data where xx.blNo == this.txtblno.Text select xx;
+            if(v==null || v.Count()==0)
+            {
+                this.txtblno.SelectAll();
+                return;
+            }
+            mbs = v.First();
             if (mbs == null)
             {
                 this.txtblno.SelectAll();
@@ -262,7 +268,7 @@ namespace Rf_Wms.Out
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + mbody.materialCode + "&blNo=" + this.txtblno.Text + "&pdateString="+this.cbopdate.Text;
+                string con = @"lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&materialCode=" + mbody.materialCode + "&blNo=" + this.txtblno.Text + "&pdateString="+this.cbopdate.Text+"&tcod=" + tcod;
                 //outletcode
                 string x = HttpHelper.HttpPost("loadPickQuantity", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -381,8 +387,18 @@ namespace Rf_Wms.Out
 
                 return;
             }
-            this.Close();
-            //this.txtminqty.Enabled = false;
+            //this.Close();
+            this.txtminqty.Enabled = false;
+            this.txtbarcode.Enabled = true;
+            this.txtbarcode.Text = "";
+            this.txtblno.Text = "";
+            this.txtcommonqty.Text = "";
+            this.txtminqty.Text = "";
+            this.labblNoqty.Text = "";
+            this.labmaterialname.Text = "";
+            //cbopdate.Items.Clear();
+            this.cbopdate.DataSource = null;
+            this.txtbarcode.Focus();
             //this.btnOK.Focus();
         }
 

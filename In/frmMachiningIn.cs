@@ -247,6 +247,29 @@ namespace Rf_Wms.In
 
                 }
             }
+             
+            else
+            {
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    string x = HttpHelper.HttpPost("verifyTrayCode", @"trayCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode );
+                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    if (msg == null)
+                        throw new Exception("verifyTrayCode错误信息捕捉失败");
+                    if (!msg.success)
+                        throw new Exception(msg.msg);
+                    Cursor.Current = Cursors.Default;
+                   
+                }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    MessageBox.Show(ex.Message);
+                    return;
+
+                }
+            }
             Model.MTrayStockByOrderType nmt = null;
             try
             {

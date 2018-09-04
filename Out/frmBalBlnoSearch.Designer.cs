@@ -59,6 +59,7 @@
             this.dataGrid1.Name = "dataGrid1";
             this.dataGrid1.Size = new System.Drawing.Size(238, 116);
             this.dataGrid1.TabIndex = 7;
+            this.dataGrid1.Click += new System.EventHandler(this.dataGrid1_Click);
             // 
             // dataGrid2
             // 

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Rf_Wms.Ot;
 namespace Rf_Wms.Out
 {
     public partial class frmBalBlnoSearch : Form
@@ -55,14 +56,24 @@ namespace Rf_Wms.Out
                     throw new Exception(msg.msg);
                 Model.MbalPickno mp = (Model.MbalPickno)JsonConvert.DeserializeObject(x, typeof(Model.MbalPickno));
                 dataGrid2.TableStyles.Clear();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("pickNo");
+                dt.Columns.Add("des");
+                foreach (Model.balPicknos v in mp.data)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["pickNo"] = v.pickNo;
+                    dr["des"] = v.des;
+                    dt.Rows.Add(dr);
+                }
                 DataGridTableStyle dts = new DataGridTableStyle();
 
-                dts.MappingName = mp.data.GetType().Name;
+                //dts.MappingName = mp.data.GetType().Name;
 
                 DataGridTextBoxColumn dtbc = new DataGridTextBoxColumn();
                 dtbc.HeaderText = "拣货单号";
                 dtbc.MappingName = "pickNo";
-                dtbc.Width = 240;
+                dtbc.Width = 140;
                 dts.GridColumnStyles.Add(dtbc);
 
                 dtbc = new DataGridTextBoxColumn();
@@ -73,7 +84,9 @@ namespace Rf_Wms.Out
 
                 dataGrid2.TableStyles.Clear();
                 dataGrid2.TableStyles.Add(dts);
-                this.dataGrid2.DataSource = mp.data;
+                //this.dataGrid2.DataSource = mp.data;
+                this.dataGrid2.DataSource = dt;
+                frmList.SizeColumnsToContent(this.dataGrid2, -1);//yy
                 Cursor.Current = Cursors.Default;
                 this.cbooutlet.SelectedIndexChanged += new System.EventHandler(this.cbooutlet_SelectedIndexChanged);
                 cbooutlet_SelectedIndexChanged(null, null);
@@ -95,11 +108,16 @@ namespace Rf_Wms.Out
         public string blNo = "";
         private void btnOK_Click(object sender, EventArgs e)
         {
-            int _int;
-            _int = dataGrid1.CurrentCell.RowNumber;
+            //int _int;
+            //_int = dataGrid1.CurrentCell.RowNumber;
 
-            if (_int < 0)
+            //if (_int < 0)
+            //    return;
+            if (!ischeck)
+            {
+                MessageBox.Show("请选择一条记录");
                 return;
+            }
             if (mbl != null)
             {
                 if (_int > mbl.data.Count)
@@ -116,8 +134,8 @@ namespace Rf_Wms.Out
 
         private void cbooutlet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.cbooutlet.Text == "请选择" && cbooutlet.Items.Count != 1)
-                return;
+            //if (this.cbooutlet.Text == "请选择" && cbooutlet.Items.Count != 1)
+            //    return;
             try
             {
 
@@ -140,12 +158,21 @@ namespace Rf_Wms.Out
                     throw new Exception(msg.msg);
                 mbl = (Model.MbalBlno)JsonConvert.DeserializeObject(x, typeof(Model.MbalBlno));
                 Cursor.Current = Cursors.Default;
-                if (mbl.data.Count == 1)
+                if (mbl.data.Count == 1 && this.cbooutlet.Text == "请选择")
                 {
                     blNo = mbl.data[0].blNo;
 
                     this.Close();
                     return;
+                }
+                if (mbl.data.Count == 1)
+                {
+                    ischeck = true;
+                    _int = 0;
+                }
+                else
+                {
+                    ischeck = false;
                 }
                 dataGrid1.TableStyles.Clear();
                 DataGridTableStyle dts = new DataGridTableStyle();
@@ -155,7 +182,7 @@ namespace Rf_Wms.Out
                 DataGridTextBoxColumn dtbc = new DataGridTextBoxColumn();
                 dtbc.HeaderText = "提单号";
                 dtbc.MappingName = "blNo";
-                dtbc.Width = 200;
+                dtbc.Width = 190;
                 dts.GridColumnStyles.Add(dtbc);
 
                 dataGrid1.TableStyles.Clear();
@@ -170,6 +197,21 @@ namespace Rf_Wms.Out
 
                 return;
             }
+        }
+
+        bool ischeck = false;
+        int _int;
+        private void dataGrid1_Click(object sender, EventArgs e)
+        {
+            //int _int;
+            _int = dataGrid1.CurrentCell.RowNumber;
+
+            if (_int < 0)
+                return;
+
+            //if (_int > m.data.Count)
+            //    return;
+            ischeck = true;
         }
 
        

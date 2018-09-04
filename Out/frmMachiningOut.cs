@@ -446,7 +446,7 @@ namespace Rf_Wms.Out
                     try
                     {
                         Cursor.Current = Cursors.WaitCursor;
-                        string x = HttpHelper.HttpPost("verifyTrayCode", @"trayCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode);
+                        string x = HttpHelper.HttpPost("verifyTrayCode", @"trayCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode);
                         msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                         if (msg == null)
                             throw new Exception("verifyTrayCode错误信息捕捉失败");

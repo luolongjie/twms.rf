@@ -555,11 +555,14 @@ namespace Rf_Wms.Out
                 {
                     throw new Exception("findTrayStockByOrderType捕捉失败");
                 }
-                if (!string.IsNullOrEmpty(nmt.data.trayCode))
+                if (nmt.data != null)
                 {
-                    if (nmt.data.trayCode != this.txttotraycode.Text)
+                    if (!string.IsNullOrEmpty(nmt.data.trayCode))
                     {
-                        this.txttotraycode.Text = nmt.data.trayCode;
+                        if (nmt.data.trayCode != this.txttotraycode.Text)
+                        {
+                            this.txttotraycode.Text = nmt.data.trayCode;
+                        }
                     }
                 }
                 Cursor.Current = Cursors.Default;

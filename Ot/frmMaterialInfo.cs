@@ -80,7 +80,8 @@ namespace Rf_Wms.Ot
             this.labcommonunit.Text = mm.data[row].commonUnitName;
             this.labminunit.Text = mm.data[row].minUnitName;
             //int max = mm.data[row].plateX * mm.data[row].plateY;
-            this.labplate.Text = mm.data[row].plateX + "*" + mm.data[row].plateY + "=" + mm.data[row].plateCount;
+            //this.labplate.Text = mm.data[row].plateX + "*" + mm.data[row].plateY + "=" + mm.data[row].plateCount;
+            this.labplate.Text =  mm.data[row].plateCount.ToString();
             this.labbarcode.Text = mm.data[row].code;
             //this.labcode.Text = mm.data[row].barCode;
             this.txttraycode.Focus();
