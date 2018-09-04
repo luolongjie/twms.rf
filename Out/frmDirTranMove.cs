@@ -409,6 +409,34 @@ namespace Rf_Wms.Out
                 this.txttraycode.SelectAll();
                 return;
             }
+            if (Comm.lcCode != this.txttotraycode.Text.Substring(0, Comm.lcCode.Length))
+            {
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    //string x = HttpHelper.HttpPost("replenishOrder/getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    if (msg == null)
+                        throw new Exception("getTrayByBox错误信息捕捉失败");
+                    if (!msg.success)
+                        throw new Exception(msg.msg);
+                    mm = (Model.MTrayByBox)JsonConvert.DeserializeObject(x, typeof(Model.MTrayByBox));
+                    if (mm == null)
+                        throw new Exception("错误信息捕捉失败");
+                    this.txttotraycode.Text = mm.data.trayCode;
+                    Cursor.Current = Cursors.Default;
+
+                }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    this.txttotraycode.SelectAll();
+                    MessageBox.Show(ex.Message);
+                    return;
+
+                }
+            }
             if (this.txttotraycode.Text == this.txttraycode.Text)
             {
                 if (mt.data.quantity*mt.data.spec+mt.data.minQuantity != commonqty*mt.data.spec+ minqty)

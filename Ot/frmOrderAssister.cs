@@ -255,5 +255,18 @@ namespace Rf_Wms.Ot
             this.txtorderid.Focus();
             this.txtAssister.Enabled = false;
         }
+
+        private void btnkeybord_Click(object sender, EventArgs e)
+        {
+            RIL_IME.ShowIME("Letter Recognizer");
+            foreach (Control v in this.Controls)
+            {
+                if (v is TextBox)
+                {
+                    if (v.Enabled)
+                        v.Focus();
+                }
+            }
+        }
     }
 }

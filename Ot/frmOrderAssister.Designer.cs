@@ -101,6 +101,7 @@
             this.btnkeybord.Size = new System.Drawing.Size(72, 20);
             this.btnkeybord.TabIndex = 296;
             this.btnkeybord.Text = "键盘";
+            this.btnkeybord.Click += new System.EventHandler(this.btnkeybord_Click);
             // 
             // btnExit
             // 
