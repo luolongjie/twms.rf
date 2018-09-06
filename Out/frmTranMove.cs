@@ -444,33 +444,7 @@ namespace Rf_Wms.Out
             
             if (e.KeyChar != 13)
                 return;
-            //try
-            //{
-            //    Cursor.Current = Cursors.WaitCursor;
-            //    string x = HttpHelper.HttpPost("getTrayCode", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
-            //    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
-            //    if (msg == null)
-            //        throw new Exception("getTrayCode失败");
-            //    if (!msg.success)
-            //        throw new Exception(msg.msg);
-            //    mm = (Model.MTrayByBox)JsonConvert.DeserializeObject(x, typeof(Model.MTrayByBox));
-            //    if (mm == null)
-            //        throw new Exception("错误信息捕捉失败");
-            //    if (string.IsNullOrEmpty(mm.data))
-            //    {
-            //        throw new Exception("没有找到对应托盘");
-            //    }
-            //    this.txttotraycode.Text = mm.data;
-            //    Cursor.Current = Cursors.Default;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Cursor.Current = Cursors.Default;
-            //    this.txttotraycode.SelectAll();
-            //    MessageBox.Show(ex.Message);
-            //    return;
-
-            //}
+            
 
             //this.txttotraycode.Text = this.txttotraycode.Text.ToUpper();
             Model.MTrayByBox mm = null;
@@ -480,43 +454,45 @@ namespace Rf_Wms.Out
                 this.txttraycode.SelectAll();
                 return;
             }
+            if (Comm.lcCode != this.txttotraycode.Text.Substring(0, Comm.lcCode.Length))
+            {
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
+                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    if (msg == null)
+                        throw new Exception("错误信息捕捉失败");
+                    if (!msg.success)
+                        throw new Exception(msg.msg);
+                    mm = (Model.MTrayByBox)JsonConvert.DeserializeObject(x, typeof(Model.MTrayByBox));
+                    if (mm == null)
+                        throw new Exception("错误信息捕捉失败");
+                    this.txttotraycode.Text = mm.data.trayCode;
+                    Cursor.Current = Cursors.Default;
+                }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    this.txttraycode.SelectAll();
+                    MessageBox.Show(ex.Message);
+                    return;
+
+                }
+            }
             if (this.txttotraycode.Text == this.txttraycode.Text)
             {
-                if (_mt.data.quantity != commonqty || _mt.data.minQuantity != minqty)
+                //if (_mt.data.quantity != commonqty || _mt.data.minQuantity != minqty)
+                if (_mt.data.quantity * _mt.data.spec + _mt.data.minQuantity != commonqty * _mt.data.spec + minqty)
                 {
                     MessageBox.Show("部分转储不允许使用同一托盘");
                     this.txttotraycode.SelectAll();
                     return;
                 }
             }
-            else
-            {
-                if (Comm.lcCode != this.txttotraycode.Text.Substring(0, Comm.lcCode.Length))
-                {
-                    try
-                    {
-                        Cursor.Current = Cursors.WaitCursor;
-                        string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode);
-                        msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
-                        if (msg == null)
-                            throw new Exception("错误信息捕捉失败");
-                        if (!msg.success)
-                            throw new Exception(msg.msg);
-                        mm = (Model.MTrayByBox)JsonConvert.DeserializeObject(x, typeof(Model.MTrayByBox));
-                        if (mm == null)
-                            throw new Exception("错误信息捕捉失败");
-                        this.txttotraycode.Text = mm.data.trayCode;
-                        Cursor.Current = Cursors.Default;
-                    }
-                    catch (Exception ex)
-                    {
-                        Cursor.Current = Cursors.Default;
-                        this.txttraycode.SelectAll();
-                        MessageBox.Show(ex.Message);
-                        return;
-
-                    }
-                }
+            //else
+            //{
+               
                 //else
                 //{
                 //    try
@@ -539,7 +515,7 @@ namespace Rf_Wms.Out
 
                 //    }
                 //}
-            }
+            //}
             Model.MTrayStockByOrderType nmt = null;
             try
             {

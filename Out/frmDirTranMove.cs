@@ -288,7 +288,8 @@ namespace Rf_Wms.Out
         {
             if (e.KeyChar == 27)
             {
-
+                this.labmaterialname.Text = "";
+                this.labinfo.Text = "";
                 this.txtcommonqty.Enabled = false;
                 this.txttraycode.Enabled = true;
                 this.txttraycode.SelectAll();
