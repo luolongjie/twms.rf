@@ -7,6 +7,7 @@ using System.Net;
 //using System.Net.Security;
 //using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
+using System.Reflection;
 
 namespace Rf_Wms
 {
@@ -41,13 +42,14 @@ namespace Rf_Wms
             //byte[] buffer = Encoding.UTF8.GetBytes(func);
             //string msg = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
             Comm.fun = Comm.url + func;
-
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString().Trim();
             //Comm.fun = Comm.url + Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-            Comm.par = postDataStr;
+           
             Comm.retval = "";
             //ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;//
-
+            postDataStr += "&version=" + version;
             postDataStr = SetSpecStr(postDataStr);
+            Comm.par = postDataStr;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Comm.url+func);
             request.Proxy = null;
             request.ProtocolVersion = HttpVersion.Version10;
