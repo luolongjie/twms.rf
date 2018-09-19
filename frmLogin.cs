@@ -87,6 +87,7 @@ namespace Rf_Wms
         {
             this.panel1.Visible = false;
             version=Assembly.GetExecutingAssembly().GetName().Version.ToString().Trim();
+            Comm.version = version;
             lblVersion.Text = "当前版本:" + version;
             string filePath = System.IO.Path.GetDirectoryName
                (System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);

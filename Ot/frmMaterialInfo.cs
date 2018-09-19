@@ -83,6 +83,7 @@ namespace Rf_Wms.Ot
             //this.labplate.Text = mm.data[row].plateX + "*" + mm.data[row].plateY + "=" + mm.data[row].plateCount;
             this.labplate.Text =  mm.data[row].plateCount.ToString();
             this.labbarcode.Text = mm.data[row].code;
+            this.labcustomer.Text = mm.data[row].shipperName;
             //this.labcode.Text = mm.data[row].barCode;
             this.txttraycode.Focus();
             this.txttraycode.SelectAll();

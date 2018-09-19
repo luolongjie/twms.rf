@@ -168,5 +168,18 @@ namespace Rf_Wms.Model
                 _plateCount = value;
             }
         }
+
+        private string _shipperName;
+        public string shipperName
+        {
+            get
+            {
+                return _shipperName;
+            }
+            set
+            {
+                _shipperName = value;
+            }
+        }
     }
 }

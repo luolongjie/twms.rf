@@ -16,6 +16,8 @@ namespace Rf_Wms
 
         public static string usercode = "";
 
+        public static string version = "";
+
         public static string warehousecode = "";
 
         public static string warehousename = "";
