@@ -187,7 +187,7 @@
             // 
             this.labcustomer.Location = new System.Drawing.Point(72, 229);
             this.labcustomer.Name = "labcustomer";
-            this.labcustomer.Size = new System.Drawing.Size(163, 20);
+            this.labcustomer.Size = new System.Drawing.Size(163, 39);
             // 
             // frmMaterialInfo
             // 
