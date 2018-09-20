@@ -234,7 +234,7 @@ namespace Rf_Wms.In
             }
             for (int i = getmaterial.data.Count - 1; i >= 0; i--)
             {
-                if (getmaterial.data[i].quantity - getmaterial.data[i].realQuantity <= 0 && getmaterial.data[i].minQuantity - getmaterial.data[i].realMinquantity <= 0)
+                if (getmaterial.data[i].quantity - getmaterial.data[i].realQuantity - getmaterial.data[i].surplusQuantity <= 0 && getmaterial.data[i].minQuantity - getmaterial.data[i].realMinquantity - getmaterial.data[i].surplusMinQuantity <= 0)
                 {
                     getmaterial.data.Remove(getmaterial.data[i]);
                     //studentList.RemoveAt(i);
@@ -269,8 +269,8 @@ namespace Rf_Wms.In
             //this.labsurplus.Text = ci + materialbody.commonUnit + mi + materialbody.minUnit;
             //if (allqty == null)
             //{
-                allqty = getmaterial.data[0].quantity - getmaterial.data[0].realQuantity;
-                allminqty = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity;
+            allqty = getmaterial.data[0].quantity - getmaterial.data[0].realQuantity - getmaterial.data[0].surplusQuantity;
+                allminqty = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity - getmaterial.data[0].surplusMinQuantity;
             //}
             if (allqty < 0 || allminqty < 0)
             {
@@ -499,8 +499,8 @@ namespace Rf_Wms.In
             this.txtcommonqty.Text = "";
             //maxquantity = getmaterial.data[0].quantity - getmaterial.data[0].realQuantity - getmaterial.data[0].surplusQuantity + mb.data.quantity;
             //maxminquantity = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity - getmaterial.data[0].surplusMinQuantity + mb.data.minQuantity;
-            maxquantity = getmaterial.data[0].quantity - getmaterial.data[0].realQuantity ;
-            maxminquantity = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity ;
+            maxquantity = getmaterial.data[0].quantity - getmaterial.data[0].realQuantity - getmaterial.data[0].surplusQuantity;
+            maxminquantity = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity - getmaterial.data[0].surplusMinQuantity;
             allqty -= commonqty;
             allminqty -= minqty;
             if (maxquantity <= 0 && maxminquantity <= 0)
