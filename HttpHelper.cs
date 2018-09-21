@@ -47,7 +47,7 @@ namespace Rf_Wms
            
             Comm.retval = "";
             //ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;//
-            postDataStr += "&version=" + version;
+            postDataStr += "&online=" + version;
             postDataStr = SetSpecStr(postDataStr);
             Comm.par = postDataStr;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Comm.url+func);
