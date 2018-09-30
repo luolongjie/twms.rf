@@ -269,8 +269,8 @@ namespace Rf_Wms.In
             //this.labsurplus.Text = ci + materialbody.commonUnit + mi + materialbody.minUnit;
             //if (allqty == null)
             //{
-                allqty = getmaterial.data[0].quantity - getmaterial.data[0].realQuantity;
-                allminqty = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity;
+            allqty = getmaterial.data[0].quantity - getmaterial.data[0].realQuantity - getmaterial.data[0].surplusQuantity;
+            allminqty = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity - getmaterial.data[0].surplusMinQuantity;
             //}
             if (allqty < 0 || allminqty < 0)
             {
@@ -501,8 +501,8 @@ namespace Rf_Wms.In
             //maxminquantity = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity - getmaterial.data[0].surplusMinQuantity + mb.data.minQuantity;
             maxquantity = getmaterial.data[0].quantity - getmaterial.data[0].realQuantity ;
             maxminquantity = getmaterial.data[0].minQuantity - getmaterial.data[0].realMinquantity ;
-            allqty -= commonqty;
-            allminqty -= minqty;
+            //allqty -= commonqty;
+            //allminqty -= minqty;
             if (maxquantity <= 0 && maxminquantity <= 0)
             {
                 mf = null;
@@ -595,8 +595,10 @@ namespace Rf_Wms.In
             //this.btnShelve.Visible = true;
             getmaterial.data[0].surplusQuantity = getmaterial.data[0].surplusQuantity - mb.data.quantity + commonqty;
             getmaterial.data[0].surplusMinQuantity = getmaterial.data[0].surplusMinQuantity - mb.data.minQuantity + minqty;
+            allqty = allqty - mb.data.quantity;
+            minqty = minqty - mb.data.minQuantity;
             mb.data.quantity = commonqty;
-            mb.data.quantity = minqty;
+            mb.data.minQuantity = minqty;
             Clear();
 
 
