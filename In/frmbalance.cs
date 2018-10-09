@@ -595,8 +595,8 @@ namespace Rf_Wms.In
             //this.btnShelve.Visible = true;
             getmaterial.data[0].surplusQuantity = getmaterial.data[0].surplusQuantity - mb.data.quantity + commonqty;
             getmaterial.data[0].surplusMinQuantity = getmaterial.data[0].surplusMinQuantity - mb.data.minQuantity + minqty;
-            allqty = allqty - mb.data.quantity;
-            minqty = minqty - mb.data.minQuantity;
+            allqty = allqty-commonqty + mb.data.quantity;
+            allminqty = allminqty - minqty + mb.data.minQuantity;
             mb.data.quantity = commonqty;
             mb.data.minQuantity = minqty;
             Clear();
