@@ -74,7 +74,7 @@ namespace Rf_Wms.In
                 Cursor.Current = Cursors.WaitCursor;
                 if (string.IsNullOrEmpty(this.txtcarton.Text))
                     throw new Exception("请扫描托盘码");
-                string x = HttpHelper.HttpPost("stockinReceive", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode);
+                string x = HttpHelper.HttpPost("stockinReceive", @"lcCode=" + Comm.lcCode + "&trayCode=" + this.txtcarton.Text + "&whId=" + Comm.warehousecode + "&updater=" + Comm.usercode);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("stockinReceive错误信息捕捉失败");
