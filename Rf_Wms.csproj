@@ -180,6 +180,7 @@
     <Compile Include="Model\MOperationByOrder.cs" />
     <Compile Include="Model\MQuantityListByTray.cs" />
     <Compile Include="Model\MRefundBanlance.cs" />
+    <Compile Include="Model\MreplenishRecommendAgain.cs" />
     <Compile Include="Model\MstartSecondarySorting.cs" />
     <Compile Include="Model\MStockInOrderInfoByFromTray.cs" />
     <Compile Include="Model\MSumQuantityByTray.cs" />

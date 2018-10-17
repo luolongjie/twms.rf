@@ -225,6 +225,12 @@ namespace Rf_Wms.Out
                 this.txtcommonqty.SelectAll();
                 return;
             }
+            if (commonqty <= 0)
+            {
+                MessageBox.Show("输入的数量必须大于0");
+                this.txtcommonqty.Text = "";
+                return;
+            }
             if (commonqty > _mt.data.quantity)
             {
                 MessageBox.Show("输入数量大于托盘数量");
@@ -236,6 +242,63 @@ namespace Rf_Wms.Out
                 MessageBox.Show("输入数量大于单据数量");
                 this.txtcommonqty.SelectAll();
                 return;
+            }
+            //replenishOrder lockReplenishRecommend 方法 
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+              
+                string x = HttpHelper.HttpPost("replenishOrder/lockReplenishRecommend", conn);
+                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                if (msg == null)
+                    throw new Exception("错误信息捕捉失败");
+                           
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.Message);
+                return;
+
+            }
+            if (!msg.success)
+            {
+                DialogResult drs = MessageBox.Show(msg.msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                if (drs == DialogResult.No)
+                    return;
+                //throw new Exception(msg.msg);
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+
+                    string x = HttpHelper.HttpPost("replenishOrder/replenishRecommendAgain", conn);
+                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    if (msg == null)
+                        throw new Exception("replenishRecommendAgain错误信息捕捉失败");
+                    Model.MreplenishRecommendAgain mmr = (Model.MreplenishRecommendAgain)JsonConvert.DeserializeObject(x, typeof(Model.Mreplenish));
+                    if (mmr == null)
+                    {
+                        throw new Exception("数据信息捕捉失败");
+                    }
+                    mtrans.data.fromSlId = mmr.data.slId;
+                    mtrans.data.fromSlIdName = mmr.data.slName;
+                    mtrans.data.quantity = mmr.data.quantity;
+                    mtrans.data.minQuantity = mmr.data.minQuantity;
+                    mtrans.data.pdate = mmr.data.pdate;
+                    this.labfromsIId.Text = mtrans.data.fromSlIdName.ToString();
+                    this.labneedqty.Text = "应补数量 " + mtrans.data.quantity.ToString() + mtrans.data.commonUnitName + " " + mtrans.data.pdate;
+                    Cursor.Current = Cursors.Default;
+                }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    MessageBox.Show(ex.Message);
+                    return;
+
+                }
             }
             this.txtcommonqty.Enabled = false;
             //this.txtminqty.Enabled = true;
@@ -515,6 +578,7 @@ namespace Rf_Wms.Out
 
         void GetTrans(bool benter)
         {
+            //releaseQuantityLockStock();//test
             string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
             if (mtrans != null && mtrans.data!=null && !benter)
             {
@@ -618,13 +682,28 @@ namespace Rf_Wms.Out
             }
         }
 
+        void releaseQuantityLockStock()
+        {
+            if (this.txtcommonqty.Text == "")
+                return;
+            string conn = @"quantity=" + commonqty + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+            string x = HttpHelper.HttpPost("replenishOrder/releaseQuantityLockStock", conn);
+            msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+            if (msg == null)
+                throw new Exception("replenishOrder/releaseQuantityLockStock错误信息捕捉失败");
+            if (!msg.success)
+                throw new Exception(msg.msg);
+        }
+
         private void btnNext_Click(object sender, EventArgs e)
         {
             if (this.txtorderid.Enabled)
                 return;
+           
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+                releaseQuantityLockStock();
                 GetTrans(true);
                 Cursor.Current = Cursors.Default;
             }
