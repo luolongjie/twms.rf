@@ -253,7 +253,8 @@ namespace Rf_Wms.Out
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
-                           
+                //if (!msg.success)
+                //    throw new Exception(msg.msg);
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -272,22 +273,25 @@ namespace Rf_Wms.Out
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+                    string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId+"&updater=" + Comm.usercode;
 
                     string x = HttpHelper.HttpPost("replenishOrder/replenishRecommendAgain", conn);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("replenishRecommendAgain错误信息捕捉失败");
-                    Model.MreplenishRecommendAgain mmr = (Model.MreplenishRecommendAgain)JsonConvert.DeserializeObject(x, typeof(Model.Mreplenish));
+                    if (!msg.success)
+                        throw new Exception(msg.msg);
+                    Model.MreplenishRecommendAgain mmr = (Model.MreplenishRecommendAgain)JsonConvert.DeserializeObject(x, typeof(Model.MreplenishRecommendAgain));
                     if (mmr == null)
                     {
                         throw new Exception("数据信息捕捉失败");
                     }
-                    mtrans.data.fromSlId = mmr.data.slId;
-                    mtrans.data.fromSlIdName = mmr.data.slName;
+                    mtrans.data.fromSlId = mmr.data.fromSlId;
+                    mtrans.data.fromSlIdName = mmr.data.fromSlIdName;
                     mtrans.data.quantity = mmr.data.quantity;
                     mtrans.data.minQuantity = mmr.data.minQuantity;
                     mtrans.data.pdate = mmr.data.pdate;
+                    mtrans.data.recommendId = mmr.data.recommendId;
                     this.labfromsIId.Text = mtrans.data.fromSlIdName.ToString();
                     this.labneedqty.Text = "应补数量 " + mtrans.data.quantity.ToString() + mtrans.data.commonUnitName + " " + mtrans.data.pdate;
                     Cursor.Current = Cursors.Default;
@@ -299,6 +303,12 @@ namespace Rf_Wms.Out
                     return;
 
                 }
+                this.txtcommonqty.Enabled = false;
+                this.txttraycode.Enabled = true;
+                this.txttraycode.SelectAll();
+                this.txtcommonqty.Text = "";
+                this.txttraycode.Focus();
+                return;
             }
             this.txtcommonqty.Enabled = false;
             //this.txtminqty.Enabled = true;
@@ -418,7 +428,7 @@ namespace Rf_Wms.Out
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("verifyTrayCode", @"trayCode=" + this.txttraycode.Text + "&lcCode=" + Comm.lcCode);
+                    string x = HttpHelper.HttpPost("verifyTrayCode", @"trayCode=" + this.txttotraycode.Text + "&lcCode=" + Comm.lcCode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("verifyTrayCode错误信息捕捉失败");
@@ -454,7 +464,7 @@ namespace Rf_Wms.Out
                     string conn = @"orderItemId=" + mtrans.data.orderItemId.ToString() + "&lcCode=" + Comm.lcCode;
 
 
-                    conn += @"&trayCode=" + this.txttotraycode.Text;
+                    conn += @"&trayCode=" + this.txttotraycode.Text+"&recommendId=" + mtrans.data.recommendId;;
 
                     string x = HttpHelper.HttpPost("replenishOrder/judgeSourceTrayCode", conn);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -686,11 +696,13 @@ namespace Rf_Wms.Out
         {
             if (this.txtcommonqty.Text == "")
                 return;
-            string conn = @"quantity=" + commonqty + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
-            string x = HttpHelper.HttpPost("replenishOrder/releaseQuantityLockStock", conn);
+            //string conn = @"quantity=" + commonqty + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+            string conn = "lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+            //string x = HttpHelper.HttpPost("replenishOrder/releaseQuantityLockStock", conn);
+            string x = HttpHelper.HttpPost("replenishOrder/releaseLockStock", conn);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
             if (msg == null)
-                throw new Exception("replenishOrder/releaseQuantityLockStock错误信息捕捉失败");
+                throw new Exception("replenishOrder/releaseLockStock错误信息捕捉失败");
             if (!msg.success)
                 throw new Exception(msg.msg);
         }

@@ -78,29 +78,42 @@ namespace Rf_Wms.Model
             }
         }
 
-        private int _slId;
-        public int slId
+        private int _fromSlId;
+        public int fromSlId
         {
             get
             {
-                return _slId;
+                return _fromSlId;
             }
             set
             {
-                _slId = value;
+                _fromSlId = value;
             }
         }
 
-        private string _slName;
-        public string slName
+        private string _fromSlIdName;
+        public string fromSlIdName
         {
             get
             {
-                return _slName;
+                return _fromSlIdName;
             }
             set
             {
-                _slName = value;
+                _fromSlIdName = value;
+            }
+        }
+
+        private int _recommendId;
+        public int recommendId
+        {
+            get
+            {
+                return _recommendId;
+            }
+            set
+            {
+                _recommendId = value;
             }
         }
     }
