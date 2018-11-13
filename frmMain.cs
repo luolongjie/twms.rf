@@ -95,7 +95,8 @@ namespace Rf_Wms
         {
             //In.frmMachiningIn frm = new Rf_Wms.In.frmMachiningIn();
             //frm.ShowDialog();
-            Out.frmStockUp frm = new Rf_Wms.Out.frmStockUp();
+            //Out.frmStockUp frm = new Rf_Wms.Out.frmStockUp();
+            Out.frmStockPlateMain frm = new Rf_Wms.Out.frmStockPlateMain();
             frm.ShowDialog();
         }
 
