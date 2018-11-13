@@ -94,7 +94,7 @@ namespace Rf_Wms
         private void pictureBox10_Click(object sender, EventArgs e)
         {
             //In.frmMachiningIn frm = new Rf_Wms.In.frmMachiningIn();
-            //frm.ShowDialog();
+            //frm.ShowDialog(); 
             Out.frmStockUp frm = new Rf_Wms.Out.frmStockUp();
             frm.ShowDialog();
         }
