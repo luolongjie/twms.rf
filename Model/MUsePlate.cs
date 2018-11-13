@@ -8,8 +8,8 @@ namespace Rf_Wms.Model
     [Serializable]
     public class MUsePlate
     {
-        private useplates _data;
-        public useplates data
+        private List<useplates> _data;
+        public List<useplates> data
         {
             get
             {

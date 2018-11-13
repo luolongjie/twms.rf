@@ -20,7 +20,7 @@ namespace Rf_Wms.Out
 
         int i = 0;
         Model.Mmsg msg = null;
-        Model.Mtcod mt = null;
+        //Model.Mtcod mt = null;
         private void frmTcod_Load(object sender, EventArgs e)
         {
             Init();
@@ -39,11 +39,11 @@ namespace Rf_Wms.Out
                     throw new Exception("错误信息捕捉失败");
                 if (!msg.success)
                     throw new Exception(msg.msg);
-                mt = (Model.Mtcod)JsonConvert.DeserializeObject(x, typeof(Model.Mtcod));
-                if (mt == null)
-                {
-                    throw new Exception("数据信息捕捉失败");
-                }
+                //mt = (Model.Mtcod)JsonConvert.DeserializeObject(x, typeof(Model.Mtcod));
+                //if (mt == null)
+                //{
+                //    throw new Exception("数据信息捕捉失败");
+                //}
                 //if (mt.data == "")
                 //{
                 //    throw new Exception("没有数据");
@@ -61,12 +61,12 @@ namespace Rf_Wms.Out
 
         void ShowTxt()
         {
-            this.labblnum.Text = mt.data.blNum.ToString();
-            this.labdriver.Text = mt.data.driver;
-            this.labload.Text = mt.data.loadQuantity + "箱" + mt.data.loadMinQuantity + "件";
-            this.labreal.Text = mt.data.realQuantity + "箱" + mt.data.realMinQuantity + "件";
-            this.labplantNo.Text = plateNo;
-            this.labtcod.Text = tcod;
+            ////this.labblnum.Text = mt.data.blNum.ToString();
+            ////this.labdriver.Text = mt.data.driver;
+            ////this.labload.Text = mt.data.loadQuantity + "箱" + mt.data.loadMinQuantity + "件";
+            ////this.labreal.Text = mt.data.realQuantity + "箱" + mt.data.realMinQuantity + "件";
+            ////this.labplantNo.Text = plateNo;
+            ////this.labtcod.Text = tcod;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -107,11 +107,11 @@ namespace Rf_Wms.Out
 
         private void btnbalance_Click(object sender, EventArgs e)
         {
-            frmBalOper frm = new frmBalOper();
-            frm.tcod = tcod;
-            frm.ShowDialog();
-            Comm.islog = false;
-            Init();
+            //frmBalOper frm = new frmBalOper();
+            //frm.tcod = tcod;
+            //frm.ShowDialog();
+            //Comm.islog = false;
+            //Init();
         }
      
 
