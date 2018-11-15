@@ -38,51 +38,53 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.labplantNo = new System.Windows.Forms.Label();
-            this.labtcod = new System.Windows.Forms.Label();
+            this.labplatePlan = new System.Windows.Forms.Label();
             this.labdriver = new System.Windows.Forms.Label();
             this.labblnum = new System.Windows.Forms.Label();
             this.labreal = new System.Windows.Forms.Label();
             this.labload = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.labtrainFrequency = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(3, 10);
+            this.label1.Location = new System.Drawing.Point(2, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 20);
             this.label1.Text = "车牌号";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(3, 58);
+            this.label2.Location = new System.Drawing.Point(2, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 20);
-            this.label2.Text = "运单号";
+            this.label2.Text = "预约时间";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(3, 101);
+            this.label3.Location = new System.Drawing.Point(2, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 20);
             this.label3.Text = "司机姓名";
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(3, 139);
+            this.label4.Location = new System.Drawing.Point(2, 139);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 20);
             this.label4.Text = "提单(份)";
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(0, 185);
+            this.label5.Location = new System.Drawing.Point(-1, 185);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 20);
             this.label5.Text = "应装数量";
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(3, 220);
+            this.label6.Location = new System.Drawing.Point(2, 220);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 20);
             this.label6.Text = "实装数量";
@@ -95,7 +97,7 @@
             this.btnbalance.Name = "btnbalance";
             this.btnbalance.Size = new System.Drawing.Size(72, 20);
             this.btnbalance.TabIndex = 67;
-            this.btnbalance.Text = "结余";
+            this.btnbalance.Text = "甩货";
             this.btnbalance.Click += new System.EventHandler(this.btnbalance_Click);
             // 
             // btnOK
@@ -122,45 +124,59 @@
             // 
             // labplantNo
             // 
-            this.labplantNo.Location = new System.Drawing.Point(86, 10);
+            this.labplantNo.Location = new System.Drawing.Point(76, 18);
             this.labplantNo.Name = "labplantNo";
             this.labplantNo.Size = new System.Drawing.Size(77, 20);
             this.labplantNo.Text = "车牌号";
             // 
-            // labtcod
+            // labplatePlan
             // 
-            this.labtcod.Location = new System.Drawing.Point(86, 58);
-            this.labtcod.Name = "labtcod";
-            this.labtcod.Size = new System.Drawing.Size(147, 32);
-            this.labtcod.Text = "运单号";
+            this.labplatePlan.Location = new System.Drawing.Point(76, 58);
+            this.labplatePlan.Name = "labplatePlan";
+            this.labplatePlan.Size = new System.Drawing.Size(147, 32);
+            this.labplatePlan.Text = "运单号";
             // 
             // labdriver
             // 
-            this.labdriver.Location = new System.Drawing.Point(86, 101);
+            this.labdriver.Location = new System.Drawing.Point(76, 101);
             this.labdriver.Name = "labdriver";
             this.labdriver.Size = new System.Drawing.Size(77, 20);
             this.labdriver.Text = "运单号";
             // 
             // labblnum
             // 
-            this.labblnum.Location = new System.Drawing.Point(86, 139);
+            this.labblnum.Location = new System.Drawing.Point(76, 139);
             this.labblnum.Name = "labblnum";
             this.labblnum.Size = new System.Drawing.Size(77, 20);
             this.labblnum.Text = "运单号";
             // 
             // labreal
             // 
-            this.labreal.Location = new System.Drawing.Point(86, 185);
+            this.labreal.Location = new System.Drawing.Point(76, 185);
             this.labreal.Name = "labreal";
             this.labreal.Size = new System.Drawing.Size(77, 20);
             this.labreal.Text = "运单号";
             // 
             // labload
             // 
-            this.labload.Location = new System.Drawing.Point(86, 220);
+            this.labload.Location = new System.Drawing.Point(76, 220);
             this.labload.Name = "labload";
             this.labload.Size = new System.Drawing.Size(77, 20);
             this.labload.Text = "运单号";
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(132, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 20);
+            this.label7.Text = "车次";
+            // 
+            // labtrainFrequency
+            // 
+            this.labtrainFrequency.Location = new System.Drawing.Point(171, 18);
+            this.labtrainFrequency.Name = "labtrainFrequency";
+            this.labtrainFrequency.Size = new System.Drawing.Size(52, 20);
+            this.labtrainFrequency.Text = "车次";
             // 
             // frmTcod
             // 
@@ -169,11 +185,13 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.labtrainFrequency);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.labload);
             this.Controls.Add(this.labreal);
             this.Controls.Add(this.labblnum);
             this.Controls.Add(this.labdriver);
-            this.Controls.Add(this.labtcod);
+            this.Controls.Add(this.labplatePlan);
             this.Controls.Add(this.labplantNo);
             this.Controls.Add(this.btnbalance);
             this.Controls.Add(this.btnOK);
@@ -205,10 +223,12 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label labplantNo;
-        private System.Windows.Forms.Label labtcod;
+        private System.Windows.Forms.Label labplatePlan;
         private System.Windows.Forms.Label labdriver;
         private System.Windows.Forms.Label labblnum;
         private System.Windows.Forms.Label labreal;
         private System.Windows.Forms.Label labload;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labtrainFrequency;
     }
 }

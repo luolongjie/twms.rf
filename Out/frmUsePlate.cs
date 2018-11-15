@@ -132,7 +132,7 @@ namespace Rf_Wms.Out
             frm.tcod = m.data[_int].tcod;
             frm.plateNo = m.data[_int].plateNo;
             frm.ShowDialog();
-            //Comm.islog = false;
+            Comm.islog = false;
             Init();
         }
 
