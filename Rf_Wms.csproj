@@ -171,13 +171,19 @@
     <Compile Include="Model\locationStockList.cs" />
     <Compile Include="Model\MAssisterByOperation.cs" />
     <Compile Include="Model\MAssisterInfo.cs" />
+    <Compile Include="Model\MBalanceBarcode.cs" />
+    <Compile Include="Model\MbalBlno.cs" />
+    <Compile Include="Model\MbalPdate.cs" />
+    <Compile Include="Model\MbalPickno.cs" />
     <Compile Include="Model\MContainer.cs" />
     <Compile Include="Model\MdoStockUpConfirm.cs" />
     <Compile Include="Model\MergeRefundOrder.cs" />
     <Compile Include="Model\MgetMaterialsByBar.cs" />
     <Compile Include="Model\MgetSecondarySortingInfo.cs" />
+    <Compile Include="Model\MloadPickQuantity.cs" />
     <Compile Include="Model\MLocationTray.cs" />
     <Compile Include="Model\MOperationByOrder.cs" />
+    <Compile Include="Model\MoutletInfo.cs" />
     <Compile Include="Model\MQuantityListByTray.cs" />
     <Compile Include="Model\MRefundBanlance.cs" />
     <Compile Include="Model\MreplenishRecommendAgain.cs" />
@@ -203,6 +209,7 @@
     <Compile Include="Model\MstockIn.cs" />
     <Compile Include="Model\MstockinReceive.cs" />
     <Compile Include="Model\MStockOutItem.cs" />
+    <Compile Include="Model\Mtcod.cs" />
     <Compile Include="Model\MTran.cs" />
     <Compile Include="Model\MTranMove.cs" />
     <Compile Include="Model\Mtray.cs" />
@@ -215,6 +222,12 @@
     <Compile Include="Model\PickRrList.cs" />
     <Compile Include="Model\SendToItemList.cs" />
     <Compile Include="Model\Twarehouse.cs" />
+    <Compile Include="Ot\frmBalMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmBalMaterial.Designer.cs">
+      <DependentUpon>frmBalMaterial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ot\frmcontainer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +317,18 @@
     </Compile>
     <Compile Include="Ot\frmWarehouse.Designer.cs">
       <DependentUpon>frmWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmBalBlnoSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmBalBlnoSearch.Designer.cs">
+      <DependentUpon>frmBalBlnoSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmBalOper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmBalOper.Designer.cs">
+      <DependentUpon>frmBalOper.cs</DependentUpon>
     </Compile>
     <Compile Include="Out\frmBalTranMove.cs">
       <SubType>Form</SubType>
@@ -483,6 +508,10 @@
       <DependentUpon>frmShelveMenu.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmBalMaterial.resx">
+      <DependentUpon>frmBalMaterial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ot\frmcontainer.resx">
       <DependentUpon>frmcontainer.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -541,6 +570,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ot\frmWarehouse.resx">
       <DependentUpon>frmWarehouse.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmBalBlnoSearch.resx">
+      <DependentUpon>frmBalBlnoSearch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmBalOper.resx">
+      <DependentUpon>frmBalOper.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Out\frmBalTranMove.resx">
