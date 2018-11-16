@@ -31,7 +31,7 @@ namespace Rf_Wms.Out
              
                 Cursor.Current = Cursors.WaitCursor;
                 string con = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&barCode=" + this.txtbarcode.Text.Trim() ;
-                string x = HttpHelper.HttpPost("getMatrialList", con);
+                string x = HttpHelper.HttpPost("getMaterialList", con);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                 if (msg == null)
                     throw new Exception("错误信息捕捉失败");
@@ -157,21 +157,12 @@ namespace Rf_Wms.Out
             {
                 this.txtblno.Enabled = false;
                 this.txtblno.Text = "";
-                if (mp == null)
-                {
-                    //this.cbopdate.DataSource = null;
-                    //cbopdate.Items.Clear();
-                    //this.cbopdate.DataSource = null;
-                    this.txtbarcode.Enabled = true;
-                    this.txtbarcode.SelectAll();
-                    this.labmaterialname.Text = "";
-                    this.txtbarcode.Focus();
-                }
-                else
-                {
-                    //this.cbopdate.Enabled = true;
-                    //this.cbopdate.Focus();
-                }
+
+                this.txtbarcode.Enabled = true;
+                this.txtbarcode.SelectAll();
+                this.labmaterialname.Text = "";
+                this.txtbarcode.Focus();
+                
                 return;
             }
             if (e.KeyChar != 13)
@@ -204,12 +195,13 @@ namespace Rf_Wms.Out
                 }
                 if (mbl.data.Count == 1)
                 {
-                    this.txtblno.Text = mbl.data[0].blNo;
+                    this.txtblno.Text = mbl.data[0].stockOutNo;
                     mbs = mbl.data[0];
                 }
                 else
                 {
                     frmBalBlnoSearch frm = new frmBalBlnoSearch();
+                    frm.mbl = mbl;
                     frm.tcod = tcod;
                     frm.materialCode = mbody.materialCode;
                     frm.ShowDialog();
@@ -252,7 +244,7 @@ namespace Rf_Wms.Out
             //        return;
             //    }
             //}
-            var v = from xx in mbl.data where xx.blNo == this.txtblno.Text select xx;
+            var v = from xx in mbl.data where xx.stockOutNo == this.txtblno.Text select xx;
             if(v==null || v.Count()==0)
             {
                 this.txtblno.SelectAll();
@@ -411,6 +403,7 @@ namespace Rf_Wms.Out
                 this.txtcommonqty.Enabled = false;
                 this.txtcommonqty.Text = "";
                 this.labblNoqty.Text = "";
+                this.labblno.Text = "";
                 this.txtblno.Enabled = true;
                 this.txtblno.SelectAll();
                 this.txtblno.Focus();

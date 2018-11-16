@@ -154,8 +154,8 @@
             // 
             this.label4.Location = new System.Drawing.Point(3, 195);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 20);
-            this.label4.Text = "提单数量";
+            this.label4.Size = new System.Drawing.Size(87, 20);
+            this.label4.Text = "出库单数量";
             // 
             // labblNoqty
             // 
@@ -208,7 +208,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmBalOper";
-            this.Text = "结余操作";
+            this.Text = "甩货操作";
             this.ResumeLayout(false);
 
         }

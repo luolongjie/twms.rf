@@ -31,7 +31,6 @@
             this.cbooutlet = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGrid1 = new System.Windows.Forms.DataGrid();
-            this.dataGrid2 = new System.Windows.Forms.DataGrid();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -57,17 +56,9 @@
             this.dataGrid1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.dataGrid1.Location = new System.Drawing.Point(0, 29);
             this.dataGrid1.Name = "dataGrid1";
-            this.dataGrid1.Size = new System.Drawing.Size(238, 116);
+            this.dataGrid1.Size = new System.Drawing.Size(238, 221);
             this.dataGrid1.TabIndex = 7;
             this.dataGrid1.Click += new System.EventHandler(this.dataGrid1_Click);
-            // 
-            // dataGrid2
-            // 
-            this.dataGrid2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.dataGrid2.Location = new System.Drawing.Point(0, 149);
-            this.dataGrid2.Name = "dataGrid2";
-            this.dataGrid2.Size = new System.Drawing.Size(238, 93);
-            this.dataGrid2.TabIndex = 8;
             // 
             // btnOK
             // 
@@ -100,7 +91,6 @@
             this.ClientSize = new System.Drawing.Size(238, 295);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.dataGrid2);
             this.Controls.Add(this.dataGrid1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbooutlet);
@@ -118,7 +108,6 @@
         private System.Windows.Forms.ComboBox cbooutlet;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGrid dataGrid1;
-        private System.Windows.Forms.DataGrid dataGrid2;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnExit;
     }
