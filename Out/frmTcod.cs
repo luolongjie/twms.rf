@@ -63,7 +63,7 @@ namespace Rf_Wms.Out
         {
             this.labblnum.Text = mt.data.blNum.ToString();
             this.labdriver.Text = mt.data.driver;
-            this.labload.Text = mt.data.loadQuantity + mt.data.unitName + mt.data.loadMinQuantity + mt.data.minUnitName;
+            this.labload.Text = mt.data.dispatchQuantity + mt.data.unitName + mt.data.dispatchMinQuantity + mt.data.minUnitName;
             this.labreal.Text = mt.data.realQuantity + mt.data.unitName + mt.data.realMinQuantity + mt.data.minUnitName;
             this.labplantNo.Text = plateNo;
             this.labplatePlan.Text = mt.data.platePlan;

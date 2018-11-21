@@ -154,14 +154,14 @@
             // 
             this.labreal.Location = new System.Drawing.Point(76, 185);
             this.labreal.Name = "labreal";
-            this.labreal.Size = new System.Drawing.Size(77, 20);
+            this.labreal.Size = new System.Drawing.Size(147, 20);
             this.labreal.Text = "运单号";
             // 
             // labload
             // 
             this.labload.Location = new System.Drawing.Point(76, 220);
             this.labload.Name = "labload";
-            this.labload.Size = new System.Drawing.Size(77, 20);
+            this.labload.Size = new System.Drawing.Size(133, 20);
             this.labload.Text = "运单号";
             // 
             // label7

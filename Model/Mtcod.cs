@@ -153,5 +153,31 @@ namespace Rf_Wms.Model
                 _loadMinQuantity = value;
             }
         }
+
+        private int _dispatchQuantity;
+        public int dispatchQuantity
+        {
+            get
+            {
+                return _dispatchQuantity;
+            }
+            set
+            {
+                _dispatchQuantity = value;
+            }
+        }
+
+        private int _dispatchMinQuantity;
+        public int dispatchMinQuantity
+        {
+            get
+            {
+                return _dispatchMinQuantity;
+            }
+            set
+            {
+                _dispatchMinQuantity = value;
+            }
+        }
     }
 }
