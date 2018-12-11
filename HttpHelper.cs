@@ -35,28 +35,35 @@ namespace Rf_Wms
         //    return true; //总是接受     
         //}  
 
-      
-
-        public static string HttpPost(string func,string postDataStr)
+        public static string HttpPost(string func, string postDataStr)
         {
             //byte[] buffer = Encoding.UTF8.GetBytes(func);
             //string msg = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+            string logfun = Comm.fun;
+            string logpar = Comm.par;
+            string logretval = Comm.retval;
             Comm.fun = Comm.url + func;
-            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString().Trim();
+
             //Comm.fun = Comm.url + Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-           
+
             Comm.retval = "";
             //ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;//
-            postDataStr += "&online=" + version;
+            //string version = Assembly.GetExecutingAssembly().GetName().Version.ToString().Trim();
+            postDataStr += "&online=" + Comm.version;
             postDataStr = SetSpecStr(postDataStr);
             Comm.par = postDataStr;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Comm.url+func);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Comm.url + func);
             request.Proxy = null;
             request.ProtocolVersion = HttpVersion.Version10;
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             //request.ContentLength = postDataStr.Length;
+
             request.Timeout = 30000;//yy
+            //if (func == "getStockInOrderInfoByFromTray")
+            //{
+            //    request.Timeout = 1;
+            //}
             //StreamWriter writer = new StreamWriter(request.GetRequestStream(), Encoding.UTF8);
             //writer.Write(postDataStr);
             //writer.Flush();
@@ -67,7 +74,7 @@ namespace Rf_Wms
             {
                 reqStream.Write(data, 0, data.Length);
                 reqStream.Close();
-            } 
+            }
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             string encoding = response.ContentEncoding;
             if (encoding == null || encoding.Length < 1)
@@ -77,6 +84,13 @@ namespace Rf_Wms
             StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(encoding));
             string retString = reader.ReadToEnd();
             Comm.retval = retString;
+            if (!Comm.islog)
+            {
+                Comm.fun = logfun;
+                Comm.par = logpar;
+                Comm.retval = logretval;
+            }
+            Comm.islog = true;
             request.KeepAlive = false;
             if (response != null)
             {
@@ -89,6 +103,61 @@ namespace Rf_Wms
             System.Net.ServicePointManager.DefaultConnectionLimit = 50;
             return retString;
         }
+      
+
+        //public static string HttpPost(string func,string postDataStr)
+        //{
+        //    //byte[] buffer = Encoding.UTF8.GetBytes(func);
+        //    //string msg = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+        //    Comm.fun = Comm.url + func;
+        //    string version = Assembly.GetExecutingAssembly().GetName().Version.ToString().Trim();
+        //    //Comm.fun = Comm.url + Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+           
+        //    Comm.retval = "";
+        //    //ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;//
+        //    postDataStr += "&online=" + version;
+        //    postDataStr = SetSpecStr(postDataStr);
+        //    Comm.par = postDataStr;
+        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Comm.url+func);
+        //    request.Proxy = null;
+        //    request.ProtocolVersion = HttpVersion.Version10;
+        //    request.Method = "POST";
+        //    request.ContentType = "application/x-www-form-urlencoded";
+        //    //request.ContentLength = postDataStr.Length;
+        //    request.Timeout = 30000;//yy
+        //    //StreamWriter writer = new StreamWriter(request.GetRequestStream(), Encoding.UTF8);
+        //    //writer.Write(postDataStr);
+        //    //writer.Flush();
+        //    //writer.Close();
+        //    byte[] data = Encoding.UTF8.GetBytes(postDataStr);
+        //    request.ContentLength = data.Length;
+        //    using (Stream reqStream = request.GetRequestStream())
+        //    {
+        //        reqStream.Write(data, 0, data.Length);
+        //        reqStream.Close();
+        //    } 
+        //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        //    string encoding = response.ContentEncoding;
+        //    if (encoding == null || encoding.Length < 1)
+        //    {
+        //        encoding = "UTF-8"; //默认编码  
+        //    }
+        //    StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(encoding));
+        //    string retString = reader.ReadToEnd();
+        //    Comm.retval = retString;
+           
+        //    request.KeepAlive = false;
+        //    if (response != null)
+        //    {
+        //        response.Close();
+        //    }
+        //    if (request != null)
+        //    {
+        //        request.Abort();
+        //    }
+        //    System.Net.ServicePointManager.DefaultConnectionLimit = 50;
+        //    return retString;
+        //}
 
         //public static string HttpPost(string func, string postDataStr)
         //{

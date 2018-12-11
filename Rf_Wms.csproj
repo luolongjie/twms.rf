@@ -167,10 +167,15 @@
     <Compile Include="In\frmShelveMenu.Designer.cs">
       <DependentUpon>frmShelveMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="MbalBlno.cs" />
+    <Compile Include="MloadPickQuantity.cs" />
     <Compile Include="Model\getRegionList.cs" />
     <Compile Include="Model\locationStockList.cs" />
     <Compile Include="Model\MAssisterByOperation.cs" />
     <Compile Include="Model\MAssisterInfo.cs" />
+    <Compile Include="Model\MBalanceBarcode.cs" />
+    <Compile Include="Model\MbalPdate.cs" />
+    <Compile Include="Model\MbalPickno.cs" />
     <Compile Include="Model\MContainer.cs" />
     <Compile Include="Model\MdoStockUpConfirm.cs" />
     <Compile Include="Model\MergeRefundOrder.cs" />
@@ -178,6 +183,7 @@
     <Compile Include="Model\MgetSecondarySortingInfo.cs" />
     <Compile Include="Model\MLocationTray.cs" />
     <Compile Include="Model\MOperationByOrder.cs" />
+    <Compile Include="Model\MoutletInfo.cs" />
     <Compile Include="Model\MQuantityListByTray.cs" />
     <Compile Include="Model\MRefundBanlance.cs" />
     <Compile Include="Model\MreplenishRecommendAgain.cs" />
@@ -203,17 +209,25 @@
     <Compile Include="Model\MstockIn.cs" />
     <Compile Include="Model\MstockinReceive.cs" />
     <Compile Include="Model\MStockOutItem.cs" />
+    <Compile Include="Model\Mtcod.cs" />
     <Compile Include="Model\MTran.cs" />
     <Compile Include="Model\MTranMove.cs" />
     <Compile Include="Model\Mtray.cs" />
     <Compile Include="Model\MTrayByBox.cs" />
     <Compile Include="Model\MTrayStockByOrderType.cs" />
     <Compile Include="Model\MultiMaterialList.cs" />
+    <Compile Include="Model\MUsePlate.cs" />
     <Compile Include="Model\MUserInfo.cs" />
     <Compile Include="Model\MZcqSlList.cs" />
     <Compile Include="Model\PickRrList.cs" />
     <Compile Include="Model\SendToItemList.cs" />
     <Compile Include="Model\Twarehouse.cs" />
+    <Compile Include="Ot\frmBalMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ot\frmBalMaterial.designer.cs">
+      <DependentUpon>frmBalMaterial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ot\frmcontainer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +318,18 @@
     <Compile Include="Ot\frmWarehouse.Designer.cs">
       <DependentUpon>frmWarehouse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Out\frmBalBlnoSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmBalBlnoSearch.designer.cs">
+      <DependentUpon>frmBalBlnoSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmBalOper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmBalOper.designer.cs">
+      <DependentUpon>frmBalOper.cs</DependentUpon>
+    </Compile>
     <Compile Include="Out\frmBalTranMove.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -370,11 +396,23 @@
     <Compile Include="Out\frmStockOutMenu.Designer.cs">
       <DependentUpon>frmStockOutMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Out\frmStockPlateMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmStockPlateMain.designer.cs">
+      <DependentUpon>frmStockPlateMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Out\frmStockUp.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Out\frmStockUp.Designer.cs">
       <DependentUpon>frmStockUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmTcod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmTcod.designer.cs">
+      <DependentUpon>frmTcod.cs</DependentUpon>
     </Compile>
     <Compile Include="Out\frmTranMove.cs">
       <SubType>Form</SubType>
@@ -393,6 +431,12 @@
     </Compile>
     <Compile Include="Out\frmTrayMenu.Designer.cs">
       <DependentUpon>frmTrayMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Out\frmUsePlate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Out\frmUsePlate.designer.cs">
+      <DependentUpon>frmUsePlate.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -464,6 +508,10 @@
       <DependentUpon>frmShelveMenu.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ot\frmBalMaterial.resx">
+      <DependentUpon>frmBalMaterial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ot\frmcontainer.resx">
       <DependentUpon>frmcontainer.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -524,6 +572,14 @@
       <DependentUpon>frmWarehouse.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmBalBlnoSearch.resx">
+      <DependentUpon>frmBalBlnoSearch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmBalOper.resx">
+      <DependentUpon>frmBalOper.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Out\frmBalTranMove.resx">
       <DependentUpon>frmBalTranMove.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -568,8 +624,16 @@
       <DependentUpon>frmStockOutMenu.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmStockPlateMain.resx">
+      <DependentUpon>frmStockPlateMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Out\frmStockUp.resx">
       <DependentUpon>frmStockUp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmTcod.resx">
+      <DependentUpon>frmTcod.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Out\frmTranMove.resx">
@@ -582,6 +646,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Out\frmTrayMenu.resx">
       <DependentUpon>frmTrayMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Out\frmUsePlate.resx">
+      <DependentUpon>frmUsePlate.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

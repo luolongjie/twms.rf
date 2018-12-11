@@ -15,11 +15,11 @@ namespace Rf_Wms
         public static string userame = "";
 
         public static string usercode = "";
-
+        public static string version = "";
         public static string warehousecode = "";
 
         public static string warehousename = "";
-
+        public static bool islog = true;
         public static Model.MbaseIn basein = null;
 
         public static List<Model.Twarehouse> warehouseList = new List<Rf_Wms.Model.Twarehouse>();
