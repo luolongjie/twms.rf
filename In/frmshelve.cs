@@ -48,7 +48,7 @@ namespace Rf_Wms.In
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txtcarton.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode);
+                    string x = HttpHelper.HttpPost("getTrayByBox", @"boxCode=" + this.txtcarton.Text + "&lcCode=" + Comm.lcCode + "&whCode=" + Comm.warehousecode + "&updater=" + Comm.usercode);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
                     if (msg == null)
                         throw new Exception("错误信息捕捉失败");
