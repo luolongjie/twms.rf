@@ -216,6 +216,10 @@ namespace Rf_Wms.Out
             {
                 //con += "&recommendSlId=" + ms.data[c].recommendSlId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toSlId=" + this.cmbtoslname.SelectedValue.ToString() + "&updater=" + Comm.usercode + "&toTrayCode="+this.txtToTraycode.Text;
                 con += "&recommendSlId=" + ms.data[c].recommendSlId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toSlId=" + this.cmbtoslname.SelectedValue.ToString() + "&updater=" + Comm.usercode + "&toTrayCode=" + this.txtToTraycode.Text + "&materialCode=" + ms.data[c].materialCode;
+                int imax = commonqty * ms.data[c].spec + minqty;
+                int allqty = imax / ms.data[c].spec;
+                int allminqty = imax % ms.data[c].spec;
+                con += "&spec=" + ms.data[c].spec + "&convertQuantity" + allqty + "&convertMinQuantity" + allminqty;
                 if (ma != null)
                 {
                     con += "&assister=" + ma.data.code;
