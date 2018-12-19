@@ -219,7 +219,7 @@ namespace Rf_Wms.Out
                 int imax = commonqty * ms.data[c].spec + minqty;
                 int allqty = imax / ms.data[c].spec;
                 int allminqty = imax % ms.data[c].spec;
-                con += "&spec=" + ms.data[c].spec + "&convertQuantity" + allqty + "&convertMinQuantity" + allminqty;
+                con += "&spec=" + ms.data[c].spec + "&convertQuantity=" + allqty + "&convertMinQuantity=" + allminqty;
                 if (ma != null)
                 {
                     con += "&assister=" + ma.data.code;
