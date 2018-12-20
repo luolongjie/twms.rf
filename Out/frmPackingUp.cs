@@ -511,7 +511,7 @@ namespace Rf_Wms.Out
                 this.txtcommonqty.SelectAll();
                 return;
             }
-            //int _spec = Convert.ToInt32(ms.data[c].spec);
+            
             //int r = commonqty * _spec;
             if (commonqty > _mt.data.quantity)
             {
