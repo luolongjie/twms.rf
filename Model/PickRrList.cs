@@ -51,6 +51,19 @@ namespace Rf_Wms.Model
             }
         }
 
+        private string _sortFlg;
+        public string sortFlg
+        {
+            get
+            {
+                return _sortFlg;
+            }
+            set
+            {
+                _sortFlg = value;
+            }
+        }
+
         private string _assistanceName;
          public string assistanceName
         {
