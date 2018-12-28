@@ -513,13 +513,13 @@ namespace Rf_Wms.Out
             }
             
             //int r = commonqty * _spec;
-            if (commonqty > _mt.data.quantity)
+            if (commonqty * ms.data[c].spec > _mt.data.quantity * ms.data[c].spec+_mt.data.minQuantity)
             {
                 MessageBox.Show("输入数量大于托盘数量");
                 this.txtcommonqty.SelectAll();
                 return;
             }
-            if (commonqty > ms.data[c].quantity )
+            if (commonqty * ms.data[c].spec > ms.data[c].quantity * ms.data[c].spec+ms.data[c].minQuantity)
             {
                 MessageBox.Show("输入数量大于单据数量");
                 this.txtcommonqty.SelectAll();
@@ -575,7 +575,7 @@ namespace Rf_Wms.Out
             //    this.txtcommonqty.SelectAll();
             //    return;
             //}
-            if (minqty > ms.data[c].minQuantity)
+            if (minqty + commonqty * ms.data[c].spec > ms.data[c].minQuantity + ms.data[c].quantity * ms.data[c].spec)
             {
                 MessageBox.Show("输入数量大于单据数量");
                 this.txtcommonqty.SelectAll();
