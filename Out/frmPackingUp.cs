@@ -203,9 +203,22 @@ namespace Rf_Wms.Out
             this.cbxrr.ValueMember = "rrId";
             this.cbxrr.DisplayMember = "rrName";
             this.cbxrr.SelectedItem = 1;
-            this.txtToTraycode.Text = "";
-            this.cbxrr.Enabled = true;
-            this.cbxrr.Focus();
+            if (rr.data[0].sortFlg.ToUpper() != "MATERIAL")
+            {
+                this.cbxrr.Visible = true;
+               
+                this.txtToTraycode.Text = "";
+                this.cbxrr.Enabled = true;
+                this.cbxrr.Focus();
+            }
+            else
+            {
+                this.cbxrr.Visible = false;
+                KeyPressEventArgs x=new KeyPressEventArgs((char)Keys.Enter);
+                cbxrr_KeyPress(null,x);
+                this.txtAssister.Enabled = true;
+                this.txtAssister.Focus();
+            }
         }
 
         //Model.Mpick mp = null;
@@ -1036,7 +1049,16 @@ namespace Rf_Wms.Out
                 this.labSlname.Text = "";
                 this.cbxrr.Enabled = true;
                 this.txtAssister.Enabled = false;
-                this.cbxrr.Focus();
+                if (this.cbxrr.Visible)
+                {
+                    this.cbxrr.Focus();
+                }
+                else
+                {
+                    this.txtorderid.Enabled = true;
+                    this.txtorderid.Text = "";
+                    this.txtorderid.Focus();
+                }
                 //this.cbxrr.Enabled = true;
                 //this.cbxrr.Focus();
                 return;
