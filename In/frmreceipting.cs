@@ -26,29 +26,29 @@ namespace Rf_Wms.In
 
         void CloseOrderid()
         {
-            if (!isNew)
-                return;
-            if (this.txtorderid.Enabled)
-                return;
-            Comm.islog = false;
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                string conn=@"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode+"&whCode="+Comm.warehousecode+"&updater=" + Comm.usercode;
-                string x = HttpHelper.HttpPost("deleteStockInOrder", conn);
-                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
-                if (msg == null)
-                    throw new Exception("错误信息捕捉失败");
-                if (!msg.success)
-                    throw new Exception(msg.msg);
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Cursor.Current = Cursors.Default;
-                MessageBox.Show(ex.Message);
+            //if (!isNew)
+            //    return;
+            //if (this.txtorderid.Enabled)
+            //    return;
+            //Comm.islog = false;
+            //try
+            //{
+            //    Cursor.Current = Cursors.WaitCursor;
+            //    string conn=@"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode+"&whCode="+Comm.warehousecode+"&updater=" + Comm.usercode;
+            //    string x = HttpHelper.HttpPost("deleteStockInOrder", conn);
+            //    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+            //    if (msg == null)
+            //        throw new Exception("错误信息捕捉失败");
+            //    if (!msg.success)
+            //        throw new Exception(msg.msg);
+            //    Cursor.Current = Cursors.Default;
+            //}
+            //catch (Exception ex)
+            //{
+            //    Cursor.Current = Cursors.Default;
+            //    MessageBox.Show(ex.Message);
                 
-            }
+            //}
         }
 
         Model.Mmsg msg = null;
