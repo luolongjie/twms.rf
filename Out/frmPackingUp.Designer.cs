@@ -55,7 +55,7 @@
             this.btnAssistance = new System.Windows.Forms.Button();
             this.btnkeyboard = new System.Windows.Forms.Button();
             this.txttoslname = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labkq = new System.Windows.Forms.Label();
             this.cbxrr = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtAssister = new System.Windows.Forms.TextBox();
@@ -280,12 +280,12 @@
             this.txttoslname.TabIndex = 288;
             this.txttoslname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txttoslname_KeyPress);
             // 
-            // label2
+            // labkq
             // 
-            this.label2.Location = new System.Drawing.Point(1, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 20);
-            this.label2.Text = "库区列表";
+            this.labkq.Location = new System.Drawing.Point(1, 27);
+            this.labkq.Name = "labkq";
+            this.labkq.Size = new System.Drawing.Size(77, 20);
+            this.labkq.Text = "库区列表";
             // 
             // cbxrr
             // 
@@ -321,7 +321,7 @@
             this.Controls.Add(this.txtAssister);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbxrr);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labkq);
             this.Controls.Add(this.txttoslname);
             this.Controls.Add(this.btnkeyboard);
             this.Controls.Add(this.btnAssistance);
@@ -387,7 +387,7 @@
         private System.Windows.Forms.Button btnAssistance;
         private System.Windows.Forms.Button btnkeyboard;
         private System.Windows.Forms.TextBox txttoslname;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labkq;
         private System.Windows.Forms.ComboBox cbxrr;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtAssister;

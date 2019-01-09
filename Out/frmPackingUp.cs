@@ -206,7 +206,7 @@ namespace Rf_Wms.Out
             if (rr.data[0].sortFlg.ToUpper() != "MATERIAL")
             {
                 this.cbxrr.Visible = true;
-               
+                this.labkq.Visible = true;
                 this.txtToTraycode.Text = "";
                 this.cbxrr.Enabled = true;
                 this.cbxrr.Focus();
@@ -214,6 +214,7 @@ namespace Rf_Wms.Out
             else
             {
                 this.cbxrr.Visible = false;
+                this.labkq.Visible = false;
                 KeyPressEventArgs x=new KeyPressEventArgs((char)Keys.Enter);
                 cbxrr_KeyPress(null,x);
                 this.txtAssister.Enabled = true;
@@ -1048,6 +1049,7 @@ namespace Rf_Wms.Out
                 this.labneedqty.Text = "";
                 this.labSlname.Text = "";
                 this.cbxrr.Enabled = true;
+               
                 this.txtAssister.Enabled = false;
                 if (this.cbxrr.Visible)
                 {
