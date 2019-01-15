@@ -231,6 +231,7 @@ namespace Rf_Wms.Out
 
         int commonqty = 0;
         int minqty = 0;
+        int mtype = 0;//0 删本条的下一条 1 本条 
         private void txtcommonqty_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 27)
@@ -245,6 +246,7 @@ namespace Rf_Wms.Out
             }
             if (e.KeyChar != 13)
                 return;
+            mtype = 0;
             try
             {
                 commonqty = Convert.ToInt32(this.txtcommonqty.Text);
@@ -340,6 +342,11 @@ namespace Rf_Wms.Out
                 this.txttraycode.Focus();
                 return;
             }
+            if(  commonqty!=moper.quantity)
+            {
+                mtype = 1;
+            }
+           
             this.txtcommonqty.Enabled = false;
             //this.txtminqty.Enabled = true;
             //this.txtminqty.Focus();
@@ -572,7 +579,14 @@ namespace Rf_Wms.Out
                 Cursor.Current = Cursors.WaitCursor;
                 GetTrans(false);
                 Cursor.Current = Cursors.Default;
-                mlist.data.Remove(moper);
+                if (mtype == 1)
+                {
+                    moper.quantity -= commonqty;
+                }
+                else
+                {
+                    mlist.data.Remove(moper);
+                }
                 ShowNext();
             }
             catch (Exception ex)
@@ -770,9 +784,7 @@ namespace Rf_Wms.Out
 
         void ShowNext()
         {
-            if (mlist.data.Count == irow)
-                irow = 0;
-            Clear();
+           
             if (mlist.data.Count == 0)
             {
                 MessageBox.Show("该单据已经操作完成");
@@ -784,8 +796,21 @@ namespace Rf_Wms.Out
                 return;
 
             }
-            moper = mlist.data[irow];
-            Showval();
+            Clear();
+
+            if (mlist.data.Count == irow)
+            {
+                this.cboreplenishinfo.Enabled = true;
+                cboreplenishinfo_SelectedIndexChanged(null, null);
+                return;
+            }
+            else
+            {
+                moper = mlist.data[irow];
+                Showval();
+                this.txttraycode.Enabled = true;
+                this.txttraycode.Focus();
+            }
         }
 
         private void btnkeyboard_Click(object sender, EventArgs e)
