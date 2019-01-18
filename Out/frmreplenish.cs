@@ -106,6 +106,7 @@ namespace Rf_Wms.Out
             {
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
+                this.txtorderid.Enabled = true;
                 this.txtorderid.SelectAll();
                 return;
 
@@ -406,7 +407,21 @@ namespace Rf_Wms.Out
             if (e.KeyChar == 27)
             {
 
-                
+                //try
+                //{
+                //    Cursor.Current = Cursors.WaitCursor;
+                //    releaseQuantityLockStock();
+                //    //GetTrans(true);
+                //    Cursor.Current = Cursors.Default;
+                //}
+                //catch (Exception ex)
+                //{
+                //    Cursor.Current = Cursors.Default;
+                //    MessageBox.Show(ex.Message);
+                //    this.txtorderid.SelectAll();
+                //    return;
+
+                //}
                 this.txttotraycode.Enabled = false;
                 this.txttotraycode.Text = "";
                 if (txtminqty.Visible == true)
@@ -633,7 +648,7 @@ namespace Rf_Wms.Out
 
         void GetTrans(bool benter)
         {
-            //releaseQuantityLockStock();//test
+            releaseQuantityLockStock();//test
             string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
             if ( moper!=null && !benter)
             {
@@ -744,10 +759,10 @@ namespace Rf_Wms.Out
 
         void releaseQuantityLockStock()
         {
-            if (this.txtcommonqty.Text == "")
+            if (this.txtorderid.Text == "" || this.cboreplenishinfo.Enabled)
                 return;
             //string conn = @"quantity=" + commonqty + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
-            string conn = "lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+            string conn = "lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + moper.recommendId;
             //string x = HttpHelper.HttpPost("replenishOrder/releaseQuantityLockStock", conn);
             string x = HttpHelper.HttpPost("replenishOrder/releaseLockStock", conn);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -761,42 +776,75 @@ namespace Rf_Wms.Out
         {
             if (this.txtorderid.Enabled)
                 return;
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                releaseQuantityLockStock();
+                //GetTrans(true);
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.Message);
+                this.txtorderid.SelectAll();
+                return;
+
+            }
             irow++;
             ShowNext();
-            //try
-            //{
-            //    Cursor.Current = Cursors.WaitCursor;
-            //    releaseQuantityLockStock();
-            //    GetTrans(true);
-            //    Cursor.Current = Cursors.Default;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Cursor.Current = Cursors.Default;
-            //    MessageBox.Show(ex.Message);
-            //    this.txtorderid.SelectAll();
-            //    return;
-
-            //}
+           
             this.txttraycode.Enabled = true;
             this.txttraycode.Focus();
         }
 
         void ShowNext()
         {
-           
+            Clear();
             if (mlist.data.Count == 0)
             {
-                MessageBox.Show("该单据已经操作完成");
-                //this.txtorderid.Enabled = true;
-                //this.txtorderid.Text = "";
-                //this.txtorderid.Focus();
-                this.cboreplenishinfo.Enabled = true;
-                this.cboreplenishinfo.Focus();
-                return;
+                if (this.cboreplenishinfo.Items.Count == 1)
+                {
+                    MessageBox.Show("当前拣货区的补货指令已完成");
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                          string conn = "lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&updater=" + Comm.usercode;
+                          string x = HttpHelper.HttpPost("replenishOrder/successOrder", conn);
+                          msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                          if (msg == null)
+                              throw new Exception("successOrder错误信息捕捉失败");
+                          if (!msg.success)
+                              throw new Exception(msg.msg);
+                          Cursor.Current = Cursors.Default;
+                    }
+                    catch (Exception ex)
+                    {
+                        Cursor.Current = Cursors.Default;
+                        MessageBox.Show(ex.Message);
+                    }
+                    //this.cboreplenishinfo.DataSource = null;
+                    this.txtorderid.Enabled = true;
+
+                    this.txtorderid.Focus();
+                    this.txtorderid.SelectAll();
+                    //this.cboreplenishinfo.Enabled = true;
+                    //this.cboreplenishinfo.Focus();
+                    return;
+                }
+                else
+                {
+                    //bindreplenishInfo();
+                    //this.cboreplenishinfo.Enabled = true;
+                    //this.cboreplenishinfo.Focus();
+                    KeyPressEventArgs e = new KeyPressEventArgs((char)13);
+                    //e.KeyChar=(char)13;
+                    txtorderid_KeyPress(null, e);
+                    return;
+                }
 
             }
-            Clear();
+           
 
             if (mlist.data.Count == irow)
             {
