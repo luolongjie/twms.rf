@@ -72,5 +72,13 @@ namespace Rf_Wms
         {
             co = txtupd;
         }
+
+       
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            frmConn obj = new frmConn();
+            obj.ShowDialog();
+        }
     }
 }

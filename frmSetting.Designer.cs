@@ -35,13 +35,14 @@
             this.txturl = new System.Windows.Forms.TextBox();
             this.txtupd = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnConnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnExit
             // 
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(171)))), ((int)(((byte)(110)))));
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(160, 208);
+            this.btnExit.Location = new System.Drawing.Point(134, 246);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(72, 20);
             this.btnExit.TabIndex = 2;
@@ -52,7 +53,7 @@
             // 
             this.btnkeyboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(154)))), ((int)(((byte)(224)))));
             this.btnkeyboard.ForeColor = System.Drawing.Color.White;
-            this.btnkeyboard.Location = new System.Drawing.Point(6, 208);
+            this.btnkeyboard.Location = new System.Drawing.Point(30, 208);
             this.btnkeyboard.Name = "btnkeyboard";
             this.btnkeyboard.Size = new System.Drawing.Size(72, 20);
             this.btnkeyboard.TabIndex = 261;
@@ -63,7 +64,7 @@
             // 
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(94)))), ((int)(((byte)(75)))));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(83, 208);
+            this.btnSave.Location = new System.Drawing.Point(134, 208);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(72, 20);
             this.btnSave.TabIndex = 262;
@@ -102,6 +103,17 @@
             this.label2.Size = new System.Drawing.Size(100, 20);
             this.label2.Text = "自动更新地址";
             // 
+            // btnConnect
+            // 
+            this.btnConnect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
+            this.btnConnect.ForeColor = System.Drawing.Color.White;
+            this.btnConnect.Location = new System.Drawing.Point(30, 246);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(72, 20);
+            this.btnConnect.TabIndex = 270;
+            this.btnConnect.Text = "网络";
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -109,6 +121,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(233)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(238, 295);
+            this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.txtupd);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txturl);
@@ -134,5 +147,6 @@
         private System.Windows.Forms.TextBox txturl;
         private System.Windows.Forms.TextBox txtupd;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnConnect;
     }
 }
