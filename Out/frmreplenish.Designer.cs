@@ -155,7 +155,7 @@
             // 
             // txtminqty
             // 
-            this.txtminqty.Location = new System.Drawing.Point(131, 203);
+            this.txtminqty.Location = new System.Drawing.Point(191, 202);
             this.txtminqty.Name = "txtminqty";
             this.txtminqty.Size = new System.Drawing.Size(47, 23);
             this.txtminqty.TabIndex = 244;

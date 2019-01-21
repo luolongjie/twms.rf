@@ -115,12 +115,12 @@ namespace Rf_Wms.Out
             this.txtorderid.Enabled = false;
             //this.txtSlId.Enabled = true;
             //this.txtSlId.Focus();
-           
+
             bindreplenishInfo();
-            //this.cboreplenishinfo.Enabled = true;
-            //this.cboreplenishinfo.Focus();
-            this.txttraycode.Enabled = true;
-            this.txttraycode.Focus();
+            this.cboreplenishinfo.Enabled = true;
+            this.cboreplenishinfo.Focus();
+            //this.txttraycode.Enabled = true;
+            //this.txttraycode.Focus();
 
         }
 
@@ -169,6 +169,8 @@ namespace Rf_Wms.Out
                 this.labmaterialname.Text = "";
                 this.labneedqty.Text = "";
                 this.labfromsIId.Text = "";
+                this.labtoslidname.Text = "";
+                labcommonUnit.Text = "";
                 //this.txtSlId.Text = "";
                 //this.txtSlId.Enabled = false;
                 //this.txtorderid.Enabled = true;
@@ -697,7 +699,7 @@ namespace Rf_Wms.Out
             this.cboreplenishinfo.DataSource = mtrans.data.replenishinfo;
             this.cboreplenishinfo.SelectedItem = 1;
             this.cboreplenishinfo.SelectedIndexChanged += new System.EventHandler(this.cboreplenishinfo_SelectedIndexChanged);
-            cboreplenishinfo_SelectedIndexChanged(null, null);
+            //cboreplenishinfo_SelectedIndexChanged(null, null);
            
         }
 
@@ -724,6 +726,7 @@ namespace Rf_Wms.Out
             this.labminunit.Text = "";
             this.labneedqty.Text = "";
             this.labtrayqty.Text = "";
+            this.labtoslidname.Text = "";
         }
 
        
@@ -823,7 +826,7 @@ namespace Rf_Wms.Out
                         Cursor.Current = Cursors.Default;
                         MessageBox.Show(ex.Message);
                     }
-                    //this.cboreplenishinfo.DataSource = null;
+                    this.cboreplenishinfo.DataSource = null;
                     this.txtorderid.Enabled = true;
 
                     this.txtorderid.Focus();
@@ -837,6 +840,7 @@ namespace Rf_Wms.Out
                     //bindreplenishInfo();
                     //this.cboreplenishinfo.Enabled = true;
                     //this.cboreplenishinfo.Focus();
+                    MessageBox.Show("当前拣货区的补货指令已经完成");
                     KeyPressEventArgs e = new KeyPressEventArgs((char)13);
                     //e.KeyChar=(char)13;
                     txtorderid_KeyPress(null, e);
@@ -930,6 +934,8 @@ namespace Rf_Wms.Out
 
         private void cboreplenishinfo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (this.cboreplenishinfo.DataSource == null)
+                return;
             FindStorage();
         }
 
