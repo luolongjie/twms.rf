@@ -8,6 +8,7 @@ namespace Rf_Wms
     public class Comm
     {
         public static string url = "";
+       
         public static string upd = "";
 
         public static string lcCode = "";

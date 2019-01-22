@@ -42,7 +42,7 @@
             // 
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(171)))), ((int)(((byte)(110)))));
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(134, 246);
+            this.btnExit.Location = new System.Drawing.Point(134, 263);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(72, 20);
             this.btnExit.TabIndex = 2;
@@ -53,7 +53,7 @@
             // 
             this.btnkeyboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(154)))), ((int)(((byte)(224)))));
             this.btnkeyboard.ForeColor = System.Drawing.Color.White;
-            this.btnkeyboard.Location = new System.Drawing.Point(30, 208);
+            this.btnkeyboard.Location = new System.Drawing.Point(30, 237);
             this.btnkeyboard.Name = "btnkeyboard";
             this.btnkeyboard.Size = new System.Drawing.Size(72, 20);
             this.btnkeyboard.TabIndex = 261;
@@ -64,7 +64,7 @@
             // 
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(94)))), ((int)(((byte)(75)))));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(134, 208);
+            this.btnSave.Location = new System.Drawing.Point(134, 237);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(72, 20);
             this.btnSave.TabIndex = 262;
@@ -80,25 +80,25 @@
             // 
             // txturl
             // 
-            this.txturl.Location = new System.Drawing.Point(11, 42);
+            this.txturl.Location = new System.Drawing.Point(11, 32);
             this.txturl.Multiline = true;
             this.txturl.Name = "txturl";
-            this.txturl.Size = new System.Drawing.Size(217, 61);
+            this.txturl.Size = new System.Drawing.Size(217, 83);
             this.txturl.TabIndex = 264;
             this.txturl.GotFocus += new System.EventHandler(this.txturl_GotFocus);
             // 
             // txtupd
             // 
-            this.txtupd.Location = new System.Drawing.Point(11, 132);
+            this.txtupd.Location = new System.Drawing.Point(11, 140);
             this.txtupd.Multiline = true;
             this.txtupd.Name = "txtupd";
-            this.txtupd.Size = new System.Drawing.Size(217, 61);
+            this.txtupd.Size = new System.Drawing.Size(217, 83);
             this.txtupd.TabIndex = 267;
             this.txtupd.GotFocus += new System.EventHandler(this.txtupd_GotFocus);
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(13, 108);
+            this.label2.Location = new System.Drawing.Point(13, 118);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 20);
             this.label2.Text = "自动更新地址";
@@ -107,7 +107,7 @@
             // 
             this.btnConnect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
             this.btnConnect.ForeColor = System.Drawing.Color.White;
-            this.btnConnect.Location = new System.Drawing.Point(30, 246);
+            this.btnConnect.Location = new System.Drawing.Point(30, 263);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(72, 20);
             this.btnConnect.TabIndex = 270;

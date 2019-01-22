@@ -105,6 +105,7 @@ namespace Rf_Wms
                     string s = sr.ReadLine();
                     Comm.url = s;
                     Comm.upd = sr.ReadLine();
+                    //Comm.testurl = sr.ReadLine();
                 }
             }
             else
