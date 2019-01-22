@@ -41,12 +41,14 @@ namespace Rf_Wms
         {
             this.txturl.Text = Comm.url;
             this.txtupd.Text = Comm.upd;
+         
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             Comm.url = this.txturl.Text;
             Comm.upd = this.txtupd.Text;
+            //Comm.testurl = this.txttest.Text;
             string filePath = System.IO.Path.GetDirectoryName
                (System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             if (filePath.Substring(0, 6) == @"file:\")
@@ -58,6 +60,7 @@ namespace Rf_Wms
             {
                 sw.WriteLine(this.txturl.Text);
                 sw.WriteLine(this.txtupd.Text);
+
                 sw.Close();
             }
             this.Close();
@@ -71,6 +74,14 @@ namespace Rf_Wms
         private void txtupd_GotFocus(object sender, EventArgs e)
         {
             co = txtupd;
+        }
+
+       
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            frmConn obj = new frmConn();
+            obj.ShowDialog();
         }
     }
 }
