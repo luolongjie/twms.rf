@@ -321,13 +321,42 @@ namespace Rf_Wms.Out
                     {
                         throw new Exception("数据信息捕捉失败");
                     }
-                    moper.fromSlId = mmr.data.fromSlId;
-                    moper.fromSlIdName = mmr.data.fromSlIdName;
-                    moper.quantity = mmr.data.quantity;
-                    moper.minQuantity = mmr.data.minQuantity;
-                    moper.pdate = mmr.data.pdate;
-                    moper.recommendId = mmr.data.recommendId;
-                    this.labfromsIId.Text = moper.fromSlIdName.ToString();
+                    string mmaterialCode = moper.materialCode;
+                    int mfromSlId = moper.fromSlId;
+                   //成功后
+                    string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&replenishId=" + this.cboreplenishinfo.SelectedValue.ToString();
+
+                    x = HttpHelper.HttpPost("replenishOrder/findStorage", con);
+                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    if (msg == null)
+                        throw new Exception("错误信息捕捉失败");
+                    if (!msg.success)
+                        throw new Exception(msg.msg);
+                    mlist = (Model.Mreplenishs)JsonConvert.DeserializeObject(x, typeof(Model.Mreplenishs));
+                    if (mlist == null)
+                    {
+                        throw new Exception("数据信息捕捉失败");
+                    }
+                    if (mlist.data.Count == 0)
+                    {
+                        throw new Exception("没有行数据");
+                    }
+                    //moper.fromSlId = mmr.data.fromSlId;
+                    //moper.fromSlIdName = mmr.data.fromSlIdName;
+                    //moper.quantity = mmr.data.quantity;
+                    //moper.minQuantity = mmr.data.minQuantity;
+                    //moper.pdate = mmr.data.pdate;
+                    //moper.recommendId = mmr.data.recommendId;
+                    for (int i = 0; i < mlist.data.Count; i++)
+                    {
+                        if (mlist.data[i].materialCode == mmaterialCode && (mlist.data[i].fromSlId - mfromSlId) >= 0)
+                        {
+                            irow = i;
+                            moper = mlist.data[irow];
+                            break;
+                        }
+                    }
+                        this.labfromsIId.Text = moper.fromSlIdName.ToString();
                     this.labneedqty.Text = "应补数量 " + moper.quantity.ToString() + moper.commonUnitName + " " + moper.pdate;
                     Cursor.Current = Cursors.Default;
                 }
