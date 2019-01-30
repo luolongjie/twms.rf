@@ -67,6 +67,7 @@ namespace Rf_Wms.Out
 
         Model.Mmsg msg = null;
         Model.Mreplenish mtrans = null;
+        Model.replenishs moper = null;
         private void txtorderid_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 13)
@@ -76,13 +77,36 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                GetTrans(false);
+                //GetTrans(false);
+                string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
+              
+                string x = HttpHelper.HttpPost("replenishOrder/processorSourceOperate", con);
+                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                if (msg == null)
+                    throw new Exception("错误信息捕捉失败");
+                if (!msg.success)
+                    throw new Exception(msg.msg);
+                mtrans = (Model.Mreplenish)JsonConvert.DeserializeObject(x, typeof(Model.Mreplenish));
+                if (mtrans == null)
+                {
+                    throw new Exception("数据信息捕捉失败");
+                }
+                Clear();
+                if (mtrans.data == null)
+                {
+                    MessageBox.Show("该单据已经操作完成");
+                    this.txtorderid.Enabled = true;
+                    this.txtorderid.Text = "";
+                    this.txtorderid.Focus();
+
+                }
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.Message);
+                this.txtorderid.Enabled = true;
                 this.txtorderid.SelectAll();
                 return;
 
@@ -91,8 +115,12 @@ namespace Rf_Wms.Out
             this.txtorderid.Enabled = false;
             //this.txtSlId.Enabled = true;
             //this.txtSlId.Focus();
-            this.txttraycode.Enabled = true;
-            this.txttraycode.Focus();
+
+            bindreplenishInfo();
+            this.cboreplenishinfo.Enabled = true;
+            this.cboreplenishinfo.Focus();
+            //this.txttraycode.Enabled = true;
+            //this.txttraycode.Focus();
 
         }
 
@@ -104,8 +132,8 @@ namespace Rf_Wms.Out
                 this.labmaterialname.Text = "";
                 this.labneedqty.Text = "";
                 this.labfromsIId.Text = "";
-                this.txtSlId.Text = "";
-                this.txtSlId.Enabled = false;
+                //this.txtSlId.Text = "";
+                //this.txtSlId.Enabled = false;
                 this.txtorderid.Enabled = true;
                 this.txtorderid.Text = "";
                 this.txtorderid.Focus();
@@ -114,13 +142,13 @@ namespace Rf_Wms.Out
             if (e.KeyChar != 13)
                 return;
             //this.txtSlId.Text = this.txtSlId.Text.ToUpper();
-            if (this.txtSlId.Text != mtrans.data.fromSlIdName.ToString())
-            {
-                MessageBox.Show("来源库位不正确");
-                this.txtSlId.SelectAll();
-                return;
-            }
-            this.txtSlId.Enabled = false;
+            //if (this.txtSlId.Text != mtrans.data.fromSlIdName.ToString())
+            //{
+            //    MessageBox.Show("来源库位不正确");
+            //    this.txtSlId.SelectAll();
+            //    return;
+            //}
+            //this.txtSlId.Enabled = false;
             this.txttraycode.Enabled = true;
             this.txttraycode.Focus();
         }
@@ -137,14 +165,19 @@ namespace Rf_Wms.Out
                 //this.txtSlId.Text = "";
                 //this.txtSlId.Focus();
                 mtrans = null;
+                moper = null;
                 this.labmaterialname.Text = "";
                 this.labneedqty.Text = "";
                 this.labfromsIId.Text = "";
+                this.labtoslidname.Text = "";
+                labcommonUnit.Text = "";
                 //this.txtSlId.Text = "";
                 //this.txtSlId.Enabled = false;
-                this.txtorderid.Enabled = true;
-                this.txtorderid.Text = "";
-                this.txtorderid.Focus();
+                //this.txtorderid.Enabled = true;
+                //this.txtorderid.Text = "";
+                //this.txtorderid.Focus();
+                this.cboreplenishinfo.Enabled = true;
+                this.cboreplenishinfo.Focus();
                 return;
             }
             if (e.KeyChar != 13)
@@ -155,7 +188,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string conn = @"orderItemId=" + mtrans.data.orderItemId.ToString() + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+                string conn = @"orderItemId=" + moper.orderItemId.ToString() + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + moper.recommendId;
                 if (this.txttraycode.Text.Length < Comm.lcCode.Length)
                 {
                     MessageBox.Show("请扫描条码");
@@ -182,8 +215,8 @@ namespace Rf_Wms.Out
                     throw new Exception("judgeTray数据信息捕捉失败");
                 }
                 this.txttraycode.Text = _mt.data.trayCode;
-                //this.labtrayqty.Text = _mt.data.quantity.ToString() + mtrans.data.commonUnitName + _mt.data.minQuantity.ToString() + mtrans.data.minUnitName;
-                this.labtrayqty.Text = _mt.data.quantity.ToString() + mtrans.data.commonUnitName;
+                //this.labtrayqty.Text = _mt.data.quantity.ToString() + moper.commonUnitName + _mt.data.minQuantity.ToString() + moper.minUnitName;
+                this.labtrayqty.Text = _mt.data.quantity.ToString() + moper.commonUnitName;
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -201,6 +234,7 @@ namespace Rf_Wms.Out
 
         int commonqty = 0;
         int minqty = 0;
+        int mtype = 0;//0 删本条的下一条 1 本条 
         private void txtcommonqty_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 27)
@@ -215,6 +249,7 @@ namespace Rf_Wms.Out
             }
             if (e.KeyChar != 13)
                 return;
+            mtype = 0;
             try
             {
                 commonqty = Convert.ToInt32(this.txtcommonqty.Text);
@@ -237,7 +272,7 @@ namespace Rf_Wms.Out
                 this.txtcommonqty.SelectAll();
                 return;
             }
-            if (commonqty > mtrans.data.quantity)
+            if (commonqty > moper.quantity)
             {
                 MessageBox.Show("输入数量大于单据数量");
                 this.txtcommonqty.SelectAll();
@@ -247,7 +282,7 @@ namespace Rf_Wms.Out
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+                string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + moper.recommendId;
               
                 string x = HttpHelper.HttpPost("replenishOrder/lockReplenishRecommend", conn);
                 msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -273,7 +308,7 @@ namespace Rf_Wms.Out
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId+"&updater=" + Comm.usercode;
+                    string conn = @"lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + moper.recommendId+"&updater=" + Comm.usercode;
 
                     string x = HttpHelper.HttpPost("replenishOrder/replenishRecommendAgain", conn);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -286,14 +321,43 @@ namespace Rf_Wms.Out
                     {
                         throw new Exception("数据信息捕捉失败");
                     }
-                    mtrans.data.fromSlId = mmr.data.fromSlId;
-                    mtrans.data.fromSlIdName = mmr.data.fromSlIdName;
-                    mtrans.data.quantity = mmr.data.quantity;
-                    mtrans.data.minQuantity = mmr.data.minQuantity;
-                    mtrans.data.pdate = mmr.data.pdate;
-                    mtrans.data.recommendId = mmr.data.recommendId;
-                    this.labfromsIId.Text = mtrans.data.fromSlIdName.ToString();
-                    this.labneedqty.Text = "应补数量 " + mtrans.data.quantity.ToString() + mtrans.data.commonUnitName + " " + mtrans.data.pdate;
+                    string mmaterialCode = moper.materialCode;
+                    int mfromSlId = moper.fromSlId;
+                   //成功后
+                    string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&replenishId=" + this.cboreplenishinfo.SelectedValue.ToString();
+
+                    x = HttpHelper.HttpPost("replenishOrder/findStorage", con);
+                    msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                    if (msg == null)
+                        throw new Exception("错误信息捕捉失败");
+                    if (!msg.success)
+                        throw new Exception(msg.msg);
+                    mlist = (Model.Mreplenishs)JsonConvert.DeserializeObject(x, typeof(Model.Mreplenishs));
+                    if (mlist == null)
+                    {
+                        throw new Exception("数据信息捕捉失败");
+                    }
+                    if (mlist.data.Count == 0)
+                    {
+                        throw new Exception("没有行数据");
+                    }
+                    //moper.fromSlId = mmr.data.fromSlId;
+                    //moper.fromSlIdName = mmr.data.fromSlIdName;
+                    //moper.quantity = mmr.data.quantity;
+                    //moper.minQuantity = mmr.data.minQuantity;
+                    //moper.pdate = mmr.data.pdate;
+                    //moper.recommendId = mmr.data.recommendId;
+                    for (int i = 0; i < mlist.data.Count; i++)
+                    {
+                        if (mlist.data[i].materialCode == mmaterialCode && (mlist.data[i].fromSlId - mfromSlId) >= 0)
+                        {
+                            irow = i;
+                            moper = mlist.data[irow];
+                            break;
+                        }
+                    }
+                        this.labfromsIId.Text = moper.fromSlIdName.ToString();
+                    this.labneedqty.Text = "应补数量 " + moper.quantity.ToString() + moper.commonUnitName + " " + moper.pdate;
                     Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)
@@ -310,6 +374,11 @@ namespace Rf_Wms.Out
                 this.txttraycode.Focus();
                 return;
             }
+            if(  commonqty!=moper.quantity)
+            {
+                mtype = 1;
+            }
+           
             this.txtcommonqty.Enabled = false;
             //this.txtminqty.Enabled = true;
             //this.txtminqty.Focus();
@@ -369,7 +438,21 @@ namespace Rf_Wms.Out
             if (e.KeyChar == 27)
             {
 
-                
+                //try
+                //{
+                //    Cursor.Current = Cursors.WaitCursor;
+                //    releaseQuantityLockStock();
+                //    //GetTrans(true);
+                //    Cursor.Current = Cursors.Default;
+                //}
+                //catch (Exception ex)
+                //{
+                //    Cursor.Current = Cursors.Default;
+                //    MessageBox.Show(ex.Message);
+                //    this.txtorderid.SelectAll();
+                //    return;
+
+                //}
                 this.txttotraycode.Enabled = false;
                 this.txttotraycode.Text = "";
                 if (txtminqty.Visible == true)
@@ -461,10 +544,10 @@ namespace Rf_Wms.Out
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    string conn = @"orderItemId=" + mtrans.data.orderItemId.ToString() + "&lcCode=" + Comm.lcCode;
+                    string conn = @"orderItemId=" + moper.orderItemId.ToString() + "&lcCode=" + Comm.lcCode;
 
 
-                    conn += @"&trayCode=" + this.txttotraycode.Text+"&recommendId=" + mtrans.data.recommendId;;
+                    conn += @"&trayCode=" + this.txttotraycode.Text+"&recommendId=" + moper.recommendId;;
 
                     string x = HttpHelper.HttpPost("replenishOrder/judgeSourceTrayCode", conn);
                     msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -523,7 +606,7 @@ namespace Rf_Wms.Out
             //    this.txttoslid.SelectAll();
             //    return;
             //}
-            if (this.txttoslid.Text != mtrans.data.toSlIdName.ToString())
+            if (this.txttoslid.Text != moper.toSlIdName.ToString())
             {
                 MessageBox.Show("移入库位不是指定库位");
                 this.txttoslid.SelectAll();
@@ -542,7 +625,15 @@ namespace Rf_Wms.Out
                 Cursor.Current = Cursors.WaitCursor;
                 GetTrans(false);
                 Cursor.Current = Cursors.Default;
-
+                if (mtype == 1)
+                {
+                    moper.quantity -= commonqty;
+                }
+                else
+                {
+                    mlist.data.Remove(moper);
+                }
+                ShowNext();
             }
             catch (Exception ex)
             {
@@ -560,7 +651,7 @@ namespace Rf_Wms.Out
             {
 
                 //this.txtminqty.Enabled = true;
-                this.cmbmaterialCondition.Enabled = false;
+                //this.cmbmaterialCondition.Enabled = false;
 
                 //this.txtminqty.Focus();
                 //this.txtminqty.SelectAll();
@@ -571,16 +662,16 @@ namespace Rf_Wms.Out
             }
             if (e.KeyChar != 13)
                 return;
-            this.cmbmaterialCondition.Enabled = false;
+            //this.cmbmaterialCondition.Enabled = false;
             this.txttotraycode.Enabled = true;
             this.txttotraycode.Focus();
         }
 
         private void frmreplenish_Load(object sender, EventArgs e)
         {
-            this.cmbmaterialCondition.DataSource = Comm.basein.data.materialConditions;
-            this.cmbmaterialCondition.ValueMember = "code";
-            this.cmbmaterialCondition.DisplayMember = "description";
+            //this.cmbmaterialCondition.DataSource = Comm.basein.data.materialConditions;
+            //this.cmbmaterialCondition.ValueMember = "code";
+            //this.cmbmaterialCondition.DisplayMember = "description";
             Clear();
             this.txtorderid.Enabled = true;
             this.txtorderid.Focus();
@@ -588,15 +679,15 @@ namespace Rf_Wms.Out
 
         void GetTrans(bool benter)
         {
-            //releaseQuantityLockStock();//test
+            releaseQuantityLockStock();//test
             string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode;
-            if (mtrans != null && mtrans.data!=null && !benter)
+            if ( moper!=null && !benter)
             {
-                con += "&orderItemId=" + mtrans.data.orderItemId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toTrayCode=" + this.txttotraycode.Text + "&updater=" + Comm.usercode + "&fromSlId=" + this.mtrans.data.fromSlId + "&materialCode=" + mtrans.data.materialCode + "&recommendId="+mtrans.data.recommendId;
+                con += "&orderItemId=" + moper.orderItemId.ToString() + "&quantity=" + commonqty.ToString() + "&minQuantity=" + minqty.ToString() + "&fromTrayCode=" + this.txttraycode.Text + "&toTrayCode=" + this.txttotraycode.Text + "&updater=" + Comm.usercode + "&fromSlId=" + this.moper.fromSlId + "&materialCode=" + moper.materialCode + "&recommendId="+moper.recommendId;
             }
             if (benter)
             {
-                con += "&orderItemId=" + mtrans.data.orderItemId.ToString() + "&recommendId=" + mtrans.data.recommendId;
+                con += "&orderItemId=" + moper.orderItemId.ToString() + "&recommendId=" + moper.recommendId;
             }
             string x = HttpHelper.HttpPost("replenishOrder/processorSourceOperate", con);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -609,31 +700,36 @@ namespace Rf_Wms.Out
             {
                 throw new Exception("数据信息捕捉失败");
             }
-            Clear();
-            if (mtrans.data == null)
-            {
-                MessageBox.Show("该单据已经操作完成");
-                this.txtorderid.Enabled = true;
-                this.txtorderid.Text = "";
-                this.txtorderid.Focus();
+           
+            //else
+            //{
+            //    this.btnAssistance.Text = moper.assistanceName;
+            //    this.labfromsIId.Text = moper.fromSlIdName.ToString();
+            //    this.labmaterialname.Text ="物料描述  " +moper.materialName;
+            //    //this.labneedqty.Text = moper.quantity.ToString() + moper.commonUnitName + moper.minQuantity.ToString() + moper.minUnitName + " " + moper.batchNo;
+            //    this.labneedqty.Text ="应补数量 " +moper.quantity.ToString() + moper.commonUnitName + " " +moper.pdate;
+            //    this.labcommonUnit.Text = moper.commonUnitName;
+            //    //this.labminunit.Text = moper.minUnitName;
+            //    this.labtoslidname.Text = moper.toSlIdName;
+            //    //this.txtSlId.Enabled = true;
+            //    //this.txtSlId.Focus();
+            //    this.txttraycode.Enabled = true;
+            //    this.txttraycode.Focus();
+            //}
 
-            }
-            else
-            {
-                this.btnAssistance.Text = mtrans.data.assistanceName;
-                this.labfromsIId.Text = mtrans.data.fromSlIdName.ToString();
-                this.labmaterialname.Text ="物料描述  " +mtrans.data.materialName;
-                //this.labneedqty.Text = mtrans.data.quantity.ToString() + mtrans.data.commonUnitName + mtrans.data.minQuantity.ToString() + mtrans.data.minUnitName + " " + mtrans.data.batchNo;
-                this.labneedqty.Text ="应补数量 " +mtrans.data.quantity.ToString() + mtrans.data.commonUnitName + " " +mtrans.data.pdate;
-                this.labcommonUnit.Text = mtrans.data.commonUnitName;
-                //this.labminunit.Text = mtrans.data.minUnitName;
-                this.labtoslidname.Text = mtrans.data.toSlIdName;
-                //this.txtSlId.Enabled = true;
-                //this.txtSlId.Focus();
-                this.txttraycode.Enabled = true;
-                this.txttraycode.Focus();
-            }
+        }
 
+        void bindreplenishInfo()
+        {
+            this.cboreplenishinfo.SelectedIndexChanged -= new System.EventHandler(this.cboreplenishinfo_SelectedIndexChanged);
+            this.cboreplenishinfo.DataSource = null;
+            this.cboreplenishinfo.DisplayMember = "name";
+            this.cboreplenishinfo.ValueMember = "id";
+            this.cboreplenishinfo.DataSource = mtrans.data.replenishinfo;
+            this.cboreplenishinfo.SelectedItem = 1;
+            this.cboreplenishinfo.SelectedIndexChanged += new System.EventHandler(this.cboreplenishinfo_SelectedIndexChanged);
+            //cboreplenishinfo_SelectedIndexChanged(null, null);
+           
         }
 
         void Clear()
@@ -644,21 +740,22 @@ namespace Rf_Wms.Out
             this.txtminqty.Enabled = false;
             //this.txtorderid.Text = "";
             this.txtorderid.Enabled = false;
-            this.txtSlId.Text = "";
-            this.txtSlId.Enabled = false;
+            //this.txtSlId.Text = "";
+            //this.txtSlId.Enabled = false;
             this.txttoslid.Text = "";
             this.txttoslid.Enabled = false;
             this.txttotraycode.Text = "";
             this.txttotraycode.Enabled = false;
             this.txttraycode.Text = "";
             this.txttraycode.Enabled = false;
-            this.cmbmaterialCondition.Enabled = false;
+            //this.cmbmaterialCondition.Enabled = false;
             this.labcommonUnit.Text = "";
             this.labfromsIId.Text = "";
             this.labmaterialname.Text = "";
             this.labminunit.Text = "";
             this.labneedqty.Text = "";
             this.labtrayqty.Text = "";
+            this.labtoslidname.Text = "";
         }
 
        
@@ -694,10 +791,10 @@ namespace Rf_Wms.Out
 
         void releaseQuantityLockStock()
         {
-            if (this.txtcommonqty.Text == "")
+            if (this.txtorderid.Text == "" || this.cboreplenishinfo.Enabled)
                 return;
             //string conn = @"quantity=" + commonqty + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
-            string conn = "lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + mtrans.data.recommendId;
+            string conn = "lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&recommendId=" + moper.recommendId;
             //string x = HttpHelper.HttpPost("replenishOrder/releaseQuantityLockStock", conn);
             string x = HttpHelper.HttpPost("replenishOrder/releaseLockStock", conn);
             msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
@@ -711,12 +808,11 @@ namespace Rf_Wms.Out
         {
             if (this.txtorderid.Enabled)
                 return;
-           
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
                 releaseQuantityLockStock();
-                GetTrans(true);
+                //GetTrans(true);
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -726,6 +822,75 @@ namespace Rf_Wms.Out
                 this.txtorderid.SelectAll();
                 return;
 
+            }
+            irow++;
+            ShowNext();
+           
+            this.txttraycode.Enabled = true;
+            this.txttraycode.Focus();
+        }
+
+        void ShowNext()
+        {
+            Clear();
+            if (mlist.data.Count == 0)
+            {
+                if (this.cboreplenishinfo.Items.Count == 1)
+                {
+                    MessageBox.Show("当前拣货区的补货指令已完成");
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                          string conn = "lcCode=" + Comm.lcCode + "&orderId=" + this.txtorderid.Text + "&updater=" + Comm.usercode;
+                          string x = HttpHelper.HttpPost("replenishOrder/successOrder", conn);
+                          msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                          if (msg == null)
+                              throw new Exception("successOrder错误信息捕捉失败");
+                          if (!msg.success)
+                              throw new Exception(msg.msg);
+                          Cursor.Current = Cursors.Default;
+                    }
+                    catch (Exception ex)
+                    {
+                        Cursor.Current = Cursors.Default;
+                        MessageBox.Show(ex.Message);
+                    }
+                    this.cboreplenishinfo.DataSource = null;
+                    this.txtorderid.Enabled = true;
+
+                    this.txtorderid.Focus();
+                    this.txtorderid.SelectAll();
+                    //this.cboreplenishinfo.Enabled = true;
+                    //this.cboreplenishinfo.Focus();
+                    return;
+                }
+                else
+                {
+                    //bindreplenishInfo();
+                    //this.cboreplenishinfo.Enabled = true;
+                    //this.cboreplenishinfo.Focus();
+                    MessageBox.Show("当前拣货区的补货指令已经完成");
+                    KeyPressEventArgs e = new KeyPressEventArgs((char)13);
+                    //e.KeyChar=(char)13;
+                    txtorderid_KeyPress(null, e);
+                    return;
+                }
+
+            }
+           
+
+            if (mlist.data.Count == irow)
+            {
+                this.cboreplenishinfo.Enabled = true;
+                cboreplenishinfo_SelectedIndexChanged(null, null);
+                return;
+            }
+            else
+            {
+                moper = mlist.data[irow];
+                Showval();
+                this.txttraycode.Enabled = true;
+                this.txttraycode.Focus();
             }
         }
 
@@ -749,7 +914,7 @@ namespace Rf_Wms.Out
 
         private void txtSlId_GotFocus(object sender, EventArgs e)
         {
-            txtSlId.SelectAll();
+            //txtSlId.SelectAll();
         }
 
         private void txttraycode_GotFocus(object sender, EventArgs e)
@@ -775,6 +940,84 @@ namespace Rf_Wms.Out
         private void txttoslid_GotFocus(object sender, EventArgs e)
         {
             txttoslid.SelectAll();
+        }
+
+        Model.Mreplenishs mlist = null;
+        int irow = 0;
+        private void cboreplenishinfo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 27)
+            {
+                this.cboreplenishinfo.DataSource = null;
+                this.cboreplenishinfo.Enabled = false;
+                this.txtorderid.Enabled = true;
+                this.txtorderid.Text = "";
+                this.txtorderid.Focus();
+                return;
+            }
+            if (e.KeyChar != 13)
+                return;
+            FindStorage();
+            
+        }
+
+        private void cboreplenishinfo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cboreplenishinfo.DataSource == null)
+                return;
+            FindStorage();
+        }
+
+        void FindStorage()
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string con = @"orderId=" + this.txtorderid.Text + "&lcCode=" + Comm.lcCode + "&whId=" + Comm.warehousecode + "&replenishId=" + this.cboreplenishinfo.SelectedValue.ToString();
+
+                string x = HttpHelper.HttpPost("replenishOrder/findStorage", con);
+                msg = (Model.Mmsg)JsonConvert.DeserializeObject(x, typeof(Model.Mmsg));
+                if (msg == null)
+                    throw new Exception("错误信息捕捉失败");
+                if (!msg.success)
+                    throw new Exception(msg.msg);
+                mlist = (Model.Mreplenishs)JsonConvert.DeserializeObject(x, typeof(Model.Mreplenishs));
+                if (mlist == null)
+                {
+                    throw new Exception("数据信息捕捉失败");
+                }
+                if (mlist.data.Count == 0)
+                {
+                    throw new Exception("没有行数据");
+                }
+                irow = 0;
+                moper = mlist.data[irow];
+                Showval();
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.Message);
+                this.txtorderid.SelectAll();
+                return;
+
+            }
+            this.cboreplenishinfo.Enabled = false;
+            this.txttraycode.Enabled = true;
+            this.txttraycode.Focus();
+        }
+
+        void Showval()
+        {
+            this.btnAssistance.Text = moper.assistanceName;
+            this.labfromsIId.Text = moper.fromSlIdName.ToString();
+            this.labmaterialname.Text = "物料描述  " + moper.materialName;
+            //this.labneedqty.Text = moper.quantity.ToString() + moper.commonUnitName + moper.minQuantity.ToString() + moper.minUnitName + " " + moper.batchNo;
+            this.labneedqty.Text = "应补数量 " + moper.quantity.ToString() + moper.commonUnitName + " " + moper.pdate;
+            this.labcommonUnit.Text = moper.commonUnitName;
+            //this.labminunit.Text = moper.minUnitName;
+            this.labtoslidname.Text = moper.toSlIdName;
         }
        
     }
