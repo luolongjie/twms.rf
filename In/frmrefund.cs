@@ -517,6 +517,7 @@ namespace Rf_Wms.In
             }
             if (e.KeyChar != 13)
                 return;
+            this.txtbatch.Text = this.txtbatch.Text.Trim();
             if (this.txtbatch.Text.Length == 0)
             {
                 MessageBox.Show("批次格式不对");
@@ -707,6 +708,11 @@ namespace Rf_Wms.In
                 return;
             if (this.txtminqty.Text == "")
                 this.txtminqty.Text = "0";
+            if (string.IsNullOrEmpty(this.txtbatch.Text))
+            {
+                MessageBox.Show("批次不能为空");
+                return;
+            }
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -786,7 +792,11 @@ namespace Rf_Wms.In
 
         private void btnShelve_Click(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrEmpty(this.txtbatch.Text))
+            {
+                MessageBox.Show("批次不能为空");
+                return;
+            }
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
