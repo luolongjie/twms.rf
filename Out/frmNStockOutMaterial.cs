@@ -141,9 +141,24 @@ namespace Rf_Wms.Out
             this.txtminqty.Text = "";
         }
 
+        bool ccodeischeck = true;//整单是否复核过
         private void frmNStockOutMaterial_Load(object sender, EventArgs e)
         {
             Clear();
+            foreach (Model.pickOperateSecondarySortingRFDTOSs v in mss.data.pickOperateSecondarySortingRFDTOS)
+            {
+                if (v.checkQuantity != null)
+                {
+                    v.ischeck = true;
+                }
+                else
+                {
+                    ccodeischeck = false;
+                    v.checkQuantity = 0;
+                    v.checkMinQuantity = 0;
+                    v.ischeck = false;
+                }
+            }
             this.txtbarcode.Focus();
         }
 
@@ -261,21 +276,27 @@ namespace Rf_Wms.Out
                 this.txtminqty.SelectAll();
                 return;
             }
+            pickdetails.ischeck = true;//190301
             pickdetails.checkQuantity = commonqty;
             pickdetails.checkMinQuantity = minqty;
             bool bo = true;
-            foreach (Model.pickOperateSecondarySortingRFDTOSs v in mss.data.pickOperateSecondarySortingRFDTOS)
+            if (!ccodeischeck)
             {
-                if (v.checkQuantity != v.pickQuantity || v.pickMinQuantity != v.checkMinQuantity)
+                foreach (Model.pickOperateSecondarySortingRFDTOSs v in mss.data.pickOperateSecondarySortingRFDTOS)
                 {
-                    bo = false;
-                    break;
+                    //if (v.checkQuantity != v.pickQuantity || v.pickMinQuantity != v.checkMinQuantity)
+                    if (!v.ischeck)
+                    {
+                        bo = false;
+                        break;
+                    }
                 }
-            }
-            if (bo)
-            {
-                this.Close();
-                return;
+                if (bo)
+                {
+                    MessageBox.Show("复核完毕");
+                    this.Close();
+                    return;
+                }
             }
             Clear();
             this.txtbarcode.Text = "";
@@ -352,6 +373,8 @@ namespace Rf_Wms.Out
             {
                 //if (v.quantity == v.realQuantity && v.minQuantity == v.realMinquantity)
                 //    continue;
+                if (v.ischeck)
+                    continue;
                 dr = dt.NewRow();
                 dr["materialCode"] = v.materialCode;
                 dr["materialName"] = v.materialName;
