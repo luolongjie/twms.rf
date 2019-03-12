@@ -303,8 +303,8 @@ namespace Rf_Wms.Model
             }
         }
 
-        private int _checkQuantity;
-        public int checkQuantity
+        private int? _checkQuantity;
+        public int? checkQuantity
         {
             get
             {
@@ -316,8 +316,8 @@ namespace Rf_Wms.Model
             }
         }
 
-        private int _checkMinQuantity;
-        public int checkMinQuantity
+        private int? _checkMinQuantity;
+        public int? checkMinQuantity
         {
             get
             {
@@ -328,6 +328,20 @@ namespace Rf_Wms.Model
                 _checkMinQuantity = value;
             }
         }
+
+        private bool _ischeck;
+        public bool ischeck
+        {
+            get
+            {
+                return _ischeck;
+            }
+            set
+            {
+                _ischeck = value;
+            }
+        }
+
 
         private string _batchNo;
         public string batchNo
