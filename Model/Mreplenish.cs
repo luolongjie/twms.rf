@@ -23,6 +23,23 @@ namespace Rf_Wms.Model
     }
 
     [Serializable]
+    public class Mreplenishs
+    {
+        private List<replenishs> _data;
+        public List<replenishs> data
+        {
+            get
+            {
+                return _data;
+            }
+            set
+            {
+                _data = value;
+            }
+        }
+    }
+
+    [Serializable]
     public class replenishs
     {
         private string _assistance;
@@ -231,6 +248,49 @@ namespace Rf_Wms.Model
             set
             {
                 _orderItemId = value;
+            }
+        }
+
+        private List<replenishinfos> _replenishinfo;
+        public List<replenishinfos> replenishinfo
+        {
+            get
+            {
+                return _replenishinfo;
+            }
+            set
+            {
+                _replenishinfo = value;
+            }
+        }
+    }
+
+    [Serializable]
+    public class replenishinfos
+    {
+        private int _id;
+        public int id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+            }
+        }
+
+        private string _name;
+        public string name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
             }
         }
     }

@@ -375,7 +375,7 @@
     <Compile Include="Out\frmreplenish.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Out\frmreplenish.Designer.cs">
+    <Compile Include="Out\frmreplenish.designer.cs">
       <DependentUpon>frmreplenish.cs</DependentUpon>
     </Compile>
     <Compile Include="Out\frmSecCheck.cs">
