@@ -86,6 +86,21 @@ namespace Rf_Wms.Model
             }
         }
 
+        private string _blNo;
+         public string blNo
+        {
+            get
+            {
+                return _blNo;
+            }
+            set
+            {
+                _blNo = value;
+            }
+        }
+
+        
+
         private string _shipperName;
         public string shipperName
         {
